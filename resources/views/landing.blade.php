@@ -1,7 +1,7 @@
 @extends('layouts.main')
 @section('content-left')
 <div class="flex flex-col">
-    <div class="text-[20px] mx-10 mt-20 text-center">
+    <div class="text-[20px] mx-10 mt-28 text-center">
         <p>Milky Way adalah sistem yang menaungi usaha susu</p>
         <p>di Indonesia berjenis susu sapi dan susu kedelai yang berkualitas</p>
     </div>
@@ -14,13 +14,13 @@
 @endsection
 
 @section('content-right')
-<div class="flex justify-center">
+<div class="flex justify-center mt-10">
     <img class="w-80" src="{{ asset('assets/sapi.png')}}" alt="sapi">
 </div>
 @endsection
 
 @section('modal')
-    <div id="popup-modal-login" tabindex="-1" class="fixed hidden justify-center items-center top-0 left-0 right-0 bottom-0 bg-black/30 z-50 p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] md:h-full">
+    <div id="popup-modal-login" tabindex="-1" class="fixed hidden justify-center items-center top-0 left-0 right-0 bottom-0 bg-black/40 z-50 p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] md:h-full">
         <div class="relative w-full h-full max-w-sm md:h-auto">
             <div class="relative bg-white rounded-xl shadow p-5 flex flex-col items-center">
                 <h1 class="text-[18px] my-2">Login Sebagai</h1>
