@@ -27,9 +27,25 @@
                 <p>Alamat</p>
                 <input type="text" name="alamat">
             </div>
-            <div>
-                <p>Tanggal Lahir</p>
-                <input type="text" name="tanggal_lahir">
+            <div class="flex">
+                <div>
+                    <p>Tanggal Lahir</p>
+                    <input type="text" name="tanggal_lahir">
+                </div>
+                <div>
+                    <p>Jenis Kelamin</p>
+                    <input type="text" name="gender">
+                </div>
+            </div>
+            <div class="flex">
+                <div>
+                    <p>Username</p>
+                    <input type="text" name="username">
+                </div>
+                <div>
+                    <p>Kata Sandi</p>
+                    <input type="text" name="password">
+                </div>
             </div>
 
         </form>
