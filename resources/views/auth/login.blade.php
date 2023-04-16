@@ -3,7 +3,9 @@
     <div class="flex flex-col items-center mt-28">
         <p class="text-[30px] font-bold">Selamat Datang Kembali!</p>
         <div class="">
-            <form class="flex flex-col" action="" method="post">
+            <form class="flex flex-col" action="/prosesLogin" method="post">
+                @csrf
+                <input type="hidden" value="{{ $type }}" name="type">
                 <p class="mt-2">Username</p>
                 <input class="my-1 py-1 px-2 rounded-lg placeholder:text-sm" type="text" placeholder="Username" name="username">
                 <p class="mt-2">Password</p>
