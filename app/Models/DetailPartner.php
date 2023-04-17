@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class DetailPenjual extends Model
+class DetailPartner extends Model
 {
     use HasFactory;
 
@@ -13,6 +13,6 @@ class DetailPenjual extends Model
         'user_id',
         'nama_toko',
         'alamat_toko',
-        'deskripsi_toko'
+        'deskripsi_suplai'
     ];
 }

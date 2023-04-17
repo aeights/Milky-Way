@@ -14,12 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('landing',['title'=>'Milky Way.id']);
-})->name('landing');
-
 
 Route::middleware(['guest'])->group(function (){
+    Route::get('/', function () {
+        return view('landing',['title'=>'Milky Way.id']);
+    })->name('landing');
     
     Route::get('/login/{type}', [AuthController::class,'login'])->name('login');
     
@@ -32,23 +31,33 @@ Route::middleware(['guest'])->group(function (){
     Route::get('/detailPartner/{id}', [AuthController::class,'detailPartner']);
     
     Route::post('/prosesLogin',[AuthController::class,'prosesLogin']);
+
+    Route::post('/prosesPenjual',[AuthController::class,'prosesPenjual']);
+
+    Route::post('/prosesPartner',[AuthController::class,'prosesPartner']);
 });
 
 // pembeli
 Route::middleware(['auth'])->group(function (){
+    Route::get('/home',function() {
+        return view('home');
+    })->name('home');
+});
+
+
+// penjual
+Route::middleware(['penjual'])->group(function (){
     
 });
-Route::get('/admin', function(){
-    return "OK";
-})->middleware('admin');
 
-// pembeli
-Route::middleware(['penjual'])->group(function (){
+//partner
+Route::middleware(['partner'])->group(function (){
 
 });
 
 Route::get('/logout',[AuthController::class,'prosesLogout']);
 
-Route::get('/home',function() {
-    return view('home');
-})->middleware('auth')->name('home');
+
+Route::get('/admin', function(){
+    return "OK";
+})->middleware('admin');

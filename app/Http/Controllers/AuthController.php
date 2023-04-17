@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DetailPartner;
+use App\Models\DetailPenjual;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -29,14 +31,15 @@ class AuthController extends Controller
     }
 
     public function prosesRegister(Request $req){
-        // proses tambah user
+        // dd($req);
+        // Validasi form
         $validated = $req->validate([
             'email' => 'required|unique:users',
             'username' => 'required|unique:users|min:4',
             'nomor_telepon' => 'required|unique:users',
             'password' => 'required|min:6',
         ]);
-
+        // Menambah akun ke DB dan redirect
         if ($validated) {
             // tambah data ke database
             $user = new User();
@@ -48,12 +51,18 @@ class AuthController extends Controller
             $user->alamat=$req->alamat;
             $user->tanggal_lahir=$req->tanggal_lahir;
             $user->jenis_kelamin=$req->jenis_kelamin;
+            $user->role=$req->type;
             $user->save();
-            if ($req->type=='penjual') {
-                return redirect('/detail-penjual/'.$user->id);
-            }else if ($req->type=='partner') {
-                return redirect('/detail-partner/'.$user->id);
-            }else{
+            if ($req->type =='penjual') {
+                return redirect('/detailPenjual/'.$user->id);
+            }else if ($req->type =='partner') {
+                return redirect('/detailPartner/'.$user->id);
+            }else {
+                $credentials = $req->validate([
+                    'username' => ['required'],
+                    'password' => ['required'],
+                ]);
+                Auth::attempt($credentials);
                 return redirect('/home');
             }
         }else{
@@ -82,6 +91,38 @@ class AuthController extends Controller
         }
     }
 
+    public function prosesPenjual(Request $req)
+    {
+        $validated = $req->validate([
+            'nama_toko' => 'required|unique:detail_penjuals',
+        ]);
+
+        if ($validated) {
+            $penjual = new DetailPenjual();
+            $penjual->user_id=$req->id;
+            $penjual->nama_toko=$req->nama_toko;
+            $penjual->alamat_toko=$req->alamat_toko;
+            $penjual->deskripsi_toko=$req->deskripsi_toko;
+            $penjual->save();
+        }
+    }
+
+    public function prosesPartner(Request $req)
+    {
+        $validated = $req->validate([
+            'nama_toko' => 'required|unique:detail_penjuals',
+        ]);
+
+        if ($validated) {
+            $partner = new DetailPartner();
+            $partner->user_id=$req->id;
+            $partner->nama_toko=$req->nama_toko;
+            $partner->alamat_toko=$req->alamat_toko;
+            $partner->deskripsi_suplai=$req->deskripsi_suplai;
+            $partner->save();
+        }
+    }
+
     public function prosesLogout()
     {
         Auth::logout();
@@ -93,7 +134,7 @@ class AuthController extends Controller
         return view('auth.detail-penjual',
             [
                 'id'=>$id,
-                'title'=>'Detail Owner'
+                'title'=>'Detail Penjual'
             ]);
     }
     
