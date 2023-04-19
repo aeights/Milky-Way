@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardSellerController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -57,7 +58,18 @@ Route::middleware(['partner'])->group(function (){
 
 Route::get('/logout',[AuthController::class,'prosesLogout']);
 
+# Penjual
+Route::get('/dashboardPenjual',[DashboardSellerController::class,'dashboardPenjual']);
 
+Route::get('/dashboardPenjual/barang',[DashboardSellerController::class,'barang']);
+
+Route::get('/dashboardPenjual/barang/tambah',[DashboardSellerController::class,'tambah']);
+
+Route::post('/tambahBarang',[DashboardSellerController::class,'tambahBarang']);
+
+Route::get('/dashboardPenjual/barang/edit',[DashboardSellerController::class,'edit']);
+
+# Admin
 Route::get('/admin', function(){
     return "OK";
 })->middleware('admin');
