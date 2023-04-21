@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 @section('content')
 <div class="pl-72 pt-36">
-    <form action="/editBarang" method="post" enctype="multipart/form-data">
+    <form action="{{url('/editBarang/'.$barang->id)}}" method="post" enctype="multipart/form-data">
         @csrf
         @foreach ($errors->all() as $error)
             <li>{{ $error }}</li>
@@ -9,31 +9,31 @@
         <input type="hidden" name="toko_id">
         <div>
             <p>Nama</p>
-            <input type="text" name="nama">
+            <input value="{{$barang->nama}}" type="text" name="nama">
         </div>
         <div>
             <p>Harga</p>
-            <input type="text" name="harga">
+            <input value="{{$barang->harga}}" type="text" name="harga">
         </div>
         <div>
             <p>Gambar</p>
-            <input type="file" name="gambar">
+            <input value="{{$barang->gambar}}" type="file" name="gambar">
         </div>
         <div>
             <p>Berat</p>
-            <input type="number" name="berat">
+            <input value="{{$barang->berat}}" type="number" name="berat">
         </div>
         <div>
             <p>Kategori</p>
-            <input type="text" name="kategori">
+            <input value="{{$barang->kategori}}" type="text" name="kategori">
         </div>
         <div>
             <p>Stok</p>
-            <input type="number" name="stok">
+            <input value="{{$barang->stok}}" type="number" name="stok">
         </div>
         <div>
             <p>Deskripsi Produk</p>
-            <input type="text" name="deskripsi">
+            <input value="{{$barang->detail_produk}}" type="text" name="deskripsi">
         </div>
         <button class="bg-[#B2A4FF] p-2 rounded-md hover:bg-slate-500 duration-200 drop-shadow-lg">Simpan</button>
     </form>

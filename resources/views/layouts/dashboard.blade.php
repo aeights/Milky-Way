@@ -15,9 +15,21 @@
 </head>
 <body class="">
     <nav class="flex flex-row items-center bg-[#B2A4FF] py-8 pr-5 place-content-end rounded-b-[10px] shadow-lg fixed w-[100vw]">
-        <p class="right-5 mx-2">Halo, Seller</p>
-        <a href=""></a>
-        <img class="w-[40px] mx-2" src="{{asset('/assets/profile.png')}}" alt="Profile">
+        <p class="right-5 mx-4">{{'Halo, '.$user = Auth::user()->nama_lengkap;}}</p>
+        <div class="action">
+            <div class="profile" onclick="showMenu()">
+                <img class="w-[40px] mx-2" src="{{asset('/assets/profile.png')}}" alt="Profile">
+            </div>
+            <div id="profileMenu" class="menu hidden absolute bg-white right-7 p-2 rounded-md mt-2 drop-shadow-lg">
+                <ul class="flex flex-col text-sm">
+                    <li class="my-1 hover:font-semibold"><a href="">Profile</a></li>
+                    <hr>
+                    <li class="my-1 hover:font-semibold"><a href="">Reset Password</a></li>
+                    <hr>
+                    <li class="my-1 hover:font-semibold"><a href="/logout">Logout</a></li>
+                </ul>
+            </div>
+        </div>
     </nav>
 
     <div class="fixed bg-[#E4E5EA] h-[100vh] w-[250px] flex flex-col items-center">
@@ -45,5 +57,13 @@
     <div class="h-[100vh]">
         @yield('content')
     </div>
+
+    <script>
+        function showMenu(){
+            var popup = document.querySelector("#profileMenu")
+            popup.classList.toggle('flex')
+            popup.classList.toggle('hidden')
+        }
+    </script>
 </body>
 </html>

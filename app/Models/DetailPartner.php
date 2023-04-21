@@ -9,10 +9,14 @@ class DetailPartner extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'user_id',
-        'nama_toko',
-        'alamat_toko',
-        'deskripsi_suplai'
+    // protected $fillable = [
+    //     'user_id',
+    //     'nama_toko',
+    //     'alamat_toko',
+    //     'deskripsi_suplai'
+    // ];
+
+    protected $guarded = [
+        'id',
     ];
 }

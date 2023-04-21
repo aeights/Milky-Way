@@ -72,21 +72,23 @@ class AuthController extends Controller
 
     public function proseslogin(Request $req)
     {
+        // dd($req);
         $credentials = $req->validate([
             'username' => ['required'],
             'password' => ['required'],
         ]);
         if($credentials){
             if(Auth::attempt($credentials)){
-                $user = User::where('username', $req->username)->get();
-                // $penjual = TokoPenjual::where('user_id', $user->id)->get();
-                // $partner = TokoPartner::where('user_id', $user->id)->get();
-                if($req->type == 'penjual'){
-                    return redirect('penjual');
-                }else if($req->type == 'partner'){
+                if($req->type == Auth::user()->role) {
+                    return redirect('dashboardPenjual');
+                }else if($req->type == Auth::user()->role) {
+                    
                 }else{
                     return redirect('home');
                 }
+            }
+            else {
+                return back();
             }
         }
     }
@@ -104,6 +106,7 @@ class AuthController extends Controller
             $penjual->alamat_toko=$req->alamat_toko;
             $penjual->deskripsi_toko=$req->deskripsi_toko;
             $penjual->save();
+            return redirect('dashboardPenjual');
         }
     }
 
@@ -145,5 +148,32 @@ class AuthController extends Controller
                 'id'=>$id,
                 'title'=>'Detail Partner'
             ]);
+    }
+
+    public function lupaPassword($type)
+    {
+        return view('auth.forgotPassword',
+        [
+            'title'=>'Lupa Password',
+            'type'=>$type
+        ]);
+    }
+
+    public function prosesLupaPassword(Request $req)
+    {
+        $validated = $req->validate([
+            'username' => 'required|exists:users',
+            'email' => 'required|exists:users',
+            'new_password' => 'required',
+        ]);
+        if ($validated) {
+            User::where('username', $req->username)
+                ->where('email', $req->email)
+                ->update(['password' => Hash::make($req->new_password)]);
+                return back()->with('message','Password berhasil direset, silahkan login kembali');
+        }
+        else {
+            return back();
+        }
     }
 }

@@ -6,7 +6,7 @@
             @foreach ($errors->all() as $error)
                 <li>{{ $error }}</li>
             @endforeach
-            <input type="hidden" name="toko_id">
+            <input type="hidden" value="{{Auth::user()->id}}" name="toko_id">
             <div>
                 <p>Nama</p>
                 <input type="text" name="nama">

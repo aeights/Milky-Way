@@ -1,0 +1,28 @@
+@extends('layouts.main')
+@section('content-left')
+    <div class="flex flex-col items-center mt-16">
+        <p class="text-md font-semibold">Masukkan Email dan Username Kamu</p>
+        <p class="text-md font-semibold">Untuk Mereset Password</p>
+        <form class="mt-8 flex flex-col" action="/login/{{$type}}/lupaPassword/reset" method="post">
+            @csrf
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+            <input type="hidden" name="type">
+            <p>Username</p>
+            <input class="my-1 py-1 px-2 rounded-lg placeholder:text-sm " placeholder="Username" type="text" name="username">
+            <p>Email</p>
+            <input class="my-1 py-1 px-2 rounded-lg placeholder:text-sm" placeholder="Email" type="email" name="email">
+            <p>Password Baru</p>
+            <input class="my-1 py-1 px-2 rounded-lg placeholder:text-sm" placeholder="Password Baru" type="password" name="new_password">
+            <button class="bg-[#B2A4FF] mt-4 py-2 rounded-[10px] duration-200 hover:bg-[#A092EC] hover:shadow-slate-700/90 shadow-md shadow-slate-700/70" type="submit">Reset Password</button>
+        </form>
+    </div>
+@endsection
+@section('content-right')
+    <div class="flex flex-col items-center mt-28">
+        <img class="w-[300px]" src="{{asset('assets/logo.png')}}" alt="logo">
+        <p class="pt-10 font-bold text-lg">Daftar Jika Kamu Belum Punya Akun</p>
+        <a class="bg-[#B2A4FF] mt-5 py-2 px-10 rounded-[10px] hover:bg-[#A092EC] hover:shadow-slate-700/90 shadow-md shadow-slate-700/70"" href="/register/{{$type}}">Daftar</a>
+    </div>
+@endsection

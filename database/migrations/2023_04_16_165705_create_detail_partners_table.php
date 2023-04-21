@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('detail_partners', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('user_id');
+            $table->foreignId('user_id');
             $table->string('nama_toko',40);
             $table->string('alamat_toko');
             $table->string('deskripsi_suplai');

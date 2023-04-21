@@ -24,6 +24,10 @@ Route::middleware(['guest'])->group(function (){
     Route::get('/login/{type}', [AuthController::class,'login'])->name('login');
     
     Route::get('/register/{type}', [AuthController::class,'register']);
+
+    Route::get('/login/{type}/lupaPassword', [AuthController::class,'lupaPassword']);
+
+    Route::post('/login/{type}/lupaPassword/reset', [AuthController::class,'prosesLupaPassword']);
     
     Route::post('/prosesRegister',[AuthController::class,'prosesRegister']);
     
@@ -39,7 +43,7 @@ Route::middleware(['guest'])->group(function (){
 });
 
 // pembeli
-Route::middleware(['auth'])->group(function (){
+Route::middleware(['pembeli'])->group(function (){
     Route::get('/home',function() {
         return view('home');
     })->name('home');
@@ -48,7 +52,19 @@ Route::middleware(['auth'])->group(function (){
 
 // penjual
 Route::middleware(['penjual'])->group(function (){
+    Route::get('/dashboardPenjual',[DashboardSellerController::class,'dashboardPenjual']);
     
+    Route::get('/dashboardPenjual/barang',[DashboardSellerController::class,'barang'])->name('barang');
+    
+    Route::get('/dashboardPenjual/barang/tambah',[DashboardSellerController::class,'tambah']);
+    
+    Route::post('/tambahBarang',[DashboardSellerController::class,'tambahBarang']);
+    
+    Route::get('/dashboardPenjual/barang/edit/{id}',[DashboardSellerController::class,'edit']);
+    
+    Route::post('/editBarang/{id}',[DashboardSellerController::class,'editBarang']);
+    
+    Route::post('/hapusBarang/{id}',[DashboardSellerController::class,'hapusBarang']);
 });
 
 //partner
@@ -57,17 +73,6 @@ Route::middleware(['partner'])->group(function (){
 });
 
 Route::get('/logout',[AuthController::class,'prosesLogout']);
-
-# Penjual
-Route::get('/dashboardPenjual',[DashboardSellerController::class,'dashboardPenjual']);
-
-Route::get('/dashboardPenjual/barang',[DashboardSellerController::class,'barang']);
-
-Route::get('/dashboardPenjual/barang/tambah',[DashboardSellerController::class,'tambah']);
-
-Route::post('/tambahBarang',[DashboardSellerController::class,'tambahBarang']);
-
-Route::get('/dashboardPenjual/barang/edit',[DashboardSellerController::class,'edit']);
 
 # Admin
 Route::get('/admin', function(){

@@ -8,8 +8,11 @@
                 <input type="hidden" value="{{ $type }}" name="type">
                 <p class="mt-2">Username</p>
                 <input class="my-1 py-1 px-2 rounded-lg placeholder:text-sm" type="text" placeholder="Username" name="username">
-                <p class="mt-2">Password</p>
-                <input class="my-1 py-1 px-2 rounded-lg placeholder:text-sm" type="text" placeholder="Password" name="password">
+                <div class="flex flex-row">
+                    <p class="mt-2">Password</p>
+                    <a class="mt-3 ml-10 text-[12px] underline" href="/login/{{$type}}/lupaPassword">Lupa Password?</a>
+                </div>
+                <input class="my-1 py-1 px-2 rounded-lg placeholder:text-sm" type="password" placeholder="Password" name="password">
                 <button class="bg-[#B2A4FF] mt-4 py-2 rounded-[10px] hover:bg-[#A092EC] hover:shadow-slate-700/90 shadow-md shadow-slate-700/70" type="submit">Login</button>
             </form>
         </div>
