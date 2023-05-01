@@ -18,12 +18,15 @@ class Pembeli
     {
         if (Auth::check()) {
             if (Auth::user()->role == 'pembeli') {
-                return redirect('home');
+                return redirect('/home');
             }
-            if (Auth::user()->role == 'penjual') {
-                return redirect('dashboardPenjual');
+            else if (Auth::user()->role == 'penjual') {
+                return redirect('/dashboardPenjual');
             }
         }
-        return redirect('/')->withErrors('Silahkan Login Terlebih Dahulu');
+        else {
+            return redirect('/')->withErrors('Silahkan Login Terlebih Dahulu');
+        }
+        return $next($request);
     }
 }

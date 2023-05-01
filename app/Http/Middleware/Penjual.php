@@ -20,7 +20,13 @@ class Penjual
             if (Auth::user()->role == 'penjual') {
                 return $next($request);
             }
+            else if (Auth::user()->role == 'pembeli') {
+                return redirect('/home');
+            }
         }
-        return redirect('/')->withErrors('Silahkan Login Terlebih Dahulu');
+        else {
+            return redirect('/')->withErrors('Silahkan Login Terlebih Dahulu');
+        }
+        return $next($request);
     }
 }

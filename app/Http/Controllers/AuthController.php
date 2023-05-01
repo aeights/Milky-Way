@@ -11,6 +11,11 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
+    public function home()
+    {
+        return view('home');
+    }
+
     public function login($type)
     {
         return view('auth.login',
@@ -72,7 +77,6 @@ class AuthController extends Controller
 
     public function proseslogin(Request $req)
     {
-        // dd($req);
         $credentials = $req->validate([
             'username' => ['required'],
             'password' => ['required'],
@@ -80,11 +84,12 @@ class AuthController extends Controller
         if($credentials){
             if(Auth::attempt($credentials)){
                 if($req->type == Auth::user()->role) {
-                    return redirect('dashboardPenjual');
+                    return redirect('/home');
                 }else if($req->type == Auth::user()->role) {
-                    
-                }else{
-                    return redirect('home');
+                    return redirect('/dashboardPenjual');
+                }else {
+                    // dd('OK');
+                    return redirect('/home');
                 }
             }
             else {
@@ -106,14 +111,14 @@ class AuthController extends Controller
             $penjual->alamat_toko=$req->alamat_toko;
             $penjual->deskripsi_toko=$req->deskripsi_toko;
             $penjual->save();
-            return redirect('dashboardPenjual');
+            return redirect('/dashboardPenjual');
         }
     }
 
     public function prosesPartner(Request $req)
     {
         $validated = $req->validate([
-            'nama_toko' => 'required|unique:detail_penjuals',
+            'nama_toko' => 'required|unique:detail_partners',
         ]);
 
         if ($validated) {

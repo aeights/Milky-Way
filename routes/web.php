@@ -44,14 +44,14 @@ Route::middleware(['guest'])->group(function (){
 
 // pembeli
 Route::middleware(['pembeli'])->group(function (){
-    Route::get('/home',function() {
-        return view('home');
-    })->name('home');
+    Route::get('/home',[AuthController::class,'home'])->name('home');
 });
 
 
 // penjual
 Route::middleware(['penjual'])->group(function (){
+
+    //Barang
     Route::get('/dashboardPenjual',[DashboardSellerController::class,'dashboardPenjual']);
     
     Route::get('/dashboardPenjual/barang',[DashboardSellerController::class,'barang'])->name('barang');
@@ -65,6 +65,25 @@ Route::middleware(['penjual'])->group(function (){
     Route::post('/editBarang/{id}',[DashboardSellerController::class,'editBarang']);
     
     Route::post('/hapusBarang/{id}',[DashboardSellerController::class,'hapusBarang']);
+
+    Route::get('/profilePenjual',[DashboardSellerController::class,'profile']);
+
+    Route::get('/profilePenjual/edit',[DashboardSellerController::class,'editProfile']);
+
+    Route::post('/profilePenjual/prosesEdit',[DashboardSellerController::class,'prosesEditProfile']);
+
+    Route::get('/batalProfile',[DashboardSellerController::class,'batalProfile']);
+
+    Route::get('/resetPasswordPenjual',[DashboardSellerController::class,'resetPassword']);
+
+    Route::post('/proses/resetPasswordPenjual',[DashboardSellerController::class,'prosesReset']);
+
+    Route::get('/batalBarang',[DashboardSellerController::class,'batalBarang']);
+
+    //Pengiriman
+    Route::get('/dashboardPenjual/pengiriman',[DashboardSellerController::class,'pengiriman'])->name('pengiriman');
+    
+    Route::get('/dashboardPenjual/pengiriman/tambahMetode',[DashboardSellerController::class,'tambahMetode']);
 });
 
 //partner

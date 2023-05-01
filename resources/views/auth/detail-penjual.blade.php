@@ -25,7 +25,7 @@
             </div>
             <div class="my-1">
                 <p>Deskripsi Toko</p>
-                <input required class="w-[400px] rounded-md py-1 px-2 text-sm" placeholder="" type="text" name="deskripsi_toko">
+                <textarea required class="w-[400px] rounded-md py-1 px-2 text-sm" placeholder="" name="deskripsi_toko"></textarea>
             </div>
             <button class="bg-[#B2A4FF] mt-5 py-2 px-10 rounded-[10px] hover:bg-[#A092EC] hover:shadow-slate-700/90 shadow-md shadow-slate-700/70" type="submit">Daftar</button>
         </form>
