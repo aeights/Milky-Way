@@ -83,7 +83,17 @@ Route::middleware(['penjual'])->group(function (){
     //Pengiriman
     Route::get('/dashboardPenjual/pengiriman',[DashboardSellerController::class,'pengiriman'])->name('pengiriman');
     
-    Route::get('/dashboardPenjual/pengiriman/tambahMetode',[DashboardSellerController::class,'tambahMetode']);
+    Route::get('/dashboardPenjual/pengiriman/tambahBiaya',[DashboardSellerController::class,'tambahBiaya']);
+
+    Route::get('/batalPengiriman',[DashboardSellerController::class,'batalPengiriman']);
+
+    Route::post('/tambahBiayaPengiriman',[DashboardSellerController::class,'tambahBiayaPengiriman']);
+
+    Route::get('/dashboardPenjual/pengiriman/edit/{id}',[DashboardSellerController::class,'editBiaya']);
+    
+    Route::post('/editBiayaPengiriman',[DashboardSellerController::class,'editBiayaPengiriman']);
+    
+    Route::post('/hapusBiaya/{id}',[DashboardSellerController::class,'hapusBiaya']);
 });
 
 //partner

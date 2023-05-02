@@ -5,7 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class DataPengiriman extends Model
+class DataTransaksi extends Model
 {
     use HasFactory;
+
+    protected $guarded = [
+        'id'
+    ];
 }

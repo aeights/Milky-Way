@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id');
             $table->string('nama_toko',40);
             $table->string('alamat_toko');
-            $table->string('deskripsi_suplai');
+            $table->text('deskripsi_suplai');
             $table->timestamps();
         });
     }

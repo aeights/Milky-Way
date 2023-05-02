@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Barang;
+use App\Models\BiayaPengiriman;
 use App\Models\DetailPenjual;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -214,17 +215,65 @@ class DashboardSellerController extends Controller
 
     public function pengiriman()
     {
+        $toko = DetailPenjual::where('user_id',Auth::user()->id)->first();
+        $biaya_pengiriman = BiayaPengiriman::where('toko_id',$toko->id)->get();
+        // dd($biaya_pengiriman);
         return view('penjual.pengirimanBarang',
     [
         'title' => 'Pengiriman',
+        'biaya_pengiriman' => $biaya_pengiriman
     ]);
     }
 
-    public function tambahMetode()
+    public function tambahBiaya()
     {
-        return view('penjual.tambahMetode',
+        return view('penjual.tambahBiayaPengiriman',
         [
-            'title' => 'Tambah Metode Pengiriman',
+            'title' => 'Tambah Biaya Pengiriman',
         ]);
+    }
+
+    public function batalPengiriman()
+    {
+        return redirect('/dashboardPenjual/pengiriman');
+    }
+
+    public function tambahBiayaPengiriman(Request $req)
+    {
+        $toko = DetailPenjual::where('user_id',Auth::user()->id)->first();
+
+        $validated = $req->validate([
+            'jarak_awal' => ['required'],
+            'jarak_akhir' => ['required'],
+            'harga' => ['required'],
+        ]);
+
+        if ($validated) {
+            $biaya = new BiayaPengiriman();
+            $biaya->toko_id=$toko->id;
+            $biaya->jarak=$req->jarak_awal.' - '.$req->jarak_akhir;
+            $biaya->harga=$req->harga;
+            $biaya->save();
+        }
+    }
+
+    public function editBiaya($id)
+    {
+        $res = str_ireplace('- ', '', BiayaPengiriman::find($id)->jarak);
+        $result = explode(" ",$res);
+
+        return view('penjual.editBiayaPengiriman',
+        [
+            'title'=> 'Edit Biaya Pengiriman',
+            'biaya'=> BiayaPengiriman::find($id),
+            'jarak'=> $result
+        ]);
+    }
+
+    public function hapusBiaya($id)
+    {
+        $biaya = BiayaPengiriman::find($id);
+        $biaya->delete();
+        return back();
     }
 }
