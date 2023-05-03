@@ -1,7 +1,7 @@
-@extends('layouts.dashboardSeller')
+@extends('layouts.buyer')
 @section('content')
-    <div class="pl-72 pt-32 flex flex-row">
-        <div class="mr-20">
+    <div class="pt-32 flex justify-center">
+        <div class="">
             <p class="font-semibold mb-2">Data Diri</p>
             <div class="p-4 border shadow-md rounded-md flex flex-row w-[590px] mb-6">
                 <form class="flex flex-col mr-14">
@@ -37,26 +37,7 @@
                     </div>
                 </form>
             </div>
-            <a class="bg-[#B2A4FF] p-2 rounded-md hover:bg-slate-500 duration-200 drop-shadow-md" href="/profilePenjual/edit">Edit Profil</a>
-        </div>
-        <div>
-            <p class="font-semibold mb-2">Data Toko</p>
-            <div class="p-4 border shadow-md rounded-md flex flex-row w-[290px]">
-                <form action="flex flex-col">
-                    <div>
-                        <p class="text-sm font-semibold mt-2 mb-1">Nama Toko</p>
-                        <input class="w-64 border rounded-md text-sm p-2 outline-slate-800" disabled value="{{$toko->nama_toko}}">
-                    </div>
-                    <div>
-                        <p class="text-sm font-semibold mt-2 mb-1">Alamat Toko</p>
-                        <input class="w-64 border rounded-md text-sm p-2 outline-slate-800" disabled value="{{$toko->alamat_toko}}">
-                    </div>
-                    <div>
-                        <p class="text-sm font-semibold mt-2 mb-1">Deskripsi Toko</p>
-                        <textarea class="w-64 border rounded-md text-sm p-2 outline-slate-800" disabled>{{$toko->deskripsi_toko}}</textarea>
-                    </div>
-                </form>
-            </div>
+            <a class="bg-[#B2A4FF] p-2 rounded-md hover:bg-slate-500 duration-200 drop-shadow-md" href="/profilePembeli/edit">Edit Profil</a>
         </div>
     </div>
 @endsection

@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardAdminController;
+use App\Http\Controllers\DashboardPartnerController;
 use App\Http\Controllers\DashboardSellerController;
 use App\Http\Controllers\HomeBuyerController;
 use Illuminate\Support\Facades\Route;
@@ -43,12 +45,24 @@ Route::middleware(['guest'])->group(function (){
     Route::post('/prosesPartner',[AuthController::class,'prosesPartner']);
 });
 
-// pembeli
+Route::get('/home',[HomeBuyerController::class,'home'])->name('home');
+
+// Pembeli
 Route::middleware(['auth','user_role:pembeli'])->group(function (){
-    Route::get('/home',[HomeBuyerController::class,'home'])->name('home');
+    Route::get('/profilePembeli',[HomeBuyerController::class,'profile']);
+
+    Route::get('/profilePembeli/edit',[HomeBuyerController::class,'editProfile']);
+
+    Route::post('/profilePembeli/prosesEdit',[HomeBuyerController::class,'prosesEditProfile']);
+
+    Route::get('/batalProfile',[HomeBuyerController::class,'batalProfile']);
+
+    Route::get('/resetPasswordPembeli',[HomeBuyerController::class,'resetPassword']);
+
+    Route::post('/proses/resetPasswordPembeli',[HomeBuyerController::class,'prosesReset']);
 });
 
-// penjual
+// Penjual
 Route::middleware(['auth','user_role:penjual'])->group(function (){
     //Barang
     Route::get('/dashboardPenjual',[DashboardSellerController::class,'dashboardPenjual']);
@@ -95,14 +109,26 @@ Route::middleware(['auth','user_role:penjual'])->group(function (){
     Route::post('/hapusBiaya/{id}',[DashboardSellerController::class,'hapusBiaya']);
 });
 
-//partner
-Route::middleware(['partner'])->group(function (){
+// Partner
+Route::middleware(['auth','user_role:partner'])->group(function (){
+    Route::get('/dashboardPartner',[DashboardPartnerController::class,'dashboardPartner']);
 
+    Route::get('/profilePartner',[DashboardPartnerController::class,'profile']);
+
+    Route::get('/profilePartner/edit',[DashboardPartnerController::class,'editProfile']);
+
+    Route::post('/profilePartner/prosesEdit',[DashboardPartnerController::class,'prosesEditProfile']);
+
+    Route::get('/batalProfile',[DashboardPartnerController::class,'batalProfile']);
+
+    Route::get('/resetPasswordPartner',[DashboardPartnerController::class,'resetPassword']);
+
+    Route::post('/proses/resetPasswordPartner',[DashboardPartnerController::class,'prosesReset']);
+});
+
+// Admin
+Route::middleware(['auth','user_role:admin'])->group(function (){
+    Route::get('/dashboardAdmin',[DashboardAdminController::class,'dashboardAdmin']);
 });
 
 Route::get('/logout',[AuthController::class,'prosesLogout']);
-
-# Admin
-Route::get('/admin', function(){
-    return "OK";
-})->middleware('admin');

@@ -1,4 +1,4 @@
-@extends('layouts.dashboard')
+@extends('layouts.dashboardSeller')
 @section('content')
     <div class="pl-72 pt-36">
         <p class="mb-4 font-semibold">Tambah Biaya Pengiriman</p>

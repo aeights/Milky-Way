@@ -1,7 +1,7 @@
-@extends('layouts.dashboardSeller')
+@extends('layouts.dashboardPartner')
 @section('content')
     <div class="pl-72 pt-36">
-        <form class="" action="/proses/resetPasswordPenjual" method="post">
+        <form class="" action="/proses/resetPasswordPartner" method="post">
             @csrf
             @foreach ($errors->all() as $error)
                 <li>{{ $error }}</li>

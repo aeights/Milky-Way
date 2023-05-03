@@ -22,25 +22,43 @@
             <input class="outline-slate-400 shadow-md rounded-full text-sm py-2 px-4 mr-2 w-96" placeholder="Cari barang disini" type="text" name="search">
             <a href=""><i class="fa-solid fa-magnifying-glass"></i></a>
         </div>
-        <div class="flex flex-row items-center">
-            <p class="right-5 mx-4">{{'Halo, '.$user = Auth::user()->nama_lengkap;}}</p>
-            <div>
-                <div class="profile" onclick="showMenu()">
-                    <img class="w-[40px] mx-2" src="{{asset('/assets/profile.png')}}" alt="Profile">
-                </div>
-                <div id="profileMenu" class="menu hidden absolute bg-white right-7 p-2 rounded-md mt-2 drop-shadow-lg">
-                    <ul class="flex flex-col text-sm">
-                        <li class="my-1 hover:font-semibold"><a href="/profilePenjual">Profile</a></li>
-                        <hr>
-                        <li class="my-1 hover:font-semibold"><a href="/resetPasswordPenjual">Transaksi</a></li>
-                        <hr>
-                        <li class="my-1 hover:font-semibold"><a href="/logout">Reset Password</a></li>
-                        <hr>
-                        <li class="my-1 hover:font-semibold"><a href="/logout">Logout</a></li>
-                    </ul>
+        @if (Auth::check())
+            <div class="flex flex-row items-center">
+                <p class="right-5 mx-4">{{'Halo, '.$user = Auth::user()->nama_lengkap;}}</p>
+                <div>
+                    <div class="profile" onclick="showMenu()">
+                        <img class="w-[40px] mx-2" src="{{asset('/assets/profile.png')}}" alt="Profile">
+                    </div>
+                    <div id="profileMenu" class="menu hidden absolute bg-white right-7 p-2 rounded-md mt-2 drop-shadow-lg">
+                        <ul class="flex flex-col text-sm">
+                            <li class="my-1 hover:font-semibold"><a href="/profilePembeli">Profile</a></li>
+                            <hr>
+                            <li class="my-1 hover:font-semibold"><a href="/">Transaksi</a></li>
+                            <hr>
+                            <li class="my-1 hover:font-semibold"><a href="/resetPasswordPembeli">Reset Password</a></li>
+                            <hr>
+                            <li class="my-1 hover:font-semibold"><a href="/logout">Logout</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
+        @else 
+            <div class="flex flex-row items-center">
+                <p class="right-5 mx-4">Halo, Selamat Datang</p>
+                <div>
+                    <div class="profile" onclick="showMenu()">
+                        <img class="w-[40px] mx-2" src="{{asset('/assets/profile.png')}}" alt="Profile">
+                    </div>
+                    <div id="profileMenu" class="menu hidden absolute bg-white right-7 p-2 rounded-md mt-2 drop-shadow-lg">
+                        <ul class="flex flex-col text-sm">
+                            <li class="my-1 hover:font-semibold"><a href="/login/pembeli">Login</a></li>
+                            <hr>
+                            <li class="my-1 hover:font-semibold"><a href="/register/pembeli">Daftar</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        @endif
     </nav>
     <div class="">
         @yield('content')

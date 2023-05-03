@@ -1,4 +1,4 @@
-@extends('layouts.dashboard')
+@extends('layouts.dashboardSeller')
 @section('content')
     <div class="pl-72 pt-32">
         <div class="mb-4">

@@ -1,4 +1,4 @@
-@extends('layouts.dashboard')
+@extends('layouts.dashboardSeller')
 @section('content')
 <div class="pl-72 pt-36">
     <form class="flex flex-row" action="{{url('/editBarang/'.$barang->id)}}" method="post" enctype="multipart/form-data">

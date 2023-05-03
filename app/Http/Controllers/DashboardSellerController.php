@@ -22,12 +22,11 @@ class DashboardSellerController extends Controller
 
     public function barang()
     {
-        // dd(Barang::all());
-        $toko_id = DetailPenjual::where('penjual');
+        $toko = DetailPenjual::where('user_id',Auth::user()->id)->first();
         return view('penjual.barang',
         [
             'title'=>'Barang',
-            'barang'=>Barang::where('penjual_id','=',Auth::user()->id)->get()
+            'barang'=>Barang::where('penjual_id','=',$toko->id)->get()
         ]);
     }
 
@@ -41,6 +40,7 @@ class DashboardSellerController extends Controller
 
     public function tambahBarang(Request $req)
     {
+        $toko = DetailPenjual::where('user_id',Auth::user()->id)->first();
         $validated = $req->validate([
             'nama'=>'required|min:3',
             'harga'=>'required',
@@ -54,11 +54,11 @@ class DashboardSellerController extends Controller
         if ($validated) {
             if ($req->hasFile('gambar')) {
                 $barang = new Barang();
-                $req->file('gambar')->move('barang/',$req->file('gambar')->getClientOriginalName());
-                $barang->penjual_id=$req->toko_id;
+                $req->file('gambar')->move('barang/',date('YmdHis') . "." .$req->file('gambar')->getClientOriginalName());
+                $barang->penjual_id=$toko->id;
                 $barang->nama=$req->nama;
                 $barang->harga=$req->harga;
-                $barang->gambar=$req->file('gambar')->getClientOriginalName();
+                $barang->gambar=date('YmdHis') . "." .$req->file('gambar')->getClientOriginalName();
                 $barang->berat=$req->berat;
                 $barang->kategori=$req->kategori;
                 $barang->stok=$req->stok;
@@ -93,10 +93,10 @@ class DashboardSellerController extends Controller
         if ($validated) {
             if ($req->hasFile('gambar')) {
                 $barang = Barang::find($id);
-                $req->file('gambar')->move('barang/',$req->file('gambar')->getClientOriginalName());
+                $req->file('gambar')->move('barang/',date('YmdHis') . "." .$req->file('gambar')->getClientOriginalName());
                 $barang->nama=$req->nama;
                 $barang->harga=$req->harga;
-                $barang->gambar=$req->file('gambar')->getClientOriginalName();
+                $barang->gambar=date('YmdHis') . "." .$req->file('gambar')->getClientOriginalName();
                 $barang->berat=$req->berat;
                 $barang->kategori=$req->kategori;
                 $barang->stok=$req->stok;
@@ -143,10 +143,10 @@ class DashboardSellerController extends Controller
     {
         $toko = DetailPenjual::where('user_id',Auth::user()->id)->first();
         return view('penjual.profilePenjual',
-    [
-        'title' => 'Profile',
-        'toko' => $toko
-    ]);
+        [
+            'title' => 'Profile',
+            'toko' => $toko
+        ]);
     }
 
     public function editProfile()

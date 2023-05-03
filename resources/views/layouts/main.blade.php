@@ -21,7 +21,7 @@
         <div class="">
             <a class="hover:underline mx-5 text-[20px]" href="">Beranda</a>
             <a class="hover:underline mx-5 text-[20px]" href="">Profile</a>
-            <a class="hover:underline mx-5 text-[20px]" href="">Produk</a>
+            <a class="hover:underline mx-5 text-[20px]" href="/home">Produk</a>
             <a class="hover:underline mx-5 text-[20px]" href="">Partner Kami</a>
         </div>
         <div>

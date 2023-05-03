@@ -1,4 +1,4 @@
-@extends('layouts.dashboard')
+@extends('layouts.dashboardSeller')
 @section('content')
     <div class="pl-72 pt-36 flex flex-col">
         <div class="w-[1000px] h-[400px] shadow-lg border">

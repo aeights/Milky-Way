@@ -1,4 +1,4 @@
-@extends('layouts.dashboardSeller')
+@extends('layouts.dashboardPartner')
 @section('content')
     <div class="pl-72 pt-32 flex flex-row">
         <div class="mr-20">
@@ -37,7 +37,7 @@
                     </div>
                 </form>
             </div>
-            <a class="bg-[#B2A4FF] p-2 rounded-md hover:bg-slate-500 duration-200 drop-shadow-md" href="/profilePenjual/edit">Edit Profil</a>
+            <a class="bg-[#B2A4FF] p-2 rounded-md hover:bg-slate-500 duration-200 drop-shadow-md" href="/profilePartner/edit">Edit Profil</a>
         </div>
         <div>
             <p class="font-semibold mb-2">Data Toko</p>
@@ -52,8 +52,8 @@
                         <input class="w-64 border rounded-md text-sm p-2 outline-slate-800" disabled value="{{$toko->alamat_toko}}">
                     </div>
                     <div>
-                        <p class="text-sm font-semibold mt-2 mb-1">Deskripsi Toko</p>
-                        <textarea class="w-64 border rounded-md text-sm p-2 outline-slate-800" disabled>{{$toko->deskripsi_toko}}</textarea>
+                        <p class="text-sm font-semibold mt-2 mb-1">Deskripsi Suplai</p>
+                        <textarea class="w-64 border rounded-md text-sm p-2 outline-slate-800" disabled>{{$toko->deskripsi_suplai}}</textarea>
                     </div>
                 </form>
             </div>

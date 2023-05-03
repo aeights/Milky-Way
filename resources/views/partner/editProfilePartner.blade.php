@@ -1,7 +1,7 @@
-@extends('layouts.dashboardSeller')
+@extends('layouts.dashboardPartner')
 @section('content')
     <div class="pl-72 pt-32">
-        <form class="flex flex-col mr-14" action="/profilePenjual/prosesEdit" method="post">
+        <form class="flex flex-col mr-14" action="/profilePartner/prosesEdit" method="post">
             @csrf
             <p class="font-semibold mb-2">Data Diri</p>
             <div class="p-4 border shadow-md rounded-md flex flex-col w-[540px] mb-6">
@@ -76,9 +76,9 @@
                     @enderror
                 </div>
                 <div>
-                    <p class="text-sm font-semibold mt-2 mb-1">Deskripsi Toko</p>
-                    <textarea class="w-64 border rounded-md text-sm p-2 outline-slate-800" name="deskripsi_toko">{{$toko->deskripsi_toko}}</textarea>
-                    @error('deskripsi_toko')
+                    <p class="text-sm font-semibold mt-2 mb-1">Deskripsi Suplai</p>
+                    <textarea class="w-64 border rounded-md text-sm p-2 outline-slate-800" name="deskripsi_suplai">{{$toko->deskripsi_suplai}}</textarea>
+                    @error('deskripsi_suplai')
                         <div class="mt-2 text-sm text-red-600">{{$message}}</div>
                     @enderror
                 </div>

@@ -2,39 +2,45 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DetailPartner;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
-class HomeBuyerController extends Controller
+class DashboardPartnerController extends Controller
 {
-    public function home()
+    public function dashboardPartner()
     {
-        return view('pembeli.home',
+        return view('partner.dashboardPartner',
         [
-            'title' => 'Beranda'
+            'title' => 'Dashboard Partner'
         ]);
     }
 
     public function profile()
     {
-        return view('pembeli.profilePembeli',
+        $toko = DetailPartner::where('user_id',Auth::user()->id)->first();
+        return view('partner.profilePartner',
         [
             'title' => 'Profile',
+            'toko' => $toko
         ]);
     }
 
     public function editProfile()
     {
-        return view('pembeli.editProfilePembeli',
+        $toko = DetailPartner::where('user_id',Auth::user()->id)->first();
+        return view('partner.editProfilePartner',
         [
             'title' => 'Edit Profile',
+            'toko' => $toko
         ]);
     }
 
     public function prosesEditProfile(Request $req)
     {
+        $current_toko = DetailPartner::where('user_id',Auth::user()->id)->first();
         $validated = $req->validate([
             'email' => ['required', 'unique:users,email,'.Auth::user()->id],
             'username' => ['required', 'min:4', 'unique:users,username,'.Auth::user()->id],
@@ -43,6 +49,11 @@ class HomeBuyerController extends Controller
             'tanggal_lahir' => ['required'],
             'jenis_kelamin' => ['required'],
             'alamat' => ['required'],
+
+            'nama_toko' => ['required', 'unique:detail_penjuals,nama_toko,'.$current_toko->id],
+            'alamat_toko' => ['required'],
+            'deskripsi_suplai' => ['required'],
+
         ]);
 
         if ($validated) {
@@ -55,7 +66,16 @@ class HomeBuyerController extends Controller
             $user->email=$req->email;
             $user->nomor_telepon=$req->nomor_telepon;
             $user->save();
-            return redirect('/profilePembeli');
+            
+            DetailPartner::where('id',$current_toko->id)
+                        ->update(
+                            [
+                                'nama_toko' => $req->nama_toko,
+                                'alamat_toko' => $req->alamat_toko,
+                                'deskripsi_suplai' => $req->deskripsi_suplai
+                            ]);
+
+            return redirect('/profilePartner');
         }
         else {
             return back();
@@ -64,12 +84,12 @@ class HomeBuyerController extends Controller
 
     public function batalProfile()
     {
-        return redirect('/profilePembeli');
+        return redirect('/profilePartner');
     }
 
     public function resetPassword()
     {
-        return view('pembeli.resetPassword',
+        return view('partner.resetPassword',
         [
             'title' => 'Reset Password'
         ]);

@@ -1,9 +1,9 @@
-@extends('layouts.dashboard')
+@extends('layouts.dashboardSeller')
 @section('content')
     <div class="pl-72 pt-36">
         <form class="flex flex-row" action="/tambahBarang" method="post" enctype="multipart/form-data">
             @csrf
-            <input type="hidden" value="{{Auth::user()->id}}" name="toko_id">
+            {{-- <input type="hidden" value="{{Auth::user()->id}}" name="toko_id"> --}}
             <div class="mr-16">
                 <div class="mb-2">
                     <p>Nama</p>

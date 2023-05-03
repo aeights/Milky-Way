@@ -54,16 +54,33 @@ class AuthController extends Controller
             $user->role=$req->type;
             $user->save();
             if ($req->type =='penjual') {
-                return redirect('/detailPenjual/'.$user->id);
+                $credentials = $req->validate([
+                    'username' => ['required'],
+                    'password' => ['required'],
+                ]);
+                Auth::attempt($credentials);
+                return redirect('/dashboardPenjual');
             }else if ($req->type =='partner') {
-                return redirect('/detailPartner/'.$user->id);
-            }else {
+                $credentials = $req->validate([
+                    'username' => ['required'],
+                    'password' => ['required'],
+                ]);
+                Auth::attempt($credentials);
+                return redirect('/dashboardPartner');
+            }else if ($req->type =='pembeli') {
                 $credentials = $req->validate([
                     'username' => ['required'],
                     'password' => ['required'],
                 ]);
                 Auth::attempt($credentials);
                 return redirect('/home');
+            }elseif ($req->type =='admin') {
+                $credentials = $req->validate([
+                    'username' => ['required'],
+                    'password' => ['required'],
+                ]);
+                Auth::attempt($credentials);
+                return redirect('/dashboardAdmin');
             }
         }else{
             return redirect('/register');
@@ -83,9 +100,9 @@ class AuthController extends Controller
                 }else if($req->type == 'penjual' && Auth::user()->role == 'penjual') {
                     return redirect('/dashboardPenjual');
                 }else if($req->type == 'partner' && Auth::user()->role == 'partner') {
-                    return redirect('/');
+                    return redirect('/dashboardPartner');
                 }else if(Auth::user()->role == 'admin') {
-                    return redirect('/');
+                    return redirect('/dashboardAdmin');
                 }else{
                     Auth::logout();
                     return back()->with('message','Akun anda bukan '.$req->type);

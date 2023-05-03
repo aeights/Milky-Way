@@ -22,9 +22,9 @@
             </div>
             <div id="profileMenu" class="menu hidden absolute bg-white right-7 p-2 rounded-md mt-2 drop-shadow-lg">
                 <ul class="flex flex-col text-sm">
-                    <li class="my-1 hover:font-semibold"><a href="/profilePenjual">Profile</a></li>
+                    <li class="my-1 hover:font-semibold"><a href="/profilePartner">Profile</a></li>
                     <hr>
-                    <li class="my-1 hover:font-semibold"><a href="/resetPasswordPenjual">Reset Password</a></li>
+                    <li class="my-1 hover:font-semibold"><a href="/resetPasswordPartner">Reset Password</a></li>
                     <hr>
                     <li class="my-1 hover:font-semibold"><a href="/logout">Logout</a></li>
                 </ul>
@@ -34,23 +34,9 @@
 
     <div class="fixed bg-[#E4E5EA] h-[100vh] w-[250px] flex flex-col items-center">
         <a class="bg-slate-200 rounded-lg py-4 px-14 mt-5 drop-shadow-lg font-bold" href="/dashboardPenjual">Dashboard</a>
-        <input class="mt-10 rounded-md h-10 drop-shadow w-52 pl-5 focus:outline-none" placeholder="Search" type="text" name="" id="">
+        <input class="mt-10 rounded-md h-10 drop-shadow w-52 pl-5 focus:outline-none" placeholder="Search" type="text" name="">
         <ul class="">
-            <li class="my-5">
-                <a class="hover:bg-[#B2A4FF] duration-200 py-4 text-start pl-14 w-[210px] block rounded-lg drop-shadow-lg" href="/dashboardPenjual/barang">Barang</a>
-            </li>
-            <li class="my-5">
-                <a class="hover:bg-[#B2A4FF] duration-200 py-4 text-start pl-14 w-[210px] block rounded-lg drop-shadow-lg" href="/dashboardPenjual/pengiriman">Pengiriman</a>
-            </li>
-            <li class="my-5">
-                <a class="hover:bg-[#B2A4FF] duration-200 py-4 text-start pl-14 w-[210px] block rounded-lg drop-shadow-lg" href="">Pencatatan</a>
-            </li>
-            <li class="my-5">
-                <a class="hover:bg-[#B2A4FF] duration-200 py-4 text-start pl-14 w-[210px] block rounded-lg drop-shadow-lg" href="">Penarikan</a>
-            </li>
-            <li class="my-5">
-                <a class="hover:bg-[#B2A4FF] duration-200 py-4 text-start pl-14 w-[210px] block rounded-lg drop-shadow-lg" href="">Partner</a>
-            </li>
+            
         </ul>
     </div>
 

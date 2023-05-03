@@ -1,7 +1,7 @@
-@extends('layouts.dashboardSeller')
+@extends('layouts.buyer')
 @section('content')
-    <div class="pl-72 pt-32">
-        <form class="flex flex-col mr-14" action="/profilePenjual/prosesEdit" method="post">
+    <div class="pt-32 flex justify-center">
+        <form class="flex flex-col mr-14" action="/profilePembeli/prosesEdit" method="post">
             @csrf
             <p class="font-semibold mb-2">Data Diri</p>
             <div class="p-4 border shadow-md rounded-md flex flex-col w-[540px] mb-6">
@@ -58,34 +58,10 @@
                         <div class="mt-2 text-sm text-red-600">{{$message}}</div>
                     @enderror
                 </div>
-            </div>
-            <p class="font-semibold mb-2">Data Toko</p>
-            <div class="p-4 border shadow-md rounded-md flex flex-col w-[540px] mb-6">
-                <div>
-                    <p class="text-sm font-semibold mt-2 mb-1">Nama Toko</p>
-                    <input class="w-64 border rounded-md text-sm p-2 outline-slate-800" value="{{$toko->nama_toko}}" type="text" name="nama_toko">
-                    @error('nama_toko')
-                        <div class="mt-2 text-sm text-red-600">{{$message}}</div>
-                    @enderror
+                <div class="flex flex-row mt-4">
+                    <button class="bg-[#B2A4FF] p-2 mr-4 rounded-md hover:bg-slate-500 duration-200 drop-shadow-md" type="submit">Simpan</button>
+                    <a class="bg-[#B2A4FF] p-2 rounded-md hover:bg-slate-500 duration-200 drop-shadow-md" href="/batalProfile">Batal</a>
                 </div>
-                <div>
-                    <p class="text-sm font-semibold mt-2 mb-1">Alamat Toko</p>
-                    <input class="w-64 border rounded-md text-sm p-2 outline-slate-800" value="{{$toko->alamat_toko}}" type="text" name="alamat_toko">
-                    @error('alamat_toko')
-                        <div class="mt-2 text-sm text-red-600">{{$message}}</div>
-                    @enderror
-                </div>
-                <div>
-                    <p class="text-sm font-semibold mt-2 mb-1">Deskripsi Toko</p>
-                    <textarea class="w-64 border rounded-md text-sm p-2 outline-slate-800" name="deskripsi_toko">{{$toko->deskripsi_toko}}</textarea>
-                    @error('deskripsi_toko')
-                        <div class="mt-2 text-sm text-red-600">{{$message}}</div>
-                    @enderror
-                </div>
-            </div>
-            <div class="flex flex-row mb-4">
-                <button class="bg-[#B2A4FF] p-2 mr-4 rounded-md hover:bg-slate-500 duration-200 drop-shadow-md" type="submit">Simpan</button>
-                <a class="bg-[#B2A4FF] p-2 rounded-md hover:bg-slate-500 duration-200 drop-shadow-md" href="/batalProfile">Batal</a>
             </div>
         </form>
     </div>
