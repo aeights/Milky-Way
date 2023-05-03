@@ -21,6 +21,7 @@
                             <th class="bg-slate-300 p-2">Jumlah</th>
                             <th class="bg-slate-200 p-2">Total Harga</th>
                             <th class="bg-slate-300 p-2">Status Transaksi</th>
+                            <th class="bg-slate-200 p-2">Opsi</th>
                         </tr>
                     </thead>
                 </table>
@@ -38,6 +39,7 @@
                             <th class="bg-slate-300 p-2">Jumlah</th>
                             <th class="bg-slate-200 p-2">Total Harga</th>
                             <th class="bg-slate-300 p-2">Status Transaksi</th>
+                            <th class="bg-slate-200 p-2">Opsi</th>
                         </tr>
                     </thead>
                 </table>
@@ -55,6 +57,7 @@
                             <th class="bg-slate-300 p-2">Jumlah</th>
                             <th class="bg-slate-200 p-2">Total Harga</th>
                             <th class="bg-slate-300 p-2">Status Transaksi</th>
+                            <th class="bg-slate-200 p-2">Opsi</th>
                         </tr>
                     </thead>
                 </table>

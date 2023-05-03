@@ -11,11 +11,6 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    public function home()
-    {
-        return view('home');
-    }
-
     public function login($type)
     {
         return view('auth.login',
@@ -83,17 +78,21 @@ class AuthController extends Controller
         ]);
         if($credentials){
             if(Auth::attempt($credentials)){
-                if($req->type == Auth::user()->role) {
+                if($req->type == 'pembeli' && Auth::user()->role == 'pembeli') {
                     return redirect('/home');
-                }else if($req->type == Auth::user()->role) {
+                }else if($req->type == 'penjual' && Auth::user()->role == 'penjual') {
                     return redirect('/dashboardPenjual');
-                }else {
-                    // dd('OK');
-                    return redirect('/home');
+                }else if($req->type == 'partner' && Auth::user()->role == 'partner') {
+                    return redirect('/');
+                }else if(Auth::user()->role == 'admin') {
+                    return redirect('/');
+                }else{
+                    Auth::logout();
+                    return back()->with('message','Akun anda bukan '.$req->type);
                 }
             }
             else {
-                return back();
+                return back()->with('message','Username atau password anda salah');
             }
         }
     }

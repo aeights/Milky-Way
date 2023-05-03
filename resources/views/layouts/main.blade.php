@@ -28,6 +28,11 @@
 
         </div>
     </nav>
+    @if (session()->has('message'))
+        <div class="bg-green-500 p-2 w-[100vw] absolute mt-[94px] text-center text-white">
+            {{session('message')}}
+        </div>
+    @endif
     <img class="w-16 absolute right-0 top-40" src="{{asset('assets/image 4.png')}}" alt="">
     <img class="w-28 absolute right-0 bottom-0" src="{{asset('assets/image 1.png')}}" alt="">
     <img class="w-16 absolute left-0 top-40" src="{{asset('assets/image 2.png')}}" alt="">

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardSellerController;
+use App\Http\Controllers\HomeBuyerController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -43,14 +44,12 @@ Route::middleware(['guest'])->group(function (){
 });
 
 // pembeli
-Route::middleware(['pembeli'])->group(function (){
-    Route::get('/home',[AuthController::class,'home'])->name('home');
+Route::middleware(['auth','user_role:pembeli'])->group(function (){
+    Route::get('/home',[HomeBuyerController::class,'home'])->name('home');
 });
 
-
 // penjual
-Route::middleware(['penjual'])->group(function (){
-
+Route::middleware(['auth','user_role:penjual'])->group(function (){
     //Barang
     Route::get('/dashboardPenjual',[DashboardSellerController::class,'dashboardPenjual']);
     
