@@ -24,7 +24,7 @@
                             <th class="bg-slate-200 p-2">Opsi</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="text-center">
                         @foreach ($transaksi as $no => $hasil)
                             <tr>
                                 <td>{{$no+1}}</td>
@@ -139,7 +139,7 @@
         </script>
         <script>
             // Get the element with id="defaultOpen" and click on it
-            document.getElementById("defaultOpen").click();
+            // document.getElementById("defaultOpen").click();
         </script>
     </div>
 @endsection

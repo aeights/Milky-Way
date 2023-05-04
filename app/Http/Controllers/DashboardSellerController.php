@@ -65,7 +65,7 @@ class DashboardSellerController extends Controller
                 $barang->stok=$req->stok;
                 $barang->detail_produk=$req->deskripsi;
                 $barang->save();
-                return to_route('barang');
+                return to_route('barang')->with('message','Barang berhasil ditambahkan');
             }
         }
     }
@@ -103,7 +103,7 @@ class DashboardSellerController extends Controller
                 $barang->stok=$req->stok;
                 $barang->detail_produk=$req->deskripsi;
                 $barang->save();
-                return to_route('barang');
+                return to_route('barang')->with('message','Barang berhasil diedit');
             }
         }
     }
@@ -113,7 +113,7 @@ class DashboardSellerController extends Controller
         $barang = Barang::find($id);
         unlink("barang/".$barang->gambar);
         $barang->delete();
-        return back();
+        return back()->with('message','Barang berhasil dihapus');
     }
 
     public function resetPassword()
@@ -133,7 +133,7 @@ class DashboardSellerController extends Controller
         if ($validated and $req->password == $req->new_password) {
             User::where('id', Auth::user()->id)
                 ->update(['password' => Hash::make($req->new_password)]);
-                return back()->with('message','Password berhasil direset, silahkan login kembali');
+                return back()->with('message','Password berhasil direset');
         }
         else {
             return back();
@@ -197,28 +197,27 @@ class DashboardSellerController extends Controller
                                 'deskripsi_toko' => $req->deskripsi_toko
                             ]);
 
-            return redirect('/profilePenjual');
+            return redirect('/profilePenjual')->with('message','Profile berhasil diupdate');
         }
         else {
             return back();
         }
     }
 
-    public function batalBarang()
-    {
-        return to_route('barang');
-    }
+    // public function batalBarang()
+    // {
+    //     return to_route('barang');
+    // }
 
-    public function batalProfile()
-    {
-        return redirect('/profilePenjual');
-    }
+    // public function batalProfile()
+    // {
+    //     return redirect('/profilePenjual');
+    // }
 
     public function pengiriman()
     {
         $toko = DetailPenjual::where('user_id',Auth::user()->id)->first();
         $biaya_pengiriman = BiayaPengiriman::where('toko_id',$toko->id)->get();
-        // dd($biaya_pengiriman);
         return view('penjual.pengirimanBarang',
     [
         'title' => 'Pengiriman',
@@ -235,10 +234,10 @@ class DashboardSellerController extends Controller
         ]);
     }
 
-    public function batalPengiriman()
-    {
-        return redirect('/dashboardPenjual/pengiriman');
-    }
+    // public function batalPengiriman()
+    // {
+    //     return redirect('/dashboardPenjual/pengiriman');
+    // }
 
     public function tambahBiayaPengiriman(Request $req)
     {
@@ -256,6 +255,7 @@ class DashboardSellerController extends Controller
             $biaya->jarak=$req->jarak_awal.' - '.$req->jarak_akhir;
             $biaya->harga=$req->harga;
             $biaya->save();
+            return redirect('/dashboardPenjual/pengiriman')->with('messsage','Biaya berhasil ditambahkan');
         }
     }
 
@@ -272,11 +272,28 @@ class DashboardSellerController extends Controller
         ]);
     }
 
+    public function editBiayaPengiriman(Request $req)
+    {
+        $validated = $req->validate([
+            'jarak_awal' => ['required'],
+            'jarak_akhir' => ['required'],
+            'harga' => ['required'],
+        ]);
+
+        if ($validated) {
+            $biaya = BiayaPengiriman::find($req->id);
+            $biaya->jarak=$req->jarak_awal.' - '.$req->jarak_akhir;
+            $biaya->harga=$req->harga;
+            $biaya->save();
+            return redirect('/dashboardPenjual/pengiriman')->with('messsage','Biaya berhasil diedit');
+        }
+    }
+
     public function hapusBiaya($id)
     {
         $biaya = BiayaPengiriman::find($id);
         $biaya->delete();
-        return back();
+        return back()->with('messsage','Biaya berhasil dihapus');
     }
 
     public function detailTransaksi($id)

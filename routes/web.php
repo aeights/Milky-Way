@@ -55,7 +55,7 @@ Route::middleware(['auth','user_role:pembeli'])->group(function (){
 
     Route::post('/profilePembeli/prosesEdit',[HomeBuyerController::class,'prosesEditProfile']);
 
-    Route::get('/batalProfilePembeli',[HomeBuyerController::class,'batalProfile']);
+    // Route::get('/batalProfilePembeli',[HomeBuyerController::class,'batalProfile']);
 
     Route::get('/resetPasswordPembeli',[HomeBuyerController::class,'resetPassword']);
 
@@ -85,20 +85,20 @@ Route::middleware(['auth','user_role:penjual'])->group(function (){
 
     Route::post('/profilePenjual/prosesEdit',[DashboardSellerController::class,'prosesEditProfile']);
 
-    Route::get('/batalProfilePenjual',[DashboardSellerController::class,'batalProfile']);
+    // Route::get('/batalProfilePenjual',[DashboardSellerController::class,'batalProfile']);
 
     Route::get('/resetPasswordPenjual',[DashboardSellerController::class,'resetPassword']);
 
     Route::post('/proses/resetPasswordPenjual',[DashboardSellerController::class,'prosesReset']);
 
-    Route::get('/batalBarang',[DashboardSellerController::class,'batalBarang']);
+    // Route::get('/batalBarang',[DashboardSellerController::class,'batalBarang']);
 
     //Pengiriman
     Route::get('/dashboardPenjual/pengiriman',[DashboardSellerController::class,'pengiriman'])->name('pengiriman');
     
     Route::get('/dashboardPenjual/pengiriman/tambahBiaya',[DashboardSellerController::class,'tambahBiaya']);
 
-    Route::get('/batalPengiriman',[DashboardSellerController::class,'batalPengiriman']);
+    // Route::get('/batalPengiriman',[DashboardSellerController::class,'batalPengiriman']);
 
     Route::post('/tambahBiayaPengiriman',[DashboardSellerController::class,'tambahBiayaPengiriman']);
 
@@ -123,7 +123,7 @@ Route::middleware(['auth','user_role:partner'])->group(function (){
 
     Route::post('/profilePartner/prosesEdit',[DashboardPartnerController::class,'prosesEditProfile']);
 
-    Route::get('/batalProfilePartner',[DashboardPartnerController::class,'batalProfile']);
+    // Route::get('/batalProfilePartner',[DashboardPartnerController::class,'batalProfile']);
 
     Route::get('/resetPasswordPartner',[DashboardPartnerController::class,'resetPassword']);
 

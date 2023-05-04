@@ -60,7 +60,7 @@
                 </div>
                 <div class="flex flex-row mt-4">
                     <button class="bg-[#B2A4FF] p-2 mr-4 rounded-md hover:bg-slate-500 duration-200 drop-shadow-md" type="submit">Simpan</button>
-                    <a class="bg-[#B2A4FF] p-2 rounded-md hover:bg-slate-500 duration-200 drop-shadow-md" href="/batalProfilePembeli">Batal</a>
+                    <a class="bg-[#B2A4FF] p-2 rounded-md hover:bg-slate-500 duration-200 drop-shadow-md" href="/profilePembeli">Batal</a>
                 </div>
             </div>
         </form>

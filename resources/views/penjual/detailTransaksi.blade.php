@@ -37,7 +37,7 @@
         </div>
         <div class="mr-9">
             <div>
-                <img class="h-80" src="{{asset('barang/'.$transaksi->gambar)}}" alt="Gambar Produk">
+                <img class="h-48" src="{{asset('barang/'.$transaksi->gambar)}}" alt="Gambar Produk">
             </div>
         </div>
     </form>

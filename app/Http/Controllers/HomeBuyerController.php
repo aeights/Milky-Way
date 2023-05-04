@@ -62,10 +62,10 @@ class HomeBuyerController extends Controller
         }
     }
 
-    public function batalProfile()
-    {
-        return redirect('/profilePembeli');
-    }
+    // public function batalProfile()
+    // {
+    //     return redirect('/profilePembeli');
+    // }
 
     public function resetPassword()
     {
@@ -84,7 +84,7 @@ class HomeBuyerController extends Controller
         if ($validated and $req->password == $req->new_password) {
             User::where('id', Auth::user()->id)
                 ->update(['password' => Hash::make($req->new_password)]);
-                return back()->with('message','Password berhasil direset, silahkan login kembali');
+                return back()->with('message','Password berhasil direset');
         }
         else {
             return back();

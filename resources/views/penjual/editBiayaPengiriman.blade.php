@@ -4,7 +4,7 @@
     <p class="mb-4 font-semibold">Edit Biaya Pengiriman</p>
     <form action="/editBiayaPengiriman" method="post">
         @csrf
-        <input type="hidden" value="{{$biaya->id}}">
+        <input type="hidden" value="{{$biaya->id}}" name="id">
         <div class="flex flex-col mb-2">
             <p class="mb-1">Jarak</p>
             <div class="flex flex-row">
@@ -19,7 +19,7 @@
         </div>
         <div>
             <button class="bg-[#B2A4FF] mt-2 mr-4 p-2 rounded-md hover:bg-slate-500 duration-200 drop-shadow-lg" type="submit">Simpan</button>
-            <a class="bg-[#B2A4FF] mt-2 p-2 rounded-md hover:bg-slate-500 duration-200 drop-shadow-lg" href="/batalPengiriman">Batal</a>
+            <a class="bg-[#B2A4FF] mt-2 p-2 rounded-md hover:bg-slate-500 duration-200 drop-shadow-lg" href="/dashboardPenjual/pengiriman">Batal</a>
         </div>
     </form>
 </div>

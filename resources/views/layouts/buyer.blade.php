@@ -60,6 +60,13 @@
             </div>
         @endif
     </nav>
+
+    @if (session()->has('message'))
+        <div class="bg-green-500 p-2 w-[100vw] absolute mt-[94px] text-center text-white">
+            {{session('message')}}
+        </div>
+    @endif
+
     <div class="">
         @yield('content')
     </div>
