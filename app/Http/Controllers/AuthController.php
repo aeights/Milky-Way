@@ -54,19 +54,9 @@ class AuthController extends Controller
             $user->role=$req->type;
             $user->save();
             if ($req->type =='penjual') {
-                $credentials = $req->validate([
-                    'username' => ['required'],
-                    'password' => ['required'],
-                ]);
-                Auth::attempt($credentials);
-                return redirect('/dashboardPenjual');
+                return redirect('/detailPenjual/'.$user->id);
             }else if ($req->type =='partner') {
-                $credentials = $req->validate([
-                    'username' => ['required'],
-                    'password' => ['required'],
-                ]);
-                Auth::attempt($credentials);
-                return redirect('/dashboardPartner');
+                return redirect('/detailPartner/'.$user->id);
             }else if ($req->type =='pembeli') {
                 $credentials = $req->validate([
                     'username' => ['required'],
@@ -144,6 +134,7 @@ class AuthController extends Controller
             $partner->alamat_toko=$req->alamat_toko;
             $partner->deskripsi_suplai=$req->deskripsi_suplai;
             $partner->save();
+            return redirect('/dashboardPartner');
         }
     }
 

@@ -24,6 +24,26 @@
                             <th class="bg-slate-200 p-2">Opsi</th>
                         </tr>
                     </thead>
+                    <tbody>
+                        @foreach ($transaksi as $no => $hasil)
+                            <tr>
+                                <td>{{$no+1}}</td>
+                                <td>{{$hasil->nama_pembeli}}</td>
+                                <td>{{$hasil->alamat}}</td>
+                                <td>
+                                    <img class="h-10 inline-block m-auto" src="{{asset('barang/'.$hasil->gambar)}}" alt="{{$hasil->gambar}}">
+                                </td>
+                                <td>{{$hasil->nama_barang}}</td>
+                                <td>{{$hasil->harga}}</td>
+                                <td>{{$hasil->jumlah}}</td>
+                                <td>{{$hasil->total_harga}}</td>
+                                <td>{{$hasil->status_transaksi}}</td>
+                                <td>
+                                    <a class="bg-green-500 text-[12px] text-white p-1 rounded-sm" href="{{url('/dashboardPenjual/transaksi/detail/'.$hasil->id)}}">Detail</a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
                 </table>
             </div>
             <div id="TS" class="tabcontent hidden justify-center">

@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('toko_id');
             $table->foreignId('pembeli_id');
+            $table->string('nama_pembeli',100);
             $table->string('alamat');
             $table->string('gambar');
             $table->string('nama_barang',50);

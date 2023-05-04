@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Barang;
 use App\Models\BiayaPengiriman;
+use App\Models\DataTransaksi;
 use App\Models\DetailPenjual;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -221,6 +222,7 @@ class DashboardSellerController extends Controller
         return view('penjual.pengirimanBarang',
     [
         'title' => 'Pengiriman',
+        'transaksi' => DataTransaksi::where('toko_id',$toko->id)->get(),
         'biaya_pengiriman' => $biaya_pengiriman
     ]);
     }
@@ -275,5 +277,21 @@ class DashboardSellerController extends Controller
         $biaya = BiayaPengiriman::find($id);
         $biaya->delete();
         return back();
+    }
+
+    public function detailTransaksi($id)
+    {
+        return view('penjual.detailTransaksi',
+        [
+            'title'=> 'Edit Barang',
+            'transaksi'=>DataTransaksi::find($id)
+        ]);
+    }
+
+    public function konfirmasiTransaksi($id)
+    {
+        DataTransaksi::where('id',$id)
+        ->update(['status_transaksi'=>'Sedang Dikirim']);
+        return redirect('/dashboardPenjual/pengiriman');
     }
 }
