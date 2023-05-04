@@ -182,7 +182,7 @@ class AuthController extends Controller
             User::where('username', $req->username)
                 ->where('email', $req->email)
                 ->update(['password' => Hash::make($req->new_password)]);
-                return back()->with('message','Password berhasil direset, silahkan login kembali');
+                return back()->with('message','Password berhasil direset,');
         }
         else {
             return back();

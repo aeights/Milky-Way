@@ -309,6 +309,6 @@ class DashboardSellerController extends Controller
     {
         DataTransaksi::where('id',$id)
         ->update(['status_transaksi'=>'Sedang Dikirim']);
-        return redirect('/dashboardPenjual/pengiriman');
+        return redirect('/dashboardPenjual/pengiriman')->with('message','Pesanan berhasil dikonfirmasi');
     }
 }

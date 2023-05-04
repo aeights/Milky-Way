@@ -75,7 +75,7 @@ class DashboardPartnerController extends Controller
                                 'deskripsi_suplai' => $req->deskripsi_suplai
                             ]);
 
-            return redirect('/profilePartner');
+            return redirect('/profilePartner')->with('message','Profile berhasil diedit');
         }
         else {
             return back();
@@ -104,7 +104,7 @@ class DashboardPartnerController extends Controller
         if ($validated and $req->password == $req->new_password) {
             User::where('id', Auth::user()->id)
                 ->update(['password' => Hash::make($req->new_password)]);
-                return back()->with('message','Password berhasil direset, silahkan login kembali');
+                return back()->with('message','Password berhasil direset');
         }
         else {
             return back();
