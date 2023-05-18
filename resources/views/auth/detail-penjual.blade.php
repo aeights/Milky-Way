@@ -14,6 +14,8 @@
             @foreach ($errors->all() as $error)
                 <li>{{ $error }}</li>
             @endforeach
+            <input type="hidden" name="username" value="{{session('username')}}">
+            <input type="hidden" name="password" value="{{session('password')}}">
             <input type="hidden" value="{{$id}}" name="id">
             <div class="my-1">
                 <p>Nama Toko</p>

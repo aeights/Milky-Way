@@ -9,6 +9,8 @@ class BiayaPengiriman extends Model
 {
     use HasFactory;
 
+    protected $table = 'biaya_pengiriman';
+
     protected $guarded = [
         'id'
     ];

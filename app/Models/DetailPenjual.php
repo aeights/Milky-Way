@@ -9,12 +9,7 @@ class DetailPenjual extends Model
 {
     use HasFactory;
 
-    // protected $fillable = [
-    //     'user_id',
-    //     'nama_toko',
-    //     'alamat_toko',
-    //     'deskripsi_toko'
-    // ];
+    protected $table = 'detail_penjual';
 
     protected $guarded = [
         'id',

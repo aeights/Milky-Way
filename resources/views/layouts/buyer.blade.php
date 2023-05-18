@@ -13,15 +13,16 @@
         }
     </style>
 </head>
-<body class="">
-    <nav class="flex flex-row bg-[#B2A4FF] py-4 px-6 items-center rounded-b-[20px] fixed w-[100vw] justify-between shadow-lg">
+<body class="bg-slate-100">
+    <nav class="z-[1] flex flex-row bg-[#B2A4FF] py-4 px-6 items-center rounded-b-[20px] fixed w-[100vw] justify-between shadow-lg">
         <a class="" href="/">
             <img class="w-44" src="{{asset('assets/logo.png')}}" alt="logo milky way">
         </a>
-        <div>
+        <form action="/caribarang" method="post">
+            @csrf
             <input class="outline-slate-400 shadow-md rounded-full text-sm py-2 px-4 mr-2 w-96" placeholder="Cari barang disini" type="text" name="search">
-            <a href=""><i class="fa-solid fa-magnifying-glass"></i></a>
-        </div>
+            <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+        </form>
         @if (Auth::check())
             <div class="flex flex-row items-center">
                 <p class="right-5 mx-4">{{'Halo, '.$user = Auth::user()->nama_lengkap;}}</p>
@@ -67,7 +68,7 @@
         </div>
     @endif
 
-    <div class="">
+    <div class="w-[100%] h-[100%]">
         @yield('content')
     </div>
 

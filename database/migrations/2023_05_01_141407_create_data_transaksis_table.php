@@ -11,14 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('data_transaksis', function (Blueprint $table) {
+        Schema::create('data_transaksi', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('toko_id');
+            $table->foreignId('penjual_id');
             $table->foreignId('pembeli_id');
-            $table->string('nama_pembeli',100);
+            $table->foreignId('barang_id');
             $table->string('alamat');
-            $table->string('gambar');
-            $table->string('nama_barang',50);
             $table->bigInteger('harga');
             $table->integer('jumlah');
             $table->bigInteger('total_harga');
@@ -27,6 +25,20 @@ return new class extends Migration
             $table->timestamps();
         });
     }
+
+            // $table->id();
+            // $table->foreignId('toko_id');
+            // $table->foreignId('pembeli_id');
+            // $table->string('nama_pembeli',100);
+            // $table->string('alamat');
+            // $table->string('gambar');
+            // $table->string('nama_barang',50);
+            // $table->bigInteger('harga');
+            // $table->integer('jumlah');
+            // $table->bigInteger('total_harga');
+            // $table->enum('status_transaksi',['Pembayaran Pembeli','Verifikasi Admin','Konfirmasi Penjual','Sedang Dikirim','Selesai','Gagal']);
+            // $table->timestamp('tanggal_transaksi');
+            // $table->timestamps();
 
     /**
      * Reverse the migrations.

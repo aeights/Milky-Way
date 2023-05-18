@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('barangs', function (Blueprint $table) {
+        Schema::create('barang', function (Blueprint $table) {
             $table->id();
             $table->foreignId('penjual_id');
             $table->string('nama',50);
@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('kategori',50);
             $table->bigInteger('stok');
             $table->text('detail_produk');
+            $table->enum('status',['ready','discontinue']);
             $table->timestamps();
         });
     }

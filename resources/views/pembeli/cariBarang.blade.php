@@ -9,7 +9,7 @@
             </div>
             <div class="flex flex-col items-center justify-between mt-2">
                 <p class="font-semibold hover:text-xl duration-300">{{$barang->nama}}</p>
-                <p class="hover:text-blue-400 duration-300">{{$barang->nama_toko}}</p>
+                <p class="hover:text-blue-400 duration-300">Nama Toko Lorem, ipsum dolor sit amet consectetur adipisicing elit. Commodi, quia.</p>
                 <p class="text-blue-400 text-lg mt-2 hover:text-xl duration-300">Rp. {{$barang->harga}}</p>
                 <p class="mt-2 text-sm hover:text-base duration-300">
                     Rating
@@ -17,7 +17,7 @@
                     4.5
                 </p>
             </div>
-            <a class="py-2 w-48 bg-blue-500 text-center mt-2 text-white hover:bg-blue-800 duration-300" href="{{'/detailbarang/'.$barang->barang_id}}">Detail</a>
+            <a class="py-2 w-48 bg-blue-500 text-center mt-2 text-white hover:bg-blue-800 duration-300" href="{{'/detailbarang/'.$barang->id}}">Detail</a>
         </div>
         @endforeach
     </div>

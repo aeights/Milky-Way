@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Barang;
+use App\Models\DetailPenjual;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class HomeBuyerController extends Controller
@@ -13,7 +16,10 @@ class HomeBuyerController extends Controller
     {
         return view('pembeli.home',
         [
-            'title' => 'Beranda'
+            'title' => 'Beranda',
+            'data' => DB::table('barang')
+                    ->select('*','barang.id AS barang_id','detail_penjual.id AS toko_id')
+                    ->join('detail_penjual','detail_penjual.id','=','barang.penjual_id')->get()
         ]);
     }
 
@@ -62,11 +68,6 @@ class HomeBuyerController extends Controller
         }
     }
 
-    // public function batalProfile()
-    // {
-    //     return redirect('/profilePembeli');
-    // }
-
     public function resetPassword()
     {
         return view('pembeli.resetPassword',
@@ -89,5 +90,39 @@ class HomeBuyerController extends Controller
         else {
             return back();
         }
+    }
+
+    // Pembelian
+    public function cariBarang(Request $req)
+    {
+        $validated = $req->validate([
+            'search' => 'required'
+        ]);
+
+        $searched_product = $req->search;
+
+        if ($validated) {
+            $product = Barang::where('nama','LIKE','%'.$searched_product.'%')->get();
+            if ($product) {
+                return view('pembeli.cariBarang',
+                [
+                    'title' => 'Beranda',
+                    'data' => $product
+                ]);
+            }else{
+                return back()->with('message','Barang yang anda cari tidak ada');
+            }
+        } else{
+            return back()->with('message','Ketikkan barang yang ingin anda cari');
+        }
+    }
+
+    public function detailBarang($id)
+    {
+        return view('pembeli.detailBarang',
+        [
+            'title' => 'Detail Barang',
+            'data' => Barang::where('id',$id)->first()
+        ]);
     }
 }

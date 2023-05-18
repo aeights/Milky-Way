@@ -54,9 +54,9 @@ class AuthController extends Controller
             $user->role=$req->type;
             $user->save();
             if ($req->type =='penjual') {
-                return redirect('/detailPenjual/'.$user->id);
+                return redirect('/detailPenjual/'.$user->id)->with(['username'=>$req->username,'password'=>$req->password]);
             }else if ($req->type =='partner') {
-                return redirect('/detailPartner/'.$user->id);
+                return redirect('/detailPartner/'.$user->id)->with(['username'=>$req->username,'password'=>$req->password]);;
             }else if ($req->type =='pembeli') {
                 $credentials = $req->validate([
                     'username' => ['required'],
@@ -107,8 +107,10 @@ class AuthController extends Controller
     public function prosesPenjual(Request $req)
     {
         $validated = $req->validate([
-            'nama_toko' => 'required|unique:detail_penjuals',
+            'nama_toko' => 'required|unique:detail_penjual',
         ]);
+
+        $penjual = User::where('id',$req->id)->first();
 
         if ($validated) {
             $penjual = new DetailPenjual();
@@ -117,6 +119,7 @@ class AuthController extends Controller
             $penjual->alamat_toko=$req->alamat_toko;
             $penjual->deskripsi_toko=$req->deskripsi_toko;
             $penjual->save();
+            Auth::attempt(['username' => $req->username, 'password' => $req->password]);
             return redirect('/dashboardPenjual');
         }
     }
@@ -124,7 +127,7 @@ class AuthController extends Controller
     public function prosesPartner(Request $req)
     {
         $validated = $req->validate([
-            'nama_toko' => 'required|unique:detail_partners',
+            'nama_toko' => 'required|unique:detail_partner',
         ]);
 
         if ($validated) {
@@ -134,6 +137,7 @@ class AuthController extends Controller
             $partner->alamat_toko=$req->alamat_toko;
             $partner->deskripsi_suplai=$req->deskripsi_suplai;
             $partner->save();
+            Auth::attempt(['username' => $req->username, 'password' => $req->password]);
             return redirect('/dashboardPartner');
         }
     }

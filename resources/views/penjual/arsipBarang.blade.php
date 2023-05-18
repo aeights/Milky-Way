@@ -2,8 +2,7 @@
 @section('content')
     <div class="pl-72 pt-32">
         <div class="mb-4">
-            <a class="bg-[#B2A4FF] p-2 mr-2 text-white rounded-md hover:bg-slate-400 duration-200 drop-shadow-lg" href="/dashboardPenjual/barang/tambah">Tambah</a>
-            <a class="bg-[#B2A4FF] p-2 text-white rounded-md hover:bg-slate-400 duration-200 drop-shadow-lg" href="/dashboardPenjual/barang/Arsip">Arsip</a>
+            <a class="bg-[#B2A4FF] p-2 mr-2 text-white rounded-md hover:bg-slate-400 duration-200 drop-shadow-lg" href="/dashboardPenjual/barang">Kembali</a>
         </div>
         <div class="flex flex-row">
             <div class="bg-slate-300 text-center text-sm font-semibold py-1 w-[42px]">No</div>
@@ -45,10 +44,9 @@
                             <td class="bg-slate-200 w-14">{{$hasil->stok}}</td>
                             <td class="bg-slate-100 overflow-hidden whitespace-nowrap">{{$hasil->detail_produk}}</td>
                             <td class="bg-slate-200 w-24">
-                                <form action="{{url('/hapusBarang/'.$hasil->id)}}" method="post" onsubmit="return confirm('Apakah anda yakin ingin menghapus barang ini?')">
+                                <form action="{{url('/pulihkanBarang/'.$hasil->id)}}" method="post" onsubmit="return confirm('Apakah anda yakin ingin memulihkan barang ini?')">
                                     @csrf
-                                    <a class="bg-green-500 text-[12px] text-white p-1 rounded-sm" href="{{url('/dashboardPenjual/barang/edit/'.$hasil->id)}}">Edit</a>
-                                    <button class="text-[12px] bg-red-500 text-white p-1 rounded-sm">Hapus</button>
+                                    <button class="text-[12px] bg-red-500 text-white p-1 rounded-sm">Pulihkan</button>
                                 </form>
                             </td>
                         </tr>

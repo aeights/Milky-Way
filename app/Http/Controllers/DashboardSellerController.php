@@ -21,13 +21,15 @@ class DashboardSellerController extends Controller
         ]);
     }
 
+    // Barang
     public function barang()
     {
         $toko = DetailPenjual::where('user_id',Auth::user()->id)->first();
         return view('penjual.barang',
         [
             'title'=>'Barang',
-            'barang'=>Barang::where('penjual_id','=',$toko->id)->get()
+            'barang'=> Barang::where('penjual_id','=',$toko->id)
+                    ->where('status','=','ready')->get()
         ]);
     }
 
@@ -108,14 +110,43 @@ class DashboardSellerController extends Controller
         }
     }
 
+    // public function hapusBarang($id)
+    // {
+    //     $barang = Barang::find($id);
+    //     unlink("barang/".$barang->gambar);
+    //     $barang->delete();
+    //     return back()->with('message','Barang berhasil dihapus');
+    // }
+
     public function hapusBarang($id)
     {
         $barang = Barang::find($id);
-        unlink("barang/".$barang->gambar);
-        $barang->delete();
-        return back()->with('message','Barang berhasil dihapus');
+        $barang->status='discontinue';
+        $barang->save();
+        return back()->with('message','Barang berhasil dihapus, untuk membatalkan cek menu arsip');
+    }
+    
+    
+    public function arsipBarang()
+    {
+        $toko = DetailPenjual::where('user_id',Auth::user()->id)->first();
+        return view('penjual.arsipBarang',
+        [
+            'title' => 'Arsip Barang',
+            'barang'=> Barang::where('penjual_id','=',$toko->id)
+            ->where('status','=','discontinue')->get()
+        ]);
     }
 
+    public function pulihkanBarang($id)
+    {
+        $barang = Barang::find($id);
+        $barang->status='ready';
+        $barang->save();
+        return back()->with('message','Barang berhasil dipulihkan, silahkan cek menu barang');
+    }
+
+    // Profile
     public function resetPassword()
     {
         return view('penjual.resetPassword',
@@ -204,16 +235,7 @@ class DashboardSellerController extends Controller
         }
     }
 
-    // public function batalBarang()
-    // {
-    //     return to_route('barang');
-    // }
-
-    // public function batalProfile()
-    // {
-    //     return redirect('/profilePenjual');
-    // }
-
+    // Pengiriman
     public function pengiriman()
     {
         $toko = DetailPenjual::where('user_id',Auth::user()->id)->first();
@@ -233,11 +255,6 @@ class DashboardSellerController extends Controller
             'title' => 'Tambah Biaya Pengiriman',
         ]);
     }
-
-    // public function batalPengiriman()
-    // {
-    //     return redirect('/dashboardPenjual/pengiriman');
-    // }
 
     public function tambahBiayaPengiriman(Request $req)
     {

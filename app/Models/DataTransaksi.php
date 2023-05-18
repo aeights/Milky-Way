@@ -9,6 +9,8 @@ class DataTransaksi extends Model
 {
     use HasFactory;
 
+    protected $table = 'data_transaksi';
+
     protected $guarded = [
         'id'
     ];
