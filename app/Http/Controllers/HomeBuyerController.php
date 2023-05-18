@@ -92,6 +92,14 @@ class HomeBuyerController extends Controller
         }
     }
 
+    public function alamat()
+    {
+        return view('pembeli.alamatPembeli',
+        [
+            'title' => 'Alamat'
+        ]);
+    }
+
     // Pembelian
     public function cariBarang(Request $req)
     {

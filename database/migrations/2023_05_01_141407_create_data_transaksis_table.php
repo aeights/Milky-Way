@@ -20,6 +20,8 @@ return new class extends Migration
             $table->bigInteger('harga');
             $table->integer('jumlah');
             $table->bigInteger('total_harga');
+            $table->string('metode_pembayaran');
+            $table->string('bukti_pembayaran');
             $table->enum('status_transaksi',['Pembayaran Pembeli','Verifikasi Admin','Konfirmasi Penjual','Sedang Dikirim','Selesai','Gagal']);
             $table->timestamp('tanggal_transaksi');
             $table->timestamps();

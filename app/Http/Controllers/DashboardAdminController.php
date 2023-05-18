@@ -60,4 +60,13 @@ class DashboardAdminController extends Controller
             return back();
         }
     }
+
+    // Transaksi
+    public function transaksi()
+    {
+        return view('admin.verifikasiTransaksi',
+    [
+        'title' => 'Transakis'
+    ]);
+    }
 }

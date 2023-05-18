@@ -60,6 +60,8 @@ Route::middleware(['auth','user_role:pembeli'])->group(function (){
 
     Route::post('/proses/resetPasswordPembeli',[HomeBuyerController::class,'prosesReset']);
 
+    Route::get('/alamat',[HomeBuyerController::class,'alamat']);
+
     // Pembelian
     Route::post('/caribarang',[HomeBuyerController::class,'cariBarang']);
 
@@ -139,6 +141,9 @@ Route::middleware(['auth','user_role:admin'])->group(function (){
     Route::get('/profileAdmin/edit',[DashboardAdminController::class,'editProfile']);
 
     Route::post('/profileAdmin/prosesEdit',[DashboardAdminController::class,'prosesEditProfile']);
+
+    // Transaksi
+    Route::get('/dashboardAdmin/transaksi',[DashboardAdminController::class,'transaksi']);
 });
 
 Route::get('/logout',[AuthController::class,'prosesLogout']);

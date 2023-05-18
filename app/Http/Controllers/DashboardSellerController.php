@@ -203,7 +203,7 @@ class DashboardSellerController extends Controller
             'jenis_kelamin' => ['required'],
             'alamat' => ['required'],
 
-            'nama_toko' => ['required', 'unique:detail_penjuals,nama_toko,'.$current_toko->id],
+            'nama_toko' => ['required', 'unique:detail_penjual,nama_toko,'.$current_toko->id],
             'alamat_toko' => ['required'],
             'deskripsi_toko' => ['required'],
 
@@ -239,11 +239,11 @@ class DashboardSellerController extends Controller
     public function pengiriman()
     {
         $toko = DetailPenjual::where('user_id',Auth::user()->id)->first();
-        $biaya_pengiriman = BiayaPengiriman::where('toko_id',$toko->id)->get();
+        $biaya_pengiriman = BiayaPengiriman::where('penjual_id',$toko->id)->get();
         return view('penjual.pengirimanBarang',
     [
         'title' => 'Pengiriman',
-        'transaksi' => DataTransaksi::where('toko_id',$toko->id)->get(),
+        'transaksi' => DataTransaksi::where('penjual_id',$toko->id)->get(),
         'biaya_pengiriman' => $biaya_pengiriman
     ]);
     }
@@ -268,7 +268,7 @@ class DashboardSellerController extends Controller
 
         if ($validated) {
             $biaya = new BiayaPengiriman();
-            $biaya->toko_id=$toko->id;
+            $biaya->penjual_id=$toko->id;
             $biaya->jarak=$req->jarak_awal.' - '.$req->jarak_akhir;
             $biaya->harga=$req->harga;
             $biaya->save();
