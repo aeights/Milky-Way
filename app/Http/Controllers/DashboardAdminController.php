@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MetodePembayaran;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -68,5 +69,75 @@ class DashboardAdminController extends Controller
     [
         'title' => 'Transakis'
     ]);
+    }
+
+    // Pembayaran
+    public function pembayaran()
+    {
+        return view('admin.Pembayaran',
+    [
+        'title' => 'Pembayaran',
+        'pembayaran' => MetodePembayaran::all()
+    ]);
+    }
+
+    public function tambahPembayaran()
+    {
+        return view('admin.tambahPembayaran',
+    [
+        'title' => 'Tambah Pembayaran'
+    ]);
+    }
+
+    public function prosesTambahPembayaran(Request $req)
+    {
+        $validated = $req->validate([
+            'nama' => 'required',
+            'jenis_bank' => 'required',
+            'no_rekening' => 'required'
+        ]);
+
+        if ($validated) {
+            $pembayaran = new MetodePembayaran();
+            $pembayaran->nama=$req->nama;
+            $pembayaran->jenis_bank=$req->jenis_bank;
+            $pembayaran->no_rekening=$req->no_rekening;
+            $pembayaran->save();
+            return redirect('/dashboardAdmin/pembayaran')->with('message','Pembayaran berhasil ditambahkan');
+        }
+    }
+
+    public function editPembayaran($id)
+    {
+        return view('admin.editPembayaran',
+    [
+        'title' => 'Edit Pembayaran',
+        'pembayaran' => MetodePembayaran::where('id',$id)->first()
+    ]);
+    }
+
+    public function prosesEditPembayaran(Request $req)
+    {
+        $validated = $req->validate([
+            'nama' => 'required',
+            'jenis_bank' => 'required',
+            'no_rekening' => 'required'
+        ]);
+
+        if ($validated) {
+            $pembayaran = MetodePembayaran::find($req->id);
+            $pembayaran->nama=$req->nama;
+            $pembayaran->jenis_bank=$req->jenis_bank;
+            $pembayaran->no_rekening=$req->no_rekening;
+            $pembayaran->save();
+            return redirect('/dashboardAdmin/pembayaran')->with('message','Pembayaran berhasil diedit');
+        }
+    }
+
+    public function hapusPembayaran($id)
+    {
+        $pembayaran = MetodePembayaran::find($id);
+        $pembayaran->delete();
+        return back()->with('message','Pembayaran berhasil dihapus');
     }
 }

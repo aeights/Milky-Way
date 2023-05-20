@@ -11,12 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('detail_partner', function (Blueprint $table) {
+        Schema::create('metode_pembayaran', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
-            $table->string('nama_toko',40);
-            $table->string('alamat_toko');
-            $table->text('deskripsi_suplai');
+            $table->string('nama',100);
+            $table->string('jenis_bank',20);
+            $table->string('no_rekening',50);
             $table->timestamps();
         });
     }
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('detail_partner');
+        Schema::dropIfExists('metode_pembayaran');
     }
 };

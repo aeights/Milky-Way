@@ -62,6 +62,16 @@ Route::middleware(['auth','user_role:pembeli'])->group(function (){
 
     Route::get('/alamat',[HomeBuyerController::class,'alamat']);
 
+    Route::get('/alamat/tambah',[HomeBuyerController::class,'tambahAlamat']);
+
+    Route::post('/alamat/tambah/proses',[HomeBuyerController::class,'prosesTambahAlamat']);
+
+    Route::get('/alamat/edit/{id}',[HomeBuyerController::class,'editAlamat']);
+
+    Route::post('/alamat/edit/proses',[HomeBuyerController::class,'prosesEditAlamat']);
+
+    Route::post('/alamat/hapus/{id}',[HomeBuyerController::class,'hapusAlamat']);
+
     // Pembelian
     Route::post('/caribarang',[HomeBuyerController::class,'cariBarang']);
 
@@ -144,6 +154,19 @@ Route::middleware(['auth','user_role:admin'])->group(function (){
 
     // Transaksi
     Route::get('/dashboardAdmin/transaksi',[DashboardAdminController::class,'transaksi']);
+
+    // Pembayaran
+    Route::get('/dashboardAdmin/pembayaran',[DashboardAdminController::class,'pembayaran']);
+
+    Route::get('/dashboardAdmin/pembayaran/tambah',[DashboardAdminController::class,'tambahPembayaran']);
+
+    Route::post('/tambahMetodePembayaran',[DashboardAdminController::class,'prosesTambahPembayaran']);
+
+    Route::get('/dashboardAdmin/pembayaran/edit/{id}',[DashboardAdminController::class,'editPembayaran']);
+
+    Route::post('/editMetodePembayaran',[DashboardAdminController::class,'prosesEditPembayaran']);
+
+    Route::post('/hapusPembayaran/{id}',[DashboardAdminController::class,'hapusPembayaran']);
 });
 
-Route::get('/logout',[AuthController::class,'prosesLogout']);
+Route::get('/logout',[AuthController::class,'prosesLogout'])->middleware('auth');

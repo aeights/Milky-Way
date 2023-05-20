@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AlamatPembeli;
 use App\Models\Barang;
 use App\Models\DetailPenjual;
 use App\Models\User;
@@ -96,8 +97,63 @@ class HomeBuyerController extends Controller
     {
         return view('pembeli.alamatPembeli',
         [
-            'title' => 'Alamat'
+            'title' => 'Alamat',
+            'alamat' => AlamatPembeli::where('pembeli_id',Auth::user()->id)->get()
         ]);
+    }
+
+    public function tambahAlamat()
+    {
+        return view('pembeli.tambahAlamat',
+    [
+        'title' => 'Tambah Alamat'
+    ]);
+    }
+
+    public function prosesTambahAlamat(Request $req)
+    {
+        $validated = $req->validate([
+            'alamat' => 'required'
+        ]);
+
+        if ($validated) {
+            $alamat = new AlamatPembeli();
+            $alamat->pembeli_id=Auth::user()->id;
+            $alamat->alamat=$req->alamat;
+            $alamat->save();
+            return redirect('/alamat')->with('message','Alamat berhasil ditambahkan');
+        }
+    }
+
+    public function editAlamat($id)
+    {
+        return view('pembeli.editAlamat',
+    [
+        'title' => 'Edit Alamat',
+        'alamat' => AlamatPembeli::where('id',$id)->first()
+    ]);
+    }
+
+    public function prosesEditAlamat(Request $req)
+    {
+        $validated = $req->validate([
+            'alamat' => 'required'
+        ]);
+
+        if ($validated) {
+            $alamat = AlamatPembeli::find($req->id);
+            $alamat->pembeli_id=Auth::user()->id;
+            $alamat->alamat=$req->alamat;
+            $alamat->save();
+            return redirect('/alamat')->with('message','Alamat berhasil diedit');
+        }
+    }
+
+    public function hapusAlamat($id)
+    {
+        $alamat = AlamatPembeli::find($id);
+        $alamat->delete();
+        return back()->with('message','Alamat berhasil dihapus');
     }
 
     // Pembelian
