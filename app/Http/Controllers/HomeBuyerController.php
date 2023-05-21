@@ -4,13 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\AlamatPembeli;
 use App\Models\Barang;
+use App\Models\DataTransaksi;
 use App\Models\DetailPenjual;
+use App\Models\MetodePembayaran;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-
+date_default_timezone_set("Asia/Jakarta");
 class HomeBuyerController extends Controller
 {
     public function home()
@@ -183,10 +185,43 @@ class HomeBuyerController extends Controller
 
     public function detailBarang($id)
     {
+        $barang = Barang::where('id',$id)->first();
         return view('pembeli.detailBarang',
         [
             'title' => 'Detail Barang',
-            'data' => Barang::where('id',$id)->first()
+            'data' => $barang,
+            'toko' => DetailPenjual::where('id',$barang->penjual_id)->first(),
+            'alamat' => AlamatPembeli::where('pembeli_id',Auth::user()->id)->get(),
+            'pembayaran' => MetodePembayaran::all(),
         ]);
+    }
+
+    public function buatPesanan(Request $req)
+    {
+        $validated = $req->validate([
+            'jumlah' => 'required',
+            'alamat' => 'required',
+            'metode_pembayaran' => 'required'
+        ]);
+
+        if ($validated) {
+            $total = $req->harga*$req->jumlah;
+            $transaksi = new DataTransaksi();
+            $transaksi->penjual_id=$req->penjual_id;
+            $transaksi->pembeli_id=$req->pembeli_id;
+            $transaksi->barang_id=$req->barang_id;
+            $transaksi->alamat=$req->alamat;
+            $transaksi->harga=$req->harga;
+            $transaksi->jumlah=$req->jumlah;
+            $transaksi->total_harga=$total;
+            $transaksi->metode_pembayaran=$req->metode_pembayaran;
+            $transaksi->bukti_pembayaran='null';
+            $transaksi->tanggal_transaksi=date('Y-m-d H:i:s');
+            $transaksi->save();
+            return back()->with('message','Pesanan Berhasil Dibuat, Silahkan Cek Menu Transaksi.');
+        }
+        else{
+            
+        }
     }
 }
