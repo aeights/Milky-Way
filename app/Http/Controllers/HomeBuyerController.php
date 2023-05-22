@@ -224,4 +224,14 @@ class HomeBuyerController extends Controller
             
         }
     }
+
+    // Transaksi
+    public function transaksi()
+    {
+        return view('pembeli.transaksiPembeli',
+        [
+            'title'=>'Transaksi',
+            'transaksi'=>DataTransaksi::all()
+        ]);
+    }
 }

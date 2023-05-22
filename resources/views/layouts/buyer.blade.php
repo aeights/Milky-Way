@@ -34,7 +34,7 @@
                         <ul class="flex flex-col text-sm">
                             <li class="my-1 hover:font-semibold"><a href="/profilePembeli">Profile</a></li>
                             <hr>
-                            <li class="my-1 hover:font-semibold"><a href="/">Transaksi</a></li>
+                            <li class="my-1 hover:font-semibold"><a href="/transaksi">Transaksi</a></li>
                             <hr>
                             <li class="my-1 hover:font-semibold"><a href="/resetPasswordPembeli">Reset Password</a></li>
                             <hr>

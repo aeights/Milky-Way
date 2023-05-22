@@ -78,6 +78,9 @@ Route::middleware(['auth','user_role:pembeli'])->group(function (){
     Route::get('/detailbarang/{id}',[HomeBuyerController::class,'detailBarang']);
 
     Route::post('/detailBarang/buatPesanan',[HomeBuyerController::class,'buatPesanan']);
+
+    // Transaksi
+    Route::get('/transaksi',[HomeBuyerController::class,'transaksi']);
 });
 
 // Penjual

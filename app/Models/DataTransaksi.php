@@ -14,4 +14,13 @@ class DataTransaksi extends Model
     protected $guarded = [
         'id'
     ];
+
+    public function barang()
+    {
+        return $this->belongsTo(Barang::class);
+    }
+    public function penjual()
+    {
+        return $this->belongsTo(DetailPenjual::class);
+    }
 }

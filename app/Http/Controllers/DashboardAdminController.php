@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DataTransaksi;
 use App\Models\MetodePembayaran;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -67,7 +68,8 @@ class DashboardAdminController extends Controller
     {
         return view('admin.verifikasiTransaksi',
     [
-        'title' => 'Transakis'
+        'title' => 'Transaki',
+        'transaksi' => DataTransaksi::where('status_transaksi','Verifikasi Admin')->get()
     ]);
     }
 

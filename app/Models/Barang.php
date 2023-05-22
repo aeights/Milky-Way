@@ -14,4 +14,9 @@ class Barang extends Model
     protected $guarded = [
         'id',
     ];
+
+    public function datatransaksi()
+    {
+        return $this->hasMany(DataTransaksi::class);
+    }
 }
