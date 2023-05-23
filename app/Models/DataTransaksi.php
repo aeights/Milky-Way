@@ -23,4 +23,8 @@ class DataTransaksi extends Model
     {
         return $this->belongsTo(DetailPenjual::class);
     }
+    public function pembeli()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

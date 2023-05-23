@@ -234,4 +234,16 @@ class HomeBuyerController extends Controller
             'transaksi'=>DataTransaksi::all()
         ]);
     }
+
+    public function detailTransaksi($id)
+    {
+        $transaksi = DataTransaksi::find($id)->first();
+        return view('pembeli.detailTransaksi',
+        [
+            'title' => 'Detail Transaksi',
+            'transaksi' => $transaksi,
+            'rekening' => MetodePembayaran::where('jenis_bank',$transaksi->metode_pembayaran)->first(),
+            'total_transfer' => $transaksi->total_harga+1000
+        ]);
+    }
 }

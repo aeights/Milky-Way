@@ -81,6 +81,8 @@ Route::middleware(['auth','user_role:pembeli'])->group(function (){
 
     // Transaksi
     Route::get('/transaksi',[HomeBuyerController::class,'transaksi']);
+
+    Route::get('/transaksi/detail/{id}',[HomeBuyerController::class,'detailTransaksi']);
 });
 
 // Penjual
