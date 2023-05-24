@@ -3,7 +3,7 @@
 <div class="flex flex-col">
     <div class="text-[20px] mx-10 mt-28 text-center">
         <p>Milky Way adalah sistem yang menaungi usaha susu</p>
-        <p>di Indonesia berjenis susu sapi dan susu kedelai yang berkualitas</p>
+        <p>di Indonesia yang berkualitas</p>
     </div>
     <div class="flex flex-col items-center mt-10">
         <button onclick="clickModalLogin()" data-modal-target="popup-modal-login" data-modal-toggle="popup-modal-login" class="bg-[#B2A4FF] hover:bg-[#A092EC] hover:shadow-slate-700/90 py-2 my-2 w-36 rounded shadow-md shadow-slate-700/40" >Login</button>

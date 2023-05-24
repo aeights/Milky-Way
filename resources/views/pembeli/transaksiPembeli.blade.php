@@ -31,7 +31,7 @@
                         <td>{{$hasil->metode_pembayaran}}</td>
                         <td>{{$hasil->status_transaksi}}</td>
                         <td class="bg-slate-200">
-                            <form class="flex" action="" method="post" onsubmit="return confirm('Apakah anda yakin ingin membatalkan transaksi ini?')">
+                            <form class="flex" action="{{'/transaksi/batalkan/'.$hasil->id}}" method="post" onsubmit="return confirm('Apakah anda yakin ingin membatalkan transaksi ini?')">
                                 @csrf
                                 <a class="bg-green-500 text-[12px] p-1 m-1 text-white rounded-sm" href="{{url('/transaksi/detail/'.$hasil->id)}}">Detail</a>
                                 <button class="text-[12px] p-1 m-1 bg-red-500 text-white rounded-sm">Batalkan</button>

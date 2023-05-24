@@ -19,10 +19,10 @@
             <img class="w-44" src="{{asset('assets/logo.png')}}" alt="logo milky way">
         </a>
         <div class="">
-            <a class="hover:underline mx-5 text-[20px]" href="">Beranda</a>
-            <a class="hover:underline mx-5 text-[20px]" href="">Profile</a>
-            <a class="hover:underline mx-5 text-[20px]" href="/home">Produk</a>
-            <a class="hover:underline mx-5 text-[20px]" href="">Partner Kami</a>
+            <a class="hover:underline mx-5" href="">Beranda</a>
+            <a class="hover:underline mx-5" href="">Profile</a>
+            <a class="hover:underline mx-5" href="/home">Produk</a>
+            <a class="hover:underline mx-5" href="">Partner Kami</a>
         </div>
         <div>
 

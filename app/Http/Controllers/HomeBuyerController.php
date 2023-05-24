@@ -246,4 +246,29 @@ class HomeBuyerController extends Controller
             'total_transfer' => $transaksi->total_harga+1000
         ]);
     }
+
+    public function batalTransaksi($id)
+    {
+        $transaksi = DataTransaksi::find($id);
+        $transaksi->status_transaksi='Gagal';
+        $transaksi->save();
+        return back()->with('message','Pesanan berhasil dibatalkan');
+    }
+
+    public function bayarTransaksi(Request $req)
+    {
+        $validated = $req->validate([
+            'bukti_pembayaran' => 'required',
+        ]);
+        if ($validated) {
+            if ($req->hasFile('bukti_pembayaran')) {
+                $transaksi = DataTransaksi::find($req->id);
+                $req->file('bukti_pembayaran')->move('bukti pembayaran/',date('YmdHis') . "." .$req->file('bukti_pembayaran')->getClientOriginalName());
+                $transaksi->bukti_pembayaran=date('YmdHis') . "." .$req->file('bukti_pembayaran')->getClientOriginalName();
+                $transaksi->status_transaksi='Verifikasi Admin';
+                $transaksi->save();
+                return redirect('/transaksi')->with('message','Pembayaran berhasil, silahkan tunggu konfirmasi dari admin dan penjual.');
+            }
+        }
+    }
 }
