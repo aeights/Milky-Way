@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Barang;
 use App\Models\DataTransaksi;
 use App\Models\MetodePembayaran;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class DashboardAdminController extends Controller
 {
@@ -71,6 +73,31 @@ class DashboardAdminController extends Controller
         'title' => 'Transaki',
         'transaksi' => DataTransaksi::where('status_transaksi','Verifikasi Admin')->get()
     ]);
+    }
+
+    public function detailTransaksi($id)
+    {
+        $transaksi = DataTransaksi::find($id)->first();
+        return view('admin.detailTransaksi',
+    [
+        'title' => 'Detail Transaksi',
+        'transaksi' => $transaksi,
+        'rekening' => MetodePembayaran::where('jenis_bank',$transaksi->metode_pembayaran)->first(),
+        'total_transfer' => $transaksi->total_harga+1000
+    ]);
+    }
+
+    public function simpanTransaksi(Request $req)
+    {
+        $transaksi = DataTransaksi::find($req->id);
+        $transaksi->status_transaksi=$req->status_transaksi;
+        $transaksi->save();
+        if ($transaksi->status_transaksi == 'Konfirmasi Penjual') {
+            Barang::where('id',$req->barang_id)
+                    ->decrement('stok',$req->jumlah);
+            return back()->with('message','Transaksi berhasil disimpan');
+        }
+        return back()->with('message','Transaksi berhasil disimpan');
     }
 
     // Pembayaran

@@ -49,7 +49,7 @@
                 <div class="mb-2 ml-4">
                     <p>Metode Pembayaran</p>
                     <select required class="rounded-md py-1 px-2 w-[95%] text-[12px] shadow-md outline-none border border-black" name="metode_pembayaran">
-                        <option>Pilih Metode Pembayaran</option>
+                        <option selected disabled hidden>Pilih Metode Pembayaran</option>
                         @foreach ($pembayaran as $item)
                         <option value="{{$item->jenis_bank}}">{{$item->jenis_bank}}</option>
                         @endforeach

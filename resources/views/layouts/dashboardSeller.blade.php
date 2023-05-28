@@ -55,7 +55,7 @@
                 <a class="hover:bg-[#B2A4FF] duration-200 py-4 text-start pl-14 w-[210px] block rounded-lg drop-shadow-lg" href="">Penarikan</a>
             </li>
             <li class="my-5">
-                <a class="hover:bg-[#B2A4FF] duration-200 py-4 text-start pl-14 w-[210px] block rounded-lg drop-shadow-lg" href="">Partner</a>
+                <a class="hover:bg-[#B2A4FF] duration-200 py-4 text-start pl-14 w-[210px] block rounded-lg drop-shadow-lg" href="">Riwayat</a>
             </li>
         </ul>
     </div>

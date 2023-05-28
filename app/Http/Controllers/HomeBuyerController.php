@@ -254,6 +254,18 @@ class HomeBuyerController extends Controller
         $transaksi->save();
         return back()->with('message','Pesanan berhasil dibatalkan');
     }
+    public function selesaiTransaksi($id)
+    {
+        $transaksi = DataTransaksi::find($id);
+        if ($transaksi->status_transaksi == 'Sedang Dikirim') {
+            $transaksi->status_transaksi='Transfer Penjual';
+            $transaksi->save();
+            return back()->with('message','Pesanan selesai');
+        }
+        else {
+            return back()->with('message','Anda belum menyelesaikan transaksi');
+        }
+    }
 
     public function bayarTransaksi(Request $req)
     {

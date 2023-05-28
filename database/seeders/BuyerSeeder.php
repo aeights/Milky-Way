@@ -15,11 +15,12 @@ class BuyerSeeder extends Seeder
     public function run(): void
     {
         User::insert([
+            'id'=>2,
             'nama_lengkap'=>'Pembeli 1',
             'email'=>'pembeli1@gmail.com',
             'username'=>'pembeli1',
             'password'=>Hash::make('111111'),
-            'nomor_telepon'=>'0861',
+            'nomor_telepon'=>'08b1',
             'alamat'=>'Jember',
             'tanggal_lahir'=>'2222-02-02',
             'jenis_kelamin'=>'Laki-laki',

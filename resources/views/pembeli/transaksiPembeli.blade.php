@@ -1,9 +1,9 @@
 @extends('layouts.buyer')
 @section('content')
     <div class="pt-32 flex flex-col justify-center">
-        <table class="table-fixed border text-sm overflow-y-scroll block h-[340px]">
+        <table class="table-fixed border text-sm overflow-y-scroll block h-[400px]">
             <thead>
-                <tr class="">
+                <tr class="fixed">
                     <th class="bg-slate-300 p-2">No</th>
                     <th class="bg-slate-300 w-20 p-2">Gambar</th>
                     <th class="bg-slate-200 p-2">Nama Barang</th>
@@ -20,8 +20,8 @@
             <tbody class="text-center">
                 @foreach ($transaksi as $no => $hasil)
                     <tr>
-                        <td>{{$no+1}}</td>
-                        <td><img src="{{asset('barang/'.$hasil->barang['gambar'])}}" alt=""></td>
+                        <td class="w-10">{{$no+1}}</td>
+                        <td><img class="h-20" src="{{asset('barang/'.$hasil->barang['gambar'])}}" alt=""></td>
                         <td>{{$hasil->barang['nama']}}</td>
                         <td>{{$hasil->penjual['nama_toko']}}</td>
                         <td>{{$hasil->alamat}}</td>
@@ -34,6 +34,7 @@
                             <form class="flex" action="{{'/transaksi/batalkan/'.$hasil->id}}" method="post" onsubmit="return confirm('Apakah anda yakin ingin membatalkan transaksi ini?')">
                                 @csrf
                                 <a class="bg-green-500 text-[12px] p-1 m-1 text-white rounded-sm" href="{{url('/transaksi/detail/'.$hasil->id)}}">Detail</a>
+                                <a onclick="return confirm('Apakah barang sudah kamu terima?')" class="bg-green-500 text-[12px] p-1 m-1 text-white rounded-sm" href="{{url('/transaksi/selesai/'.$hasil->id)}}">Selesai</a>
                                 <button class="text-[12px] p-1 m-1 bg-red-500 text-white rounded-sm">Batalkan</button>
                             </form>
                         </td>

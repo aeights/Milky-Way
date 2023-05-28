@@ -84,6 +84,8 @@ Route::middleware(['auth','user_role:pembeli'])->group(function (){
 
     Route::get('/transaksi/detail/{id}',[HomeBuyerController::class,'detailTransaksi']);
     
+    Route::get('/transaksi/selesai/{id}',[HomeBuyerController::class,'selesaiTransaksi']);
+
     Route::post('/transaksi/batalkan/{id}',[HomeBuyerController::class,'batalTransaksi']);
 
     Route::post('/bayar/{id}',[HomeBuyerController::class,'bayarTransaksi']);
@@ -165,6 +167,10 @@ Route::middleware(['auth','user_role:admin'])->group(function (){
 
     // Transaksi
     Route::get('/dashboardAdmin/transaksi',[DashboardAdminController::class,'transaksi']);
+
+    Route::get('/dashboardAdmin/transaksi/{id}',[DashboardAdminController::class,'detailTransaksi']);
+
+    Route::post('/dashboardAdmin/transaksi/simpan',[DashboardAdminController::class,'simpanTransaksi']);
 
     // Pembayaran
     Route::get('/dashboardAdmin/pembayaran',[DashboardAdminController::class,'pembayaran']);

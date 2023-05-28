@@ -22,25 +22,11 @@ return new class extends Migration
             $table->bigInteger('total_harga');
             $table->string('metode_pembayaran');
             $table->string('bukti_pembayaran');
-            $table->enum('status_transaksi',['Pembayaran Pembeli','Verifikasi Admin','Konfirmasi Penjual','Sedang Dikirim','Selesai','Gagal']);
+            $table->enum('status_transaksi',['Pembayaran Pembeli','Verifikasi Admin','Konfirmasi Penjual','Sedang Dikirim','Transfer Penjual','Selesai','Gagal']);
             $table->timestamp('tanggal_transaksi');
             $table->timestamps();
         });
     }
-
-            // $table->id();
-            // $table->foreignId('toko_id');
-            // $table->foreignId('pembeli_id');
-            // $table->string('nama_pembeli',100);
-            // $table->string('alamat');
-            // $table->string('gambar');
-            // $table->string('nama_barang',50);
-            // $table->bigInteger('harga');
-            // $table->integer('jumlah');
-            // $table->bigInteger('total_harga');
-            // $table->enum('status_transaksi',['Pembayaran Pembeli','Verifikasi Admin','Konfirmasi Penjual','Sedang Dikirim','Selesai','Gagal']);
-            // $table->timestamp('tanggal_transaksi');
-            // $table->timestamps();
 
     /**
      * Reverse the migrations.
