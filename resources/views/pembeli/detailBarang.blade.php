@@ -17,7 +17,7 @@
             <p class="opacity-80 mt-2">Deskripsi:</p>
             <p>{{$data->detail_produk}}</p>
         </div>
-        <div class="w-[30%] h-[400px] border border-slate-800 bg-slate-50 py-2 px-4 rounded-lg drop-shadow-lg">
+        <div class="w-[30%] h-[450px] border border-slate-800 bg-slate-50 py-2 px-4 rounded-lg drop-shadow-lg">
             <p class="text-xl text-center mb-2 font-semibold">Beli</p>
             <div class="flex mb-2 rounded-md bg-slate-200 p-1">
                 <div class="w-[50px] h-[50px] rounded-lg mr-2">
@@ -40,9 +40,18 @@
                 <div class="mb-2 ml-4">
                     <p>Alamat</p>
                     <select required class="rounded-md py-1 px-2 w-[95%] text-[12px] shadow-md outline-none border border-black" name="alamat">
-                        <option>Pilih Alamat Tujuan</option>
+                        <option selected disabled hidden>Pilih Alamat Tujuan</option>
                         @foreach ($alamat as $item)
                         <option value="{{$item->alamat}}">{{$item->alamat}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="mb-2 ml-4">
+                    <p>Ongkos Kirim</p>
+                    <select required class="rounded-md py-1 px-2 w-[95%] text-[12px] shadow-md outline-none border border-black" name="ongkir">
+                        <option selected disabled hidden>Pilih Ongkos Kirim</option>
+                        @foreach ($ongkir as $item)
+                        <option value="{{$item->harga}}">{{$item->jarak}} Km, Ongkir Rp. {{$item->harga}}</option>
                         @endforeach
                     </select>
                 </div>

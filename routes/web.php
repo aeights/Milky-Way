@@ -138,6 +138,19 @@ Route::middleware(['auth','user_role:penjual'])->group(function (){
     Route::get('/dashboardPenjual/transaksi/detail/{id}',[DashboardSellerController::class,'detailTransaksi']);
 
     Route::post('/konfirmasiTransaksi/{id}',[DashboardSellerController::class,'konfirmasiTransaksi']);
+
+    // Pencatatan
+    Route::get('/dashboardPenjual/pencatatan',[DashboardSellerController::class,'pencatatan']);
+
+    Route::get('/dashboardPenjual/pencatatan/tambah',[DashboardSellerController::class,'tambahCatatan']);
+
+    Route::post('/tambahCatatan',[DashboardSellerController::class,'prosesTambahCatatan']);
+
+    Route::get('/dashboardPenjual/pencatatan/edit/{id}',[DashboardSellerController::class,'editCatatan']);
+
+    Route::post('/editCatatan',[DashboardSellerController::class,'prosesEditCatatan']);
+
+    Route::post('/hapusCatatan/{id}',[DashboardSellerController::class,'hapusCatatan']);
 });
 
 // Partner

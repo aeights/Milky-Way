@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\AlamatPembeli;
 use App\Models\Barang;
+use App\Models\BiayaPengiriman;
 use App\Models\DataTransaksi;
 use App\Models\DetailPenjual;
 use App\Models\MetodePembayaran;
@@ -186,6 +187,7 @@ class HomeBuyerController extends Controller
     public function detailBarang($id)
     {
         $barang = Barang::where('id',$id)->first();
+        // dd(BiayaPengiriman::where('penjual_id',$barang->penjual_id)->first());
         return view('pembeli.detailBarang',
         [
             'title' => 'Detail Barang',
@@ -193,6 +195,7 @@ class HomeBuyerController extends Controller
             'toko' => DetailPenjual::where('id',$barang->penjual_id)->first(),
             'alamat' => AlamatPembeli::where('pembeli_id',Auth::user()->id)->get(),
             'pembayaran' => MetodePembayaran::all(),
+            'ongkir' => BiayaPengiriman::where('penjual_id',$barang->penjual_id)->get()
         ]);
     }
 

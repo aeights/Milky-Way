@@ -49,7 +49,7 @@
                 <a class="hover:bg-[#B2A4FF] duration-200 py-4 text-start pl-14 w-[210px] block rounded-lg drop-shadow-lg" href="/dashboardPenjual/pengiriman">Pengiriman</a>
             </li>
             <li class="my-5">
-                <a class="hover:bg-[#B2A4FF] duration-200 py-4 text-start pl-14 w-[210px] block rounded-lg drop-shadow-lg" href="">Pencatatan</a>
+                <a class="hover:bg-[#B2A4FF] duration-200 py-4 text-start pl-14 w-[210px] block rounded-lg drop-shadow-lg" href="/dashboardPenjual/pencatatan">Pencatatan</a>
             </li>
             <li class="my-5">
                 <a class="hover:bg-[#B2A4FF] duration-200 py-4 text-start pl-14 w-[210px] block rounded-lg drop-shadow-lg" href="">Penarikan</a>

@@ -6,6 +6,7 @@ use App\Models\Barang;
 use App\Models\BiayaPengiriman;
 use App\Models\DataTransaksi;
 use App\Models\DetailPenjual;
+use App\Models\Pencatatan;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -327,5 +328,78 @@ class DashboardSellerController extends Controller
         DataTransaksi::where('id',$id)
         ->update(['status_transaksi'=>'Sedang Dikirim']);
         return redirect('/dashboardPenjual/pengiriman')->with('message','Pesanan berhasil dikonfirmasi');
+    }
+
+    // Pencatatan
+    public function pencatatan()
+    {
+        return view('penjual.pencatatan',
+    [
+        'title' => 'Pencatatan',
+        'catatan' => Pencatatan::where('penjual_id',Auth::user()->id)->get()
+    ]);
+    }
+
+    public function tambahCatatan()
+    {
+        return view('penjual.tambahCatatan',
+    [
+        'title' => 'Tambah Catatan',
+        'barang' => Barang::where('penjual_id',Auth::user()->id)->get()
+    ]);
+    }
+    public function prosesTambahCatatan(Request $req)
+    {
+        $validated = $req->validate([
+            'barang_id' => ['required'],
+            'terjual' => ['required'],
+            'penghasilan' => ['required'],
+            'tanggal' => ['required'],
+        ]);
+
+        if ($validated) {
+            $catatan = new Pencatatan();
+            $catatan->penjual_id=$req->id;
+            $catatan->barang_id=$req->barang_id;
+            $catatan->stok_terjual=$req->terjual;
+            $catatan->penghasilan=$req->penghasilan;
+            $catatan->tanggal=$req->tanggal;
+            $catatan->save();
+            return redirect('/dashboardPenjual/pencatatan')->with('message','Catatan berhasil ditambahkan');
+        }
+    }
+    public function editCatatan($id)
+    {
+        return view('penjual.editCatatan',
+    [
+        'title' => 'Tambah Catatan',
+        'catatan' => Pencatatan::where('id',$id)->first(),
+        'barang' => Barang::where('penjual_id',Auth::user()->id)->get()
+    ]);
+    }
+    public function prosesEditCatatan(Request $req)
+    {
+        $validated = $req->validate([
+            'barang_id' => ['required'],
+            'terjual' => ['required'],
+            'penghasilan' => ['required'],
+            'tanggal' => ['required'],
+        ]);
+
+        if ($validated) {
+            $catatan = Pencatatan::find($req->id);
+            $catatan->penjual_id=$req->id;
+            $catatan->barang_id=$req->barang_id;
+            $catatan->stok_terjual=$req->terjual;
+            $catatan->penghasilan=$req->penghasilan;
+            $catatan->tanggal=$req->tanggal;
+            $catatan->save();
+            return redirect('/dashboardPenjual/pencatatan')->with('message','Catatan berhasil ditambahkan');
+        }
+    }
+
+    public function hapusCatatan($id)
+    {
+        # code...
     }
 }
