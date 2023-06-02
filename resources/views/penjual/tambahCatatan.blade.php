@@ -17,14 +17,23 @@
                 <div class="mb-2">
                     <p class="text-sm mb-1">Stok Terjual</p>
                     <input class="mb-2 bg-white appearance-none text-sm border rounded w-[80%] py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" min="1" type="number" name="terjual">
+                    @error('terjual')
+                        <div class="mt-2 text-sm text-red-600">{{$message}}</div>
+                    @enderror
                 </div>
                 <div class="mb-2">
                     <p class="text-sm mb-1">Penghasilan</p>
                     <input class="mb-2 bg-white appearance-none text-sm border rounded w-[80%] py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" min="0" type="number" name="penghasilan">
+                    @error('penghasilan')
+                        <div class="mt-2 text-sm text-red-600">{{$message}}</div>
+                    @enderror
                 </div>
                 <div class="mb-2">
                     <p>Tanggal</p>
                     <input class="mb-2 bg-white appearance-none text-sm border rounded w-[80%] py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Tanggal Catatan" type="date" name="tanggal">
+                    @error('tanggal')
+                        <div class="mt-2 text-sm text-red-600">{{$message}}</div>
+                    @enderror
                 </div>
                 <button class="bg-[#B2A4FF] mt-2 mr-4 p-2 rounded-md hover:bg-slate-500 duration-200 drop-shadow-lg" type="submit">Tambah</button>
                 <a class="bg-[#B2A4FF] mt-2 p-2 rounded-md hover:bg-slate-500 duration-200 drop-shadow-lg" href="/dashboardPenjual/pencatatan">Batal</a>

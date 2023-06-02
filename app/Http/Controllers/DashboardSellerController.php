@@ -10,6 +10,7 @@ use App\Models\Pencatatan;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class DashboardSellerController extends Controller
@@ -331,13 +332,52 @@ class DashboardSellerController extends Controller
     }
 
     // Pencatatan
+    public function dataChart()
+    {
+        $chart = Pencatatan::selectRaw('SUM(penghasilan) as penghasilan, SUM(stok_terjual) as stok_terjual')
+            ->groupBy('tanggal')
+            ->get()
+            ->map(function ($item) {
+                return [
+                    'tanggal'  => date('d M Y', strtotime($item->tanggal)),
+                    'terjual' => $item->stok_terjual,
+                    'hasil' => $item->penghasilan,
+                ];
+            }
+        );
+    }
+
     public function pencatatan()
     {
+        $chart = Pencatatan::selectRaw('SUM(penghasilan) as penghasilan,DATE(tanggal) as tanggal ,SUM(stok_terjual) as stok_terjual')
+            ->where('penjual_id',Auth::user()->id)
+            ->groupBy('tanggal')
+            ->get()
+            ->map(function ($item) {
+                return [
+                    'tanggal'  => date('d M Y', strtotime($item->tanggal)),
+                    'terjual' => $item->stok_terjual,
+                    'hasil' => $item->penghasilan,
+                ];
+            }
+        );
+
+        $data = [];
+        $label = [];
+        $idx = 0;
+        foreach ($chart as $item => $value) {
+            $data[] = $value['hasil'];
+            $label[] = $value['tanggal'];
+            $idx++;
+        }
+
         return view('penjual.pencatatan',
-    [
-        'title' => 'Pencatatan',
-        'catatan' => Pencatatan::where('penjual_id',Auth::user()->id)->get()
-    ]);
+        [
+            'title' => 'Pencatatan',
+            'catatan' => Pencatatan::where('penjual_id',Auth::user()->id)->get(),
+            'data' => $data,
+            'label' => $label,
+        ]);
     }
 
     public function tambahCatatan()
@@ -372,13 +412,14 @@ class DashboardSellerController extends Controller
     {
         return view('penjual.editCatatan',
     [
-        'title' => 'Tambah Catatan',
+        'title' => 'Edit Catatan',
         'catatan' => Pencatatan::where('id',$id)->first(),
         'barang' => Barang::where('penjual_id',Auth::user()->id)->get()
     ]);
     }
     public function prosesEditCatatan(Request $req)
     {
+        // dd($req);
         $validated = $req->validate([
             'barang_id' => ['required'],
             'terjual' => ['required'],
@@ -387,8 +428,7 @@ class DashboardSellerController extends Controller
         ]);
 
         if ($validated) {
-            $catatan = Pencatatan::find($req->id);
-            $catatan->penjual_id=$req->id;
+            $catatan = Pencatatan::find($req->catatan_id);
             $catatan->barang_id=$req->barang_id;
             $catatan->stok_terjual=$req->terjual;
             $catatan->penghasilan=$req->penghasilan;
@@ -400,6 +440,8 @@ class DashboardSellerController extends Controller
 
     public function hapusCatatan($id)
     {
-        # code...
+        $catatan = Pencatatan::find($id);
+        $catatan->delete();
+        return back()->with('message','Catatan berhasil dihapus');
     }
 }
