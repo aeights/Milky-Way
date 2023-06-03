@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('rekening_penjual', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('penjual_id');
             $table->string('nama',100);
             $table->string('jenis_bank',20);
             $table->string('no_rekening',50);

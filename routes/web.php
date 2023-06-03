@@ -151,6 +151,22 @@ Route::middleware(['auth','user_role:penjual'])->group(function (){
     Route::post('/editCatatan',[DashboardSellerController::class,'prosesEditCatatan']);
 
     Route::post('/hapusCatatan/{id}',[DashboardSellerController::class,'hapusCatatan']);
+
+    // Penarikan
+    Route::get('/dashboardPenjual/penarikan',[DashboardSellerController::class,'penarikan']);
+
+    Route::get('/dashboardPenjual/penarikan/tambah',[DashboardSellerController::class,'tambahRekening']);
+
+    Route::post('/tambahRekening',[DashboardSellerController::class,'prosesTambahRekening']);
+
+    Route::get('/dashboardPenjual/penarikan/edit/{id}',[DashboardSellerController::class,'editRekening']);
+
+    Route::post('/editRekening',[DashboardSellerController::class,'prosesEditRekening']);
+
+    Route::post('/hapusRekening/{id}',[DashboardSellerController::class,'hapusRekening']);
+
+    // Riwayat
+    Route::get('/dashboardPenjual/riwayat',[DashboardSellerController::class,'riwayat']);
 });
 
 // Partner
@@ -197,6 +213,9 @@ Route::middleware(['auth','user_role:admin'])->group(function (){
     Route::post('/editMetodePembayaran',[DashboardAdminController::class,'prosesEditPembayaran']);
 
     Route::post('/hapusPembayaran/{id}',[DashboardAdminController::class,'hapusPembayaran']);
+
+    // Riwayat
+    Route::get('/dashboardAdmin/riwayat',[DashboardAdminController::class,'riwayat']);
 });
 
 Route::get('/logout',[AuthController::class,'prosesLogout'])->middleware('auth');

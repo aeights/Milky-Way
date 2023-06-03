@@ -11,11 +11,11 @@
                 <p class="font-semibold hover:text-xl duration-300">{{$barang->nama}}</p>
                 <p class="hover:text-blue-400 duration-300">{{$barang->nama_toko}}</p>
                 <p class="text-blue-400 text-lg mt-2 hover:text-xl duration-300">Rp. {{$barang->harga}}</p>
-                <p class="mt-2 text-sm hover:text-base duration-300">
+                {{-- <p class="mt-2 text-sm hover:text-base duration-300">
                     Rating
                     <i class="fa-solid fa-star" style="color: #dfe236;"></i>
                     4.5
-                </p>
+                </p> --}}
             </div>
             <a class="py-2 w-48 bg-blue-500 text-center mt-2 text-white hover:bg-blue-800 duration-300" href="{{'/detailbarang/'.$barang->barang_id}}">Detail</a>
         </div>

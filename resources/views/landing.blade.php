@@ -27,7 +27,7 @@
                 <div class="flex flex-col text-center">
                     <a class="bg-[#B2A4FF] my-2 px-5 py-2 rounded-[10px] hover:bg-[#A092EC] hover:shadow-slate-700/90 shadow-md shadow-slate-700/70" href="/login/pembeli">Pembeli</a>
                     <a class="bg-[#B2A4FF] my-2 px-5 py-2 rounded-[10px] hover:bg-[#A092EC] hover:shadow-slate-700/90 shadow-md shadow-slate-700/70" href="/login/penjual">Penjual</a>
-                    <a class="bg-[#B2A4FF] my-2 px-5 py-2 rounded-[10px] hover:bg-[#A092EC] hover:shadow-slate-700/90 shadow-md shadow-slate-700/70" href="/login/partner">Partner</a>
+                    {{-- <a class="bg-[#B2A4FF] my-2 px-5 py-2 rounded-[10px] hover:bg-[#A092EC] hover:shadow-slate-700/90 shadow-md shadow-slate-700/70" href="/login/partner">Partner</a> --}}
                 </div>
             </div>
             <div class="absolute top-0 right-3 text-lg">
@@ -45,7 +45,7 @@
                 <div class="flex flex-col text-center">
                     <a class="bg-[#B2A4FF] my-2 px-5 py-2 rounded-[10px] hover:bg-[#A092EC] hover:shadow-slate-700/90 shadow-md shadow-slate-700/70" href="/register/pembeli">Pembeli</a>
                     <a class="bg-[#B2A4FF] my-2 px-5 py-2 rounded-[10px] hover:bg-[#A092EC] hover:shadow-slate-700/90 shadow-md shadow-slate-700/70" href="/register/penjual">Penjual</a>
-                    <a class="bg-[#B2A4FF] my-2 px-5 py-2 rounded-[10px] hover:bg-[#A092EC] hover:shadow-slate-700/90 shadow-md shadow-slate-700/70" href="/register/partner">Partner</a>
+                    {{-- <a class="bg-[#B2A4FF] my-2 px-5 py-2 rounded-[10px] hover:bg-[#A092EC] hover:shadow-slate-700/90 shadow-md shadow-slate-700/70" href="/register/partner">Partner</a> --}}
                 </div>
             </div>
             <div class="absolute top-0 right-3 text-lg">

@@ -7,6 +7,7 @@ use App\Models\BiayaPengiriman;
 use App\Models\DataTransaksi;
 use App\Models\DetailPenjual;
 use App\Models\Pencatatan;
+use App\Models\RekeningPenjual;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -413,7 +414,7 @@ class DashboardSellerController extends Controller
         return view('penjual.editCatatan',
     [
         'title' => 'Edit Catatan',
-        'catatan' => Pencatatan::where('id',$id)->first(),
+        'catatan' => Pencatatan::find($id),
         'barang' => Barang::where('penjual_id',Auth::user()->id)->get()
     ]);
     }
@@ -443,5 +444,88 @@ class DashboardSellerController extends Controller
         $catatan = Pencatatan::find($id);
         $catatan->delete();
         return back()->with('message','Catatan berhasil dihapus');
+    }
+
+    // Penarikan
+    public function penarikan()
+    {
+        return view('penjual.rekening',
+        [
+            'title' => 'Penarikan',
+            'rekening' => RekeningPenjual::where('penjual_id',Auth::user()->id)->get(),
+        ]);
+    }
+
+    public function tambahRekening()
+    {
+        return view('penjual.tambahRekening',
+        [
+            'title' => 'Tambah Rekening',
+        ]);
+    }
+
+    public function prosesTambahRekening(Request $req)
+    {
+        $validated = $req->validate([
+            'nama' => 'required',
+            'jenis_bank' => 'required',
+            'no_rekening' => 'required'
+        ]);
+
+        if ($validated) {
+            $rekening = new RekeningPenjual();
+            $rekening->penjual_id=$req->id;
+            $rekening->nama=$req->nama;
+            $rekening->jenis_bank=$req->jenis_bank;
+            $rekening->no_rekening=$req->no_rekening;
+            $rekening->save();
+            return redirect('/dashboardPenjual/penarikan')->with('message','Rekening berhasil ditambahkan');
+        }
+    }
+
+    public function editRekening($id)
+    {
+        return view('penjual.editRekening',
+        [
+            'title' => 'Edit Rekening',
+            'rekening' => RekeningPenjual::find($id)
+        ]);
+    }
+
+    public function prosesEditRekening(Request $req)
+    {
+        $validated = $req->validate([
+            'nama' => 'required',
+            'jenis_bank' => 'required',
+            'no_rekening' => 'required'
+        ]);
+
+        if ($validated) {
+            $rekening = RekeningPenjual::find($req->rekening_id);
+            $rekening->nama=$req->nama;
+            $rekening->jenis_bank=$req->jenis_bank;
+            $rekening->no_rekening=$req->no_rekening;
+            $rekening->save();
+            return redirect('/dashboardPenjual/penarikan')->with('message','Rekening berhasil diedit');
+        }
+    }
+
+    public function hapusRekening($id)
+    {
+        $rekening = RekeningPenjual::find($id);
+        $rekening->delete();
+        return back()->with('message','Rekening berhasil dihapus');
+    }
+
+    // Riwayat
+    public function riwayat()
+    {
+        $toko = DetailPenjual::where('user_id',Auth::user()->id)->first();
+        return view('penjual.riwayatTransaksi',
+        [
+            'title' => 'Pengiriman',
+            'transaksi' => DataTransaksi::where('penjual_id',$toko->id)
+            ->where('status_transaksi','Selesai')->get(),
+        ]);
     }
 }

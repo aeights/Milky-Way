@@ -38,10 +38,10 @@
     <img class="w-16 absolute left-0 top-40" src="{{asset('assets/image 2.png')}}" alt="">
     <img class="w-16 absolute left-0 bottom-10" src="{{asset('assets/image 3.png')}}" alt="">
     <div class="flex h-[100%]">
-        <div class="flex-1 bg-[#BAB6CF] pt-32">
+        <div class="flex-1 bg-[#BAB6CF] pt-[10%] pb-[10%]">
             @yield('content-left')
         </div>
-        <div class="flex-1 bg-[#E4E5EA] pt-32">
+        <div class="flex-1 bg-[#E4E5EA] pt-[10%] pb-[10%]">
             @yield('content-right')
         </div>
     </div>

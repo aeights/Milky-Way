@@ -65,3 +65,11 @@
         </tbody>
     </table>
 </div>
+
+
+{{-- FORM --}}
+p-2 drop-shadow-md w-60 text-sm border border-slate-300 rounded-md outline-[#B2A4FF]
+
+@error('nama')
+    <div class="mt-2 text-sm text-red-600">{{$message}}</div>
+@enderror

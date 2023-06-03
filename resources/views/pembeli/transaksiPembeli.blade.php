@@ -1,46 +1,61 @@
 @extends('layouts.buyer')
 @section('content')
-    <div class="pt-32 flex flex-col justify-center">
-        <table class="table-fixed border text-sm overflow-y-scroll block h-[400px]">
-            <thead>
-                <tr class="fixed">
-                    <th class="bg-slate-300 p-2">No</th>
-                    <th class="bg-slate-300 w-20 p-2">Gambar</th>
-                    <th class="bg-slate-200 p-2">Nama Barang</th>
-                    <th class="bg-slate-200 p-2">Nama Toko</th>
-                    <th class="bg-slate-200 p-2">Alamat</th>
-                    <th class="bg-slate-200 p-2">Harga</th>
-                    <th class="bg-slate-200 p-2">Jumlah</th>
-                    <th class="bg-slate-200 p-2">Total Harga</th>
-                    <th class="bg-slate-200 p-2">Metode Pembayaran</th>
-                    <th class="bg-slate-200 p-2">Status Transaksi</th>
-                    <th class="bg-slate-200 p-2">Opsi</th>
-                </tr>
-            </thead>
-            <tbody class="text-center">
-                @foreach ($transaksi as $no => $hasil)
-                    <tr>
-                        <td class="w-10">{{$no+1}}</td>
-                        <td><img class="h-20" src="{{asset('barang/'.$hasil->barang['gambar'])}}" alt=""></td>
-                        <td>{{$hasil->barang['nama']}}</td>
-                        <td>{{$hasil->penjual['nama_toko']}}</td>
-                        <td>{{$hasil->alamat}}</td>
-                        <td>Rp. {{$hasil->barang['harga']}}</td>
-                        <td>{{$hasil->jumlah}}</td>
-                        <td>Rp. {{$hasil->total_harga}}</td>
-                        <td>{{$hasil->metode_pembayaran}}</td>
-                        <td>{{$hasil->status_transaksi}}</td>
-                        <td class="bg-slate-200">
-                            <form class="flex" action="{{'/transaksi/batalkan/'.$hasil->id}}" method="post" onsubmit="return confirm('Apakah anda yakin ingin membatalkan transaksi ini?')">
-                                @csrf
-                                <a class="bg-green-500 text-[12px] p-1 m-1 text-white rounded-sm" href="{{url('/transaksi/detail/'.$hasil->id)}}">Detail</a>
-                                <a onclick="return confirm('Apakah barang sudah kamu terima?')" class="bg-green-500 text-[12px] p-1 m-1 text-white rounded-sm" href="{{url('/transaksi/selesai/'.$hasil->id)}}">Selesai</a>
-                                <button class="text-[12px] p-1 m-1 bg-red-500 text-white rounded-sm">Batalkan</button>
-                            </form>
-                        </td>
+    <div class="pt-32 flex justify-center">
+        <div>
+            <div class="flex">
+                <div class="bg-[#B2A4FF] text-center text-sm w-10 p-2">No</div>
+                <div class="bg-[#B2A4FF] text-center text-sm w-28 p-2">Gambar</div>
+                <div class="bg-[#B2A4FF] text-center text-sm w-32 p-2">Nama Barang</div>
+                <div class="bg-[#B2A4FF] text-center text-sm w-32 p-2">Nama Toko</div>
+                <div class="bg-[#B2A4FF] text-center text-sm w-32 p-2">Alamat</div>
+                <div class="bg-[#B2A4FF] text-center text-sm w-20 p-2">Harga</div>
+                <div class="bg-[#B2A4FF] text-center text-sm w-24 p-2">Jumlah</div>
+                <div class="bg-[#B2A4FF] text-center text-sm w-28 p-2">Total Harga</div>
+                <div class="bg-[#B2A4FF] text-center text-sm w-28 p-2">Pembayaran</div>
+                <div class="bg-[#B2A4FF] text-center text-sm w-44 p-2">Status Transaksi</div>
+                <div class="bg-[#B2A4FF] text-center text-sm w-44 p-2">Opsi</div>
+            </div>
+            <table class="table-fixed border text-sm overflow-y-scroll block h-[60vh]">
+                {{-- <thead>
+                    <tr class="fixed bg-[#B2A4FF]">
+                        <th class="p-2">No</th>
+                        <th class="w-20 p-2">Gambar</th>
+                        <th class=" p-2">Nama Barang</th>
+                        <th class=" p-2">Nama Toko</th>
+                        <th class=" p-2">Alamat</th>
+                        <th class=" p-2">Harga</th>
+                        <th class=" p-2">Jumlah</th>
+                        <th class=" p-2">Total Harga</th>
+                        <th class=" p-2">Metode Pembayaran</th>
+                        <th class=" p-2">Status Transaksi</th>
+                        <th class=" p-2">Opsi</th>
                     </tr>
-                @endforeach
-            </tbody>
-        </table>
+                </thead> --}}
+                <tbody class="text-center">
+                    @foreach ($transaksi as $no => $hasil)
+                        <tr class="border-b-2">
+                            <td class="w-10 bg-slate-200">{{$no+1}}</td>
+                            <td class="w-28"><img class="h-10 m-auto" src="{{asset('barang/'.$hasil->barang['gambar'])}}" alt=""></td>
+                            <td class="w-32">{{$hasil->barang['nama']}}</td>
+                            <td class="w-32">{{$hasil->penjual['nama_toko']}}</td>
+                            <td class="w-32">{{$hasil->alamat}}</td>
+                            <td class="w-20">Rp. {{$hasil->barang['harga']}}</td>
+                            <td class="w-24">{{$hasil->jumlah}}</td>
+                            <td class="w-28">Rp. {{$hasil->total_harga}}</td>
+                            <td class="w-28">{{$hasil->metode_pembayaran}}</td>
+                            <td class="w-44">{{$hasil->status_transaksi}}</td>
+                            <td class="bg-slate-200 w-44">
+                                <form class="flex" action="{{'/transaksi/batalkan/'.$hasil->id}}" method="post" onsubmit="return confirm('Apakah anda yakin ingin membatalkan transaksi ini?')">
+                                    @csrf
+                                    <a class="bg-green-500 text-[12px] p-1 m-1 text-white rounded-sm" href="{{url('/transaksi/detail/'.$hasil->id)}}">Detail</a>
+                                    <a onclick="return confirm('Apakah barang sudah kamu terima?')" class="bg-green-500 text-[12px] p-1 m-1 text-white rounded-sm" href="{{url('/transaksi/selesai/'.$hasil->id)}}">Selesai</a>
+                                    <button class="text-[12px] p-1 m-1 bg-red-500 text-white rounded-sm">Batalkan</button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
 @endsection

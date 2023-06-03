@@ -71,13 +71,14 @@ class DashboardAdminController extends Controller
         return view('admin.verifikasiTransaksi',
     [
         'title' => 'Transaki',
-        'transaksi' => DataTransaksi::where('status_transaksi','Verifikasi Admin')->get()
+        'transaksi' => DataTransaksi::where('status_transaksi','Verifikasi Admin')
+        ->orWhere('status_transaksi','Transfer Penjual')->get()
     ]);
     }
 
     public function detailTransaksi($id)
     {
-        $transaksi = DataTransaksi::find($id)->first();
+        $transaksi = DataTransaksi::find($id);
         return view('admin.detailTransaksi',
     [
         'title' => 'Detail Transaksi',
@@ -168,5 +169,15 @@ class DashboardAdminController extends Controller
         $pembayaran = MetodePembayaran::find($id);
         $pembayaran->delete();
         return back()->with('message','Pembayaran berhasil dihapus');
+    }
+
+    // Riwayat
+    public function riwayat()
+    {
+        return view('admin.riwayatTransaksi',
+        [
+            'title' => 'Pengiriman',
+            'transaksi' => DataTransaksi::where('status_transaksi','Selesai')->get(),
+        ]);
     }
 }

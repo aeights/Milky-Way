@@ -240,7 +240,7 @@ class HomeBuyerController extends Controller
 
     public function detailTransaksi($id)
     {
-        $transaksi = DataTransaksi::find($id)->first();
+        $transaksi = DataTransaksi::find($id);
         return view('pembeli.detailTransaksi',
         [
             'title' => 'Detail Transaksi',

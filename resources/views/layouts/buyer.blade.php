@@ -13,7 +13,7 @@
         }
     </style>
 </head>
-<body class="bg-slate-100">
+<body class="bg-slate-50">
     <nav class="z-[1] flex flex-row bg-[#B2A4FF] py-4 px-6 items-center rounded-b-[20px] fixed w-[100vw] justify-between shadow-lg">
         <a class="" href="/">
             <img class="w-44" src="{{asset('assets/logo.png')}}" alt="logo milky way">

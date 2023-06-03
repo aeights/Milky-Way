@@ -19,15 +19,24 @@
             <input type="hidden" value="{{$id}}" name="id">
             <div class="my-1">
                 <p>Nama Toko</p>
-                <input required class="w-[400px] rounded-md py-1 px-2 text-sm" placeholder="Milky Way" type="text" name="nama_toko">
+                <input class="w-[400px] rounded-md py-1 px-2 text-sm" placeholder="Milky Way" type="text" name="nama_toko">
+                @error('nama_toko')
+                    <div class="mt-1 text-sm text-red-600">{{$message}}</div>
+                @enderror
             </div>
             <div class="my-1">
                 <p>Alamat Toko</p>
-                <input required class="w-[400px] rounded-md py-1 px-2 text-sm" placeholder="Jl. xxx xxx xxx" type="text" name="alamat_toko">
+                <input class="w-[400px] rounded-md py-1 px-2 text-sm" placeholder="Jl. xxx xxx xxx" type="text" name="alamat_toko">
+                @error('alamat_toko')
+                    <div class="mt-1 text-sm text-red-600">{{$message}}</div>
+                @enderror
             </div>
             <div class="my-1">
                 <p>Deskripsi Toko</p>
-                <textarea required class="w-[400px] rounded-md py-1 px-2 text-sm" placeholder="" name="deskripsi_toko"></textarea>
+                <textarea class="w-[400px] rounded-md py-1 px-2 text-sm" placeholder="" name="deskripsi_toko"></textarea>
+                @error('deskripsi_toko')
+                    <div class="mt-1 text-sm text-red-600">{{$message}}</div>
+                @enderror
             </div>
             <button class="bg-[#B2A4FF] mt-5 py-2 px-10 rounded-[10px] hover:bg-[#A092EC] hover:shadow-slate-700/90 shadow-md shadow-slate-700/70" type="submit">Daftar</button>
         </form>
