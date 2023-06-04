@@ -17,9 +17,9 @@
             <p class="opacity-80 mt-2">Deskripsi:</p>
             <p>{{$data->detail_produk}}</p>
         </div>
-        <div class="w-[30%] h-[450px] border border-slate-800 bg-slate-50 py-2 px-4 rounded-lg drop-shadow-lg">
+        <div class="w-[30%] h-[450px] bg-slate-50 py-2 px-4 rounded-lg drop-shadow-lg">
             <p class="text-xl text-center mb-2 font-semibold">Beli</p>
-            <div class="flex mb-2 rounded-md bg-slate-200 p-1">
+            <div class="flex mb-2 rounded-md bg-slate-200 p-1 shadow">
                 <div class="w-[50px] h-[50px] rounded-lg mr-2">
                     <img class="object-cover w-[50px] h-[50px] rounded-lg" src="{{asset('barang/'.$data->gambar)}}" alt="">
                 </div>
@@ -35,11 +35,11 @@
                 <p>Stok Barang: {{$data->stok}}</p>
                 <div class="flex justify-center items-center">
                     <p>Jumlah Yang Dibeli:</p>
-                    <input class="text-center ml-4 outline-none border border-black rounded-full p-2 w-24" min="1" max="{{$data->stok}}" type="number" value="1" name="jumlah">
+                    <input class="text-center ml-4 outline-none shadow rounded-full p-2 w-24" min="1" max="{{$data->stok}}" type="number" value="1" name="jumlah">
                 </div>
                 <div class="mb-2 ml-4">
                     <p>Alamat</p>
-                    <select required class="rounded-md py-1 px-2 w-[95%] text-[12px] shadow-md outline-none border border-black" name="alamat">
+                    <select required class="rounded-md py-1 px-2 w-[95%] text-[12px] shadow-md outline-none" name="alamat">
                         <option selected disabled hidden>Pilih Alamat Tujuan</option>
                         @foreach ($alamat as $item)
                         <option value="{{$item->alamat}}">{{$item->alamat}}</option>
@@ -48,7 +48,7 @@
                 </div>
                 <div class="mb-2 ml-4">
                     <p>Ongkos Kirim</p>
-                    <select required class="rounded-md py-1 px-2 w-[95%] text-[12px] shadow-md outline-none border border-black" name="ongkir">
+                    <select required class="rounded-md py-1 px-2 w-[95%] text-[12px] shadow-md outline-none" name="ongkir">
                         <option selected disabled hidden>Pilih Ongkos Kirim</option>
                         @foreach ($ongkir as $item)
                         <option value="{{$item->harga}}">{{$item->jarak}} Km, Ongkir Rp. {{$item->harga}}</option>
@@ -57,7 +57,7 @@
                 </div>
                 <div class="mb-2 ml-4">
                     <p>Metode Pembayaran</p>
-                    <select required class="rounded-md py-1 px-2 w-[95%] text-[12px] shadow-md outline-none border border-black" name="metode_pembayaran">
+                    <select required class="rounded-md py-1 px-2 w-[95%] text-[12px] shadow-md outline-none" name="metode_pembayaran">
                         <option selected disabled hidden>Pilih Metode Pembayaran</option>
                         @foreach ($pembayaran as $item)
                         <option value="{{$item->jenis_bank}}">{{$item->jenis_bank}}</option>

@@ -180,4 +180,16 @@ class DashboardAdminController extends Controller
             'transaksi' => DataTransaksi::where('status_transaksi','Selesai')->get(),
         ]);
     }
+
+    public function detailRiwayat($id)
+    {
+        $transaksi = DataTransaksi::find($id);
+        return view('admin.detailRiwayatTransaksi',
+        [
+            'title' => 'Detail Transaksi',
+            'transaksi' => $transaksi,
+            'rekening' => MetodePembayaran::where('jenis_bank',$transaksi->metode_pembayaran)->first(),
+            'total_transfer' => $transaksi->total_harga+1000
+        ]);
+    }
 }

@@ -89,6 +89,11 @@ Route::middleware(['auth','user_role:pembeli'])->group(function (){
     Route::post('/transaksi/batalkan/{id}',[HomeBuyerController::class,'batalTransaksi']);
 
     Route::post('/bayar/{id}',[HomeBuyerController::class,'bayarTransaksi']);
+
+    // Riwayat
+    Route::get('/riwayat',[HomeBuyerController::class,'riwayat']);
+
+    Route::get('/riwayat/detail/{id}',[HomeBuyerController::class,'detailRiwayat']);
 });
 
 // Penjual
@@ -167,6 +172,8 @@ Route::middleware(['auth','user_role:penjual'])->group(function (){
 
     // Riwayat
     Route::get('/dashboardPenjual/riwayat',[DashboardSellerController::class,'riwayat']);
+
+    Route::get('/dashboardPenjual/riwayat/detail/{id}',[DashboardSellerController::class,'detailRiwayat']);
 });
 
 // Partner
@@ -216,6 +223,8 @@ Route::middleware(['auth','user_role:admin'])->group(function (){
 
     // Riwayat
     Route::get('/dashboardAdmin/riwayat',[DashboardAdminController::class,'riwayat']);
+
+    Route::get('/dashboardAdmin/riwayat/detail/{id}',[DashboardAdminController::class,'detailRiwayat']);
 });
 
 Route::get('/logout',[AuthController::class,'prosesLogout'])->middleware('auth');

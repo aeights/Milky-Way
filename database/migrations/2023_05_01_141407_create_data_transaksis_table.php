@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('alamat');
             $table->bigInteger('harga');
             $table->integer('jumlah');
+            $table->integer('ongkir');
             $table->bigInteger('total_harga');
             $table->string('metode_pembayaran');
             $table->string('bukti_pembayaran');

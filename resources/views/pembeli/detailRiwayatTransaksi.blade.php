@@ -20,26 +20,25 @@
                     </div>
                     <div class="mb-2">
                         <p class="text-sm mb-1">Ongkos Kirim</p>
-                        <input class="bg-white p-2 drop-shadow-md w-60 text-sm border border-slate-300 rounded-md outline-[#B2A4FF]" type="text" value="Rp. {{$transaksi->ongkir}}" disabled name="harga">
+                        <input class="bg-white p-2 drop-shadow-md w-60 text-sm border border-slate-300 rounded-md outline-[#B2A4FF]" type="text" value="Rp. {{$transaksi->harga}}" disabled name="harga">
                     </div>
                     <div class="mb-2">
                         <p class="text-sm mb-1">Jumlah</p>
                         <input class="bg-white p-2 drop-shadow-md w-60 text-sm border border-slate-300 rounded-md outline-[#B2A4FF]" type="text" value="{{$transaksi->jumlah}}" disabled name="jumlah">
                     </div>
-                    <div class="mb-2">
+                    <div class="mb-4">
                         <p class="text-sm mb-1">Total Harga</p>
                         <input class="bg-white p-2 drop-shadow-md w-60 text-sm border border-slate-300 rounded-md outline-[#B2A4FF]" type="text" value="Rp. {{$transaksi->total_harga}}" disabled name="total_harga">
                     </div>
                     <div>
-                        <button class="bg-[#B2A4FF] mt-2 mr-4 p-2 rounded-md hover:bg-slate-500 duration-200 drop-shadow-lg" type="submit">Bayar</button>
-                        <a class="bg-[#B2A4FF] mt-2 p-2 rounded-md hover:bg-slate-500 duration-200 drop-shadow-lg" href="/transaksi">Kembali</a>
+                        <a class="bg-[#B2A4FF] mt-2 p-2 rounded-md hover:bg-slate-500 duration-200 drop-shadow-lg" href="/riwayat">Kembali</a>
                     </div>
                 </div>
                 <div class="mr-16">
                     <p class="font-semibold mb-2">Detail Barang</p>
                     <div class="mb-2">
                         <p class="text-sm mb-1">Nama Toko</p>
-                        <input class="bg-white p-2 drop-shadow-md w-60 text-sm border border-slate-300 rounded-md outline-[#B2A4FF]" type="text" value="{{$transaksi->penjual['nama_toko']}}" disabled name="harga">
+                        <input class="bg-white p-2 drop-shadow-md w-60 text-sm border border-slate-300 rounded-md outline-[#B2A4FF]" type="text" value="Rp. {{$transaksi->harga}}" disabled name="harga">
                     </div>
                     <div class="mb-2">
                         <p class="text-sm mb-1">Nama Barang</p>
@@ -55,7 +54,7 @@
                     </div>
                     <div class="mb-2">
                         <p class="text-sm mb-1">Harga</p>
-                        <input class="bg-white p-2 drop-shadow-md w-60 text-sm border border-slate-300 rounded-md outline-[#B2A4FF]" type="text" value="Rp. {{$transaksi->harga}}" disabled name="total_harga">
+                        <input class="bg-white p-2 drop-shadow-md w-60 text-sm border border-slate-300 rounded-md outline-[#B2A4FF]" type="text" value="Rp. {{$transaksi->total_harga}}" disabled name="total_harga">
                     </div>
                 </div>
                 <div class="mr-16">
@@ -77,11 +76,8 @@
                         <input class="bg-white p-2 drop-shadow-md w-60 text-sm border border-slate-300 rounded-md outline-[#B2A4FF]" type="text" value="Rp. {{$total_transfer}}" disabled name="total">
                     </div>
                     <div class="mb-2">
-                        <p class="text-sm mb-1">Bukti Pembayaran</p>
-                        <input class="p-2 text-sm drop-shadow-md" type="file" name="bukti_pembayaran">
-                        @error('bukti_pembayaran')
-                            <div class="text-sm text-red-600">{{$message}}</div>
-                        @enderror
+                        <p class="text-sm mb-1">Status Transaksi</p>
+                        <input class="bg-white p-2 drop-shadow-md w-60 text-sm border border-slate-300 rounded-md outline-[#B2A4FF]" type="text" value="{{$transaksi->status_transaksi}}" disabled name="status">
                     </div>
                 </div>
             </div>

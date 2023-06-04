@@ -19,9 +19,9 @@
             </thead>
             <tbody class="text-center">
                 @foreach ($transaksi as $no => $hasil)
-                    <tr>
+                    <tr class="border-b-2">
                         <td class="w-10">{{$no+1}}</td>
-                        <td><img class="h-20" src="{{asset('barang/'.$hasil->barang['gambar'])}}" alt=""></td>
+                        <td><img class="h-10" src="{{asset('barang/'.$hasil->barang['gambar'])}}" alt=""></td>
                         <td>{{$hasil->barang['nama']}}</td>
                         <td>{{$hasil->penjual['nama_toko']}}</td>
                         <td>{{$hasil->alamat}}</td>

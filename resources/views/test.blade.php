@@ -73,3 +73,5 @@ p-2 drop-shadow-md w-60 text-sm border border-slate-300 rounded-md outline-[#B2A
 @error('nama')
     <div class="mt-2 text-sm text-red-600">{{$message}}</div>
 @enderror
+
+Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nemo sint, voluptatum dolorem quia aperiam ut rerum repudiandae cupiditate mollitia, sequi velit ea tenetur provident voluptate itaque cumque explicabo laborum ab. Fuga, ab quibusdam? Exercitationem, rerum delectus! Voluptatibus assumenda praesentium rem culpa iusto ut doloremque corporis, fugit dolores facere nisi, provident, in dignissimos. Placeat eos totam esse magnam, nisi officia corporis soluta? Aliquid, ut soluta quisquam neque at velit vitae vel. Deleniti dicta reiciendis quia architecto nobis optio totam commodi distinctio unde ut, vero atque minus minima maiores voluptatem maxime reprehenderit? Esse explicabo cumque ratione, alias ipsum dolore enim in tempore!

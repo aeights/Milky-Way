@@ -204,11 +204,12 @@ class HomeBuyerController extends Controller
         $validated = $req->validate([
             'jumlah' => 'required',
             'alamat' => 'required',
+            'ongkir' => 'required',
             'metode_pembayaran' => 'required'
         ]);
 
         if ($validated) {
-            $total = $req->harga*$req->jumlah;
+            $total = $req->harga*$req->jumlah+$req->ongkir;
             $transaksi = new DataTransaksi();
             $transaksi->penjual_id=$req->penjual_id;
             $transaksi->pembeli_id=$req->pembeli_id;
@@ -216,6 +217,7 @@ class HomeBuyerController extends Controller
             $transaksi->alamat=$req->alamat;
             $transaksi->harga=$req->harga;
             $transaksi->jumlah=$req->jumlah;
+            $transaksi->ongkir=$req->ongkir;
             $transaksi->total_harga=$total;
             $transaksi->metode_pembayaran=$req->metode_pembayaran;
             $transaksi->bukti_pembayaran='null';
@@ -285,5 +287,26 @@ class HomeBuyerController extends Controller
                 return redirect('/transaksi')->with('message','Pembayaran berhasil, silahkan tunggu konfirmasi dari admin dan penjual.');
             }
         }
+    }
+
+    public function riwayat()
+    {
+        return view('pembeli.riwayat',
+    [
+        'title' => 'Transaksi',
+        'transaksi' => DataTransaksi::where('status_transaksi','Selesai')->get()
+    ]);
+    }
+
+    public function detailRiwayat($id)
+    {
+        $transaksi = DataTransaksi::find($id);
+        return view('pembeli.detailTransaksi',
+        [
+            'title' => 'Detail Transaksi',
+            'transaksi' => $transaksi,
+            'rekening' => MetodePembayaran::where('jenis_bank',$transaksi->metode_pembayaran)->first(),
+            'total_transfer' => $transaksi->total_harga+1000
+        ]);
     }
 }

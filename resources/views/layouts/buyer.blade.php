@@ -36,9 +36,11 @@
                             <hr>
                             <li class="my-1 hover:font-semibold"><a href="/transaksi">Transaksi</a></li>
                             <hr>
-                            <li class="my-1 hover:font-semibold"><a href="/resetPasswordPembeli">Reset Password</a></li>
-                            <hr>
                             <li class="my-1 hover:font-semibold"><a href="/alamat">Alamat</a></li>
+                            <hr>
+                            <li class="my-1 hover:font-semibold"><a href="/riwayat">Riwayat</a></li>
+                            <hr>
+                            <li class="my-1 hover:font-semibold"><a href="/resetPasswordPembeli">Reset Password</a></li>
                             <hr>
                             <li class="my-1 hover:font-semibold"><a href="/logout">Logout</a></li>
                         </ul>

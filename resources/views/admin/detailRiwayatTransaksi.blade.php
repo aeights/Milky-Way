@@ -40,8 +40,7 @@
                         </div>
                     </div>
                     <div>
-                        <button class="bg-[#B2A4FF] mr-4 p-2 rounded-md hover:bg-slate-500 duration-200 drop-shadow-lg" type="submit">Simpan</button>
-                        <a class="bg-[#B2A4FF] p-2 rounded-md hover:bg-slate-500 duration-200 drop-shadow-lg" href="/dashboardAdmin/transaksi">Kembali</a>
+                        <a class="bg-[#B2A4FF] p-2 rounded-md hover:bg-slate-500 duration-200 drop-shadow-lg" href="/dashboardAdmin/riwayat">Kembali</a>
                     </div>
                 </div>
                 <div class="">
@@ -90,16 +89,7 @@
                         </div>
                         <div class="mb-2">
                             <p class="text-sm mb-1">Status Transaksi</p>
-                            <select selec class="rounded-md py-2 px-3 w-full text-gray-700 text-[12px] shadow-md outline-none border border-black" name="status_transaksi">
-                                <option selected disabled hidden value="{{$transaksi->status_transaksi}}">{{$transaksi->status_transaksi}}</option>
-                                <option value="Pembayaran Pembeli">Pembayaran Pembeli</option>
-                                <option value="Verifikasi Admin">Verifikasi Admin</option>
-                                <option value="Konfirmasi Penjual">Konfirmasi Penjual</option>
-                                <option value="Sedang Dikirim">Sedang Dikirim</option>
-                                <option value="Transfer Penjual">Transfer Penjual</option>
-                                <option value="Selesai">Selesai</option>
-                                <option value="Gagal">Gagal</option>
-                            </select>
+                            <input class="mb-2 bg-white appearance-none text-sm border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" value="{{$transaksi->status_transaksi}}" disabled name="status">
                         </div>
                     </div>
                 </div>
