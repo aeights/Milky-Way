@@ -14,14 +14,21 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-
+date_default_timezone_set("Asia/Jakarta");
 class DashboardSellerController extends Controller
 {
     public function dashboardPenjual()
     {
         return view('penjual.dashboardPenjual',
         [
-            'title'=>'Dashboard Penjual'
+            'title' => 'Dashboard Admin',
+            'pembayaran_pembeli' => DataTransaksi::where('status_transaksi','Pembayaran Pembeli')->get(),
+            'verifikasi_admin' => DataTransaksi::where('status_transaksi','Verifikasi Admin')->get(),
+            'konfirmasi_penjual' => DataTransaksi::where('status_transaksi','Konfirmasi Penjual')->get(),
+            'sedang_dikirim' => DataTransaksi::where('status_transaksi','Sedang Dikirim')->get(),
+            'transfer_penjual' => DataTransaksi::where('status_transaksi','Transfer Penjual')->get(),
+            'selesai' => DataTransaksi::where('status_transaksi','Selesai')->get(),
+            'gagal' => DataTransaksi::where('status_transaksi','Gagal')->get(),
         ]);
     }
 
@@ -90,7 +97,6 @@ class DashboardSellerController extends Controller
         $validated = $req->validate([
             'nama'=>'required|min:3',
             'harga'=>'required',
-            'gambar'=>'required',
             'berat'=>'required',
             'kategori'=>'required',
             'stok'=>'required',
@@ -104,6 +110,17 @@ class DashboardSellerController extends Controller
                 $barang->nama=$req->nama;
                 $barang->harga=$req->harga;
                 $barang->gambar=date('YmdHis') . "." .$req->file('gambar')->getClientOriginalName();
+                $barang->berat=$req->berat;
+                $barang->kategori=$req->kategori;
+                $barang->stok=$req->stok;
+                $barang->detail_produk=$req->deskripsi;
+                $barang->save();
+                return to_route('barang')->with('message','Barang berhasil diedit');
+            }
+            else {
+                $barang = Barang::find($id);
+                $barang->nama=$req->nama;
+                $barang->harga=$req->harga;
                 $barang->berat=$req->berat;
                 $barang->kategori=$req->kategori;
                 $barang->stok=$req->stok;
@@ -247,7 +264,9 @@ class DashboardSellerController extends Controller
         return view('penjual.pengirimanBarang',
     [
         'title' => 'Pengiriman',
-        'transaksi' => DataTransaksi::where('penjual_id',$toko->id)->get(),
+        'transaksi' => DataTransaksi::where('penjual_id',$toko->id)->where('status_transaksi','!=','Selesai')->where('status_transaksi','!=','Gagal')->get(),
+        'selesai' => DataTransaksi::where('penjual_id',$toko->id)->where('status_transaksi','Selesai')->get(),
+        'gagal' => DataTransaksi::where('penjual_id',$toko->id)->where('status_transaksi','Gagal')->get(),
         'biaya_pengiriman' => $biaya_pengiriman
     ]);
     }
@@ -319,10 +338,13 @@ class DashboardSellerController extends Controller
 
     public function detailTransaksi($id)
     {
+        $transaksi = DataTransaksi::find($id);
         return view('penjual.detailTransaksi',
         [
-            'title'=> 'Edit Barang',
-            'transaksi'=>DataTransaksi::find($id)
+            'title' => 'Detail Transaksi',
+            'transaksi' => $transaksi,
+            'rekening' => MetodePembayaran::where('jenis_bank',$transaksi->metode_pembayaran)->first(),
+            'total_transfer' => $transaksi->total_harga+1000
         ]);
     }
 

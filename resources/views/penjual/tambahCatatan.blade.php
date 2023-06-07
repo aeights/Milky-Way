@@ -7,30 +7,33 @@
                 <input value="{{Auth::user()->id}}" type="hidden" name="id">
                 <div class="mb-2">
                     <p>Barang</p>
-                    <select required class="rounded-md py-1 px-2 w-[80%] text-[12px] shadow-md outline-none border border-black" name="barang_id">
+                    <select required class="bg-white p-2 drop-shadow-md w-60 text-sm border border-slate-300 rounded-md outline-[#B2A4FF]" name="barang_id">
                         <option selected disabled hidden>Pilih Barang</option>
                         @foreach ($barang as $item)
                         <option value="{{$item->id}}">{{$item->nama}}</option>
                         @endforeach
                     </select>
+                    @error('barang_id')
+                        <div class="mt-2 text-sm text-red-600">{{$message}}</div>
+                    @enderror
                 </div>
                 <div class="mb-2">
                     <p class="text-sm mb-1">Stok Terjual</p>
-                    <input class="mb-2 bg-white appearance-none text-sm border rounded w-[80%] py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" min="1" type="number" name="terjual">
+                    <input class="bg-white p-2 drop-shadow-md w-60 text-sm border border-slate-300 rounded-md outline-[#B2A4FF]" min="1" type="number" name="terjual">
                     @error('terjual')
                         <div class="mt-2 text-sm text-red-600">{{$message}}</div>
                     @enderror
                 </div>
                 <div class="mb-2">
                     <p class="text-sm mb-1">Penghasilan</p>
-                    <input class="mb-2 bg-white appearance-none text-sm border rounded w-[80%] py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" min="0" type="number" name="penghasilan">
+                    <input class="bg-white p-2 drop-shadow-md w-60 text-sm border border-slate-300 rounded-md outline-[#B2A4FF]" min="0" type="number" name="penghasilan">
                     @error('penghasilan')
                         <div class="mt-2 text-sm text-red-600">{{$message}}</div>
                     @enderror
                 </div>
                 <div class="mb-2">
                     <p>Tanggal</p>
-                    <input class="mb-2 bg-white appearance-none text-sm border rounded w-[80%] py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Tanggal Catatan" type="date" name="tanggal">
+                    <input class="bg-white p-2 drop-shadow-md w-60 text-sm border border-slate-300 rounded-md outline-[#B2A4FF]" placeholder="Tanggal Catatan" type="date" name="tanggal">
                     @error('tanggal')
                         <div class="mt-2 text-sm text-red-600">{{$message}}</div>
                     @enderror

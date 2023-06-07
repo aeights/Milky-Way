@@ -23,7 +23,7 @@
         </thead> --}}
         <tbody class="text-center">
             @foreach ($rekening as $no => $hasil)
-                <tr>
+                <tr class="border-b-2">
                     <td class="bg-slate-200 w-10">{{$no+1}}</td>
                     <td class="w-72">{{$hasil->nama}}</td>
                     <td class="w-48">{{$hasil->jenis_bank}}</td>

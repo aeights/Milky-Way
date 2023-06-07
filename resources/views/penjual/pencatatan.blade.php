@@ -8,13 +8,13 @@
         <div class="flex">
             <div class="bg-[#B2A4FF] text-center text-sm p-2 w-10">No</div>
             <div class="bg-[#B2A4FF] text-center text-sm p-2 w-36">Gambar</div>
-            <div class="bg-[#B2A4FF] text-center text-sm p-2 w-34">Nama Barang</div>
-            <div class="bg-[#B2A4FF] text-center text-sm p-2 w-14">Terjual</div>
+            <div class="bg-[#B2A4FF] text-center text-sm p-2 w-44">Nama Barang</div>
+            <div class="bg-[#B2A4FF] text-center text-sm p-2 w-16">Terjual</div>
             <div class="bg-[#B2A4FF] text-center text-sm p-2 w-28">Penghasilan</div>
             <div class="bg-[#B2A4FF] text-center text-sm p-2 w-28">Tanggal</div>
             <div class="bg-[#B2A4FF] text-center text-sm p-2 w-24">Opsi</div>
         </div>
-        <table class="w-[97%] table-fixed border text-sm overflow-y-scroll block h-[400px]">
+        <table class="table-fixed border text-sm overflow-y-scroll block w-[765px] h-[60vh]">
             {{-- <thead>
                 <tr class="fixed">
                     <th class="bg-slate-200 p-2">No</th>
@@ -28,11 +28,11 @@
             </thead> --}}
             <tbody class="text-center">
                 @foreach ($catatan as $no => $hasil)
-                    <tr>
-                        <td class="w-10">{{$no+1}}</td>
-                        <td class="w-36"><img class="h-10" src="{{asset('barang/'.$hasil->barang['gambar'])}}" alt=""></td>
-                        <td class="w-34">{{$hasil->barang['nama']}}</td>
-                        <td class="w-14">{{$hasil->stok_terjual}}</td>
+                    <tr class="border-b-2">
+                        <td class="bg-slate-200 w-10">{{$no+1}}</td>
+                        <td class="w-36"><img class="h-10 inline-block m-auto" src="{{asset('barang/'.$hasil->barang['gambar'])}}" alt=""></td>
+                        <td class="w-44">{{substr($hasil->barang['nama'],0,15)}}</td>
+                        <td class="w-16">{{$hasil->stok_terjual}}</td>
                         <td class="w-28">Rp. {{$hasil->penghasilan}}</td>
                         <td class="w-28">{{$hasil->tanggal}}</td>
                         <td class="bg-slate-200 w-24">

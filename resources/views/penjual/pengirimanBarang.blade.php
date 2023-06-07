@@ -1,103 +1,135 @@
 @extends('layouts.dashboardSeller')
 @section('content')
     <div class="pl-72 pt-36 flex flex-col">
-        <div class="w-[1000px] h-[400px] shadow-lg border">
+        <div class="w-[1000px] h-[60vh] shadow-lg border">
             <div class="tab flex flex-row justify-evenly">
                 <button class="tablinks duration-200 hover:bg-slate-400 w-[250px] p-4" onclick="openCity(event, 'TB')" id="defaultOpen">Transaksi Berlangsung</button>
                 <button class="tablinks duration-200 hover:bg-slate-400 w-[250px] p-4" onclick="openCity(event, 'TS')">Transaksi Selesai</button>
                 <button class="tablinks duration-200 hover:bg-slate-400 w-[250px] p-4" onclick="openCity(event, 'TG')">Transaksi Gagal</button>
                 <button class="tablinks duration-200 hover:bg-slate-400 w-[250px] p-4" onclick="openCity(event, 'BP')">Biaya Pengiriman</button>
             </div>
-            <div id="TB" class="tabcontent hidden items-center">
-                <table class="table-fixed border w-[1000px] text-sm overflow-y-scroll block h-[340px]">
-                    <thead>
-                        <tr class="">
-                            <th class="bg-slate-300 p-2">No</th>
-                            <th class="bg-slate-200 p-2">Nama Pembeli</th>
-                            <th class="bg-slate-300 p-2">Alamat</th>
-                            <th class="bg-slate-200 p-2">Gambar</th>
-                            <th class="bg-slate-300 p-2">Nama Barang</th>
-                            <th class="bg-slate-200 p-2">Harga</th>
-                            <th class="bg-slate-300 p-2">Jumlah</th>
-                            <th class="bg-slate-200 p-2">Total Harga</th>
-                            <th class="bg-slate-300 p-2">Status Transaksi</th>
-                            <th class="bg-slate-200 p-2">Opsi</th>
-                        </tr>
-                    </thead>
+            <div id="TB" class="tabcontent hidden flex-col">
+                <div class="flex">
+                    <div class="bg-[#B2A4FF] text-center text-sm w-10 p-2">No</div>
+                    <div class="bg-[#B2A4FF] text-center text-sm w-36 p-2">Gambar</div>
+                    <div class="bg-[#B2A4FF] text-center text-sm w-32 p-2">Nama Barang</div>
+                    {{-- <div class="bg-[#B2A4FF] text-center text-sm w-32 p-2">Nama Toko</div> --}}
+                    {{-- <div class="bg-[#B2A4FF] text-center text-sm w-32 p-2">Alamat</div> --}}
+                    <div class="bg-[#B2A4FF] text-center text-sm w-20 p-2">Harga</div>
+                    <div class="bg-[#B2A4FF] text-center text-sm w-24 p-2">Jumlah</div>
+                    <div class="bg-[#B2A4FF] text-center text-sm w-28 p-2">Total Harga</div>
+                    <div class="bg-[#B2A4FF] text-center text-sm w-28 p-2">Pembayaran</div>
+                    <div class="bg-[#B2A4FF] text-center text-sm w-44 p-2">Status Transaksi</div>
+                    <div class="bg-[#B2A4FF] text-center text-sm w-28 p-2">Opsi</div>
+                </div>
+                <table class="table-fixed border text-sm overflow-y-scroll block h-[45vh]">
                     <tbody class="text-center">
                         @foreach ($transaksi as $no => $hasil)
-                            <tr>
-                                <td>{{$no+1}}</td>
-                                <td>{{$hasil->nama_pembeli}}</td>
-                                <td>{{$hasil->alamat}}</td>
-                                <td>
-                                    <img class="h-10 inline-block m-auto" src="{{asset('barang/'.$hasil->gambar)}}" alt="{{$hasil->gambar}}">
-                                </td>
-                                <td>{{$hasil->nama_barang}}</td>
-                                <td>{{$hasil->harga}}</td>
-                                <td>{{$hasil->jumlah}}</td>
-                                <td>{{$hasil->total_harga}}</td>
-                                <td>{{$hasil->status_transaksi}}</td>
-                                <td>
-                                    <a class="bg-green-500 text-[12px] text-white p-1 rounded-sm" href="{{url('/dashboardPenjual/transaksi/detail/'.$hasil->id)}}">Detail</a>
+                            <tr class="border-b-2">
+                                <td class="w-10 bg-slate-200">{{$no+1}}</td>
+                                <td class="w-36"><img class="h-10 m-auto" src="{{asset('barang/'.$hasil->barang['gambar'])}}" alt=""></td>
+                                <td class="w-32">{{substr($hasil->barang['nama'],0,15)}}</td>
+                                {{-- <td class="w-32">{{$hasil->penjual['nama_toko']}}</td> --}}
+                                {{-- <td class="w-32">{{$hasil->alamat}}</td> --}}
+                                <td class="w-20">Rp. {{$hasil->barang['harga']}}</td>
+                                <td class="w-24">{{$hasil->jumlah}}</td>
+                                <td class="w-28">Rp. {{$hasil->total_harga}}</td>
+                                <td class="w-28">{{$hasil->metode_pembayaran}}</td>
+                                <td class="w-44">{{$hasil->status_transaksi}}</td>
+                                <td class="bg-slate-200 w-24">
+                                    <a class="bg-green-500 text-[12px] p-1 m-1 text-white rounded-sm" href="{{url('/dashboardPenjual/transaksi/detail/'.$hasil->id)}}">Detail</a>
                                 </td>
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
             </div>
-            <div id="TS" class="tabcontent hidden justify-center">
-                <table class="table-fixed border w-[1000px] text-sm overflow-y-scroll block h-[340px]">
-                    <thead>
-                        <tr class="">
-                            <th class="bg-slate-300 p-2">No</th>
-                            <th class="bg-slate-200 p-2">Nama Pembeli</th>
-                            <th class="bg-slate-300 p-2">Alamat</th>
-                            <th class="bg-slate-200 p-2">Gambar</th>
-                            <th class="bg-slate-300 p-2">Nama Barang</th>
-                            <th class="bg-slate-200 p-2">Harga</th>
-                            <th class="bg-slate-300 p-2">Jumlah</th>
-                            <th class="bg-slate-200 p-2">Total Harga</th>
-                            <th class="bg-slate-300 p-2">Status Transaksi</th>
-                            <th class="bg-slate-200 p-2">Opsi</th>
-                        </tr>
-                    </thead>
+            <div id="TS" class="tabcontent hidden flex-col">
+                <div class="flex">
+                    <div class="bg-[#B2A4FF] text-center text-sm w-10 p-2">No</div>
+                    <div class="bg-[#B2A4FF] text-center text-sm w-36 p-2">Gambar</div>
+                    <div class="bg-[#B2A4FF] text-center text-sm w-32 p-2">Nama Barang</div>
+                    {{-- <div class="bg-[#B2A4FF] text-center text-sm w-32 p-2">Nama Toko</div> --}}
+                    {{-- <div class="bg-[#B2A4FF] text-center text-sm w-32 p-2">Alamat</div> --}}
+                    <div class="bg-[#B2A4FF] text-center text-sm w-20 p-2">Harga</div>
+                    <div class="bg-[#B2A4FF] text-center text-sm w-24 p-2">Jumlah</div>
+                    <div class="bg-[#B2A4FF] text-center text-sm w-28 p-2">Total Harga</div>
+                    <div class="bg-[#B2A4FF] text-center text-sm w-28 p-2">Pembayaran</div>
+                    <div class="bg-[#B2A4FF] text-center text-sm w-44 p-2">Status Transaksi</div>
+                    <div class="bg-[#B2A4FF] text-center text-sm w-28 p-2">Opsi</div>
+                </div>
+                <table class="table-fixed border text-sm overflow-y-scroll block h-[45vh]">
+                    <tbody class="text-center">
+                        @foreach ($selesai as $no => $hasil)
+                            <tr class="border-b-2">
+                                <td class="w-10 bg-slate-200">{{$no+1}}</td>
+                                <td class="w-36"><img class="h-10 m-auto" src="{{asset('barang/'.$hasil->barang['gambar'])}}" alt=""></td>
+                                <td class="w-32">{{substr($hasil->barang['nama'],0,15)}}</td>
+                                {{-- <td class="w-32">{{$hasil->penjual['nama_toko']}}</td> --}}
+                                {{-- <td class="w-32">{{$hasil->alamat}}</td> --}}
+                                <td class="w-20">Rp. {{$hasil->barang['harga']}}</td>
+                                <td class="w-24">{{$hasil->jumlah}}</td>
+                                <td class="w-28">Rp. {{$hasil->total_harga}}</td>
+                                <td class="w-28">{{$hasil->metode_pembayaran}}</td>
+                                <td class="w-44">{{$hasil->status_transaksi}}</td>
+                                <td class="bg-slate-200 w-24">
+                                    <a class="bg-green-500 text-[12px] p-1 m-1 text-white rounded-sm" href="{{url('/dashboardPenjual/transaksi/detail/'.$hasil->id)}}">Detail</a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
                 </table>
             </div>
-            <div id="TG" class="tabcontent hidden justify-center">
-                <table class="table-fixed border w-[1000px] text-sm overflow-y-scroll block h-[340px]">
-                    <thead>
-                        <tr class="">
-                            <th class="bg-slate-300 p-2">No</th>
-                            <th class="bg-slate-200 p-2">Nama Pembeli</th>
-                            <th class="bg-slate-300 p-2">Alamat</th>
-                            <th class="bg-slate-200 p-2">Gambar</th>
-                            <th class="bg-slate-300 p-2">Nama Barang</th>
-                            <th class="bg-slate-200 p-2">Harga</th>
-                            <th class="bg-slate-300 p-2">Jumlah</th>
-                            <th class="bg-slate-200 p-2">Total Harga</th>
-                            <th class="bg-slate-300 p-2">Status Transaksi</th>
-                            <th class="bg-slate-200 p-2">Opsi</th>
-                        </tr>
-                    </thead>
+            <div id="TG" class="tabcontent hidden flex-col">
+                <div class="flex">
+                    <div class="bg-[#B2A4FF] text-center text-sm w-10 p-2">No</div>
+                    <div class="bg-[#B2A4FF] text-center text-sm w-36 p-2">Gambar</div>
+                    <div class="bg-[#B2A4FF] text-center text-sm w-32 p-2">Nama Barang</div>
+                    {{-- <div class="bg-[#B2A4FF] text-center text-sm w-32 p-2">Nama Toko</div> --}}
+                    {{-- <div class="bg-[#B2A4FF] text-center text-sm w-32 p-2">Alamat</div> --}}
+                    <div class="bg-[#B2A4FF] text-center text-sm w-20 p-2">Harga</div>
+                    <div class="bg-[#B2A4FF] text-center text-sm w-24 p-2">Jumlah</div>
+                    <div class="bg-[#B2A4FF] text-center text-sm w-28 p-2">Total Harga</div>
+                    <div class="bg-[#B2A4FF] text-center text-sm w-28 p-2">Pembayaran</div>
+                    <div class="bg-[#B2A4FF] text-center text-sm w-44 p-2">Status Transaksi</div>
+                    <div class="bg-[#B2A4FF] text-center text-sm w-28 p-2">Opsi</div>
+                </div>
+                <table class="table-fixed border text-sm overflow-y-scroll block h-[45vh]">
+                    <tbody class="text-center">
+                        @foreach ($gagal as $no => $hasil)
+                            <tr class="border-b-2">
+                                <td class="w-10 bg-slate-200">{{$no+1}}</td>
+                                <td class="w-36"><img class="h-10 m-auto" src="{{asset('barang/'.$hasil->barang['gambar'])}}" alt=""></td>
+                                <td class="w-32">{{substr($hasil->barang['nama'],0,15)}}</td>
+                                {{-- <td class="w-32">{{$hasil->penjual['nama_toko']}}</td> --}}
+                                {{-- <td class="w-32">{{$hasil->alamat}}</td> --}}
+                                <td class="w-20">Rp. {{$hasil->barang['harga']}}</td>
+                                <td class="w-24">{{$hasil->jumlah}}</td>
+                                <td class="w-28">Rp. {{$hasil->total_harga}}</td>
+                                <td class="w-28">{{$hasil->metode_pembayaran}}</td>
+                                <td class="w-44">{{$hasil->status_transaksi}}</td>
+                                <td class="bg-slate-200 w-24">
+                                    <a class="bg-green-500 text-[12px] p-1 m-1 text-white rounded-sm" href="{{url('/dashboardPenjual/transaksi/detail/'.$hasil->id)}}">Detail</a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
                 </table>
             </div>
-            <div id="BP" class="tabcontent hidden items-center">
-                <table class="table-fixed border w-[1000px] text-sm overflow-y-scroll block h-[340px]">
-                    <thead>
-                        <tr class="">
-                            <th class="bg-slate-300 p-2">No</th>
-                            <th class="bg-slate-200 p-2">jarak</th>
-                            <th class="bg-slate-300 p-2">Harga</th>
-                            <th class="bg-slate-200 p-2">Opsi</th>
-                        </tr>
-                    </thead>
+            <div id="BP" class="tabcontent hidden flex-col items-center">
+                <div class="flex">
+                    <div class="bg-[#B2A4FF] text-center text-sm w-10 p-2">No</div>
+                    <div class="bg-[#B2A4FF] text-center text-sm w-24 p-2">Jarak</div>
+                    <div class="bg-[#B2A4FF] text-center text-sm w-28 p-2">Harga</div>
+                    <div class="bg-[#B2A4FF] text-center text-sm w-28 p-2">Opsi</div>
+                </div>
+                <table class="table-fixed border text-sm overflow-y-scroll block h-[45vh]">
                     <tbody class="text-center">
                         @foreach ($biaya_pengiriman as $no => $biaya)
-                            <tr>
-                                <td>{{$no+1}}</td>
-                                <td>{{$biaya->jarak}}</td>
-                                <td>{{$biaya->harga}}</td>
+                            <tr class="border-b-2">
+                                <td class="bg-slate-200 w-10">{{$no+1}}</td>
+                                <td class="w-24">{{$biaya->jarak}} Km</td>
+                                <td class="w-28">Rp. {{$biaya->harga}}</td>
                                 <td class="bg-slate-200 w-24">
                                     <form action="{{url('/hapusBiaya/'.$biaya->id)}}" method="post" onsubmit="return confirm('Apakah anda yakin ingin menghapus data ini?')">
                                         @csrf

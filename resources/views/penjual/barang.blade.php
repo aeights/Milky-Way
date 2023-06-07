@@ -33,7 +33,7 @@
                 </thead> --}}
                 <tbody class="text-center">
                     @foreach ($barang as $no => $hasil)  
-                        <tr class="bg-slate-50">
+                        <tr class="bg-slate-50 border-b-2">
                             <td class="bg-slate-200 w-10">{{$no+1}}</td>
                             <td class="bg-slate-100 w-36">
                                 <img class="h-10 inline-block m-auto" src="{{asset('barang/'.$hasil->gambar)}}" alt="{{$hasil->gambar}}">
