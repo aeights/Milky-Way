@@ -52,7 +52,7 @@
                         </div>
                         <div class="mb-2">
                             <p class="text-sm mb-1">Nama Barang</p>
-                            <input class="mb-2 bg-white appearance-none text-sm border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" value="{{$transaksi->barang['nama']}}" disabled name="jumlah">
+                            <input class="mb-2 bg-white appearance-none text-sm border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" value="{{$transaksi->barang['nama']}}" disabled name="nama_barang">
                         </div>
                         <div class="mb-2">
                             <p class="text-sm mb-1">Kategori</p>
@@ -64,7 +64,7 @@
                         </div>
                         <div class="mb-2">
                             <p class="text-sm mb-1">Harga</p>
-                            <input class="mb-2 shadow bg-white appearance-none text-sm border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" value="Rp. {{$transaksi->total_harga}}" disabled name="total_harga">
+                            <input class="mb-2 shadow bg-white appearance-none text-sm border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" value="Rp. {{$transaksi->harga}}" disabled name="harga">
                         </div>
                     </div>
                 </div>

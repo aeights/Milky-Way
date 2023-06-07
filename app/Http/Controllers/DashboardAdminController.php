@@ -9,6 +9,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class DashboardAdminController extends Controller
 {
@@ -16,7 +17,14 @@ class DashboardAdminController extends Controller
     {
         return view('admin.dashboardAdmin',
         [
-            'title' => 'Dashboard Admin'
+            'title' => 'Dashboard Admin',
+            'pembayaran_pembeli' => DataTransaksi::where('status_transaksi','Pembayaran Pembeli')->get(),
+            'verifikasi_admin' => DataTransaksi::where('status_transaksi','Verifikasi Admin')->get(),
+            'konfirmasi_penjual' => DataTransaksi::where('status_transaksi','Konfirmasi Penjual')->get(),
+            'sedang_dikirim' => DataTransaksi::where('status_transaksi','Sedang Dikirim')->get(),
+            'transfer_penjual' => DataTransaksi::where('status_transaksi','Transfer Penjual')->get(),
+            'selesai' => DataTransaksi::where('status_transaksi','Selesai')->get(),
+            'gagal' => DataTransaksi::where('status_transaksi','Gagal')->get(),
         ]);
     }
 
@@ -65,14 +73,38 @@ class DashboardAdminController extends Controller
         }
     }
 
+    public function resetPassword()
+    {
+        return view('admin.resetPassword',
+        [
+            'title' => 'Reset Password'
+        ]);
+    }
+
+    public function prosesReset(Request $req)
+    {
+        $validated = $req->validate([
+            'password' => 'required',
+            'new_password' => 'required',
+        ]);
+        if ($validated and $req->password == $req->new_password) {
+            User::where('id', Auth::user()->id)
+                ->update(['password' => Hash::make($req->new_password)]);
+                return back()->with('message','Password berhasil direset');
+        }
+        else {
+            return back();
+        }
+    }
+
     // Transaksi
     public function transaksi()
     {
         return view('admin.verifikasiTransaksi',
     [
         'title' => 'Transaki',
-        'transaksi' => DataTransaksi::where('status_transaksi','Verifikasi Admin')
-        ->orWhere('status_transaksi','Transfer Penjual')->get()
+        'transaksi' => DataTransaksi::where('status_transaksi','!=','Selesai')
+        ->where('status_transaksi','!=','Gagal')->get()
     ]);
     }
 
@@ -176,7 +208,7 @@ class DashboardAdminController extends Controller
     {
         return view('admin.riwayatTransaksi',
         [
-            'title' => 'Pengiriman',
+            'title' => 'Riwayat',
             'transaksi' => DataTransaksi::where('status_transaksi','Selesai')->get(),
         ]);
     }

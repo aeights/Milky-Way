@@ -40,7 +40,7 @@
                         </div>
                     </div>
                     <div>
-                        <a class="bg-[#B2A4FF] p-2 rounded-md hover:bg-slate-500 duration-200 drop-shadow-lg" href="/dashboardAdmin/riwayat">Kembali</a>
+                        <a class="bg-[#B2A4FF] p-2 rounded-md hover:bg-slate-500 duration-200 drop-shadow-lg" href="/dashboardPenjual/riwayat">Kembali</a>
                     </div>
                 </div>
                 <div class="">

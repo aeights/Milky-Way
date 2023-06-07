@@ -236,7 +236,7 @@ class HomeBuyerController extends Controller
         return view('pembeli.transaksiPembeli',
         [
             'title'=>'Transaksi',
-            'transaksi'=>DataTransaksi::all()
+            'transaksi'=>DataTransaksi::where('status_transaksi','!=','Selesai')->where('status_transaksi','!=','Gagal')->get()
         ]);
     }
 

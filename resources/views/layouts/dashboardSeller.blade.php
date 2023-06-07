@@ -14,7 +14,7 @@
     </style>
 </head>
 <body class="">
-    <nav class="flex flex-row items-center bg-[#B2A4FF] py-8 pr-5 place-content-end rounded-b-[10px] shadow-lg fixed w-[100vw]">
+    <nav class="z-[1] flex flex-row items-center bg-[#B2A4FF] py-8 pr-5 place-content-end rounded-b-[10px] shadow-lg fixed w-[100vw]">
         <p class="right-5 mx-4">{{'Halo, '.$user = Auth::user()->nama_lengkap;}}</p>
         <div class="action">
             <div class="profile" onclick="showMenu()">
@@ -38,7 +38,7 @@
         </div>
     @endif
 
-    <div class="fixed bg-[#E4E5EA] h-[100vh] w-[250px] flex flex-col items-center">
+    <div class="z-[2] fixed bg-[#E4E5EA] h-[100vh] w-[250px] flex flex-col items-center">
         <a class="bg-slate-200 rounded-lg py-4 px-14 mt-5 drop-shadow-lg font-bold" href="/dashboardPenjual">Dashboard</a>
         <input class="mt-10 rounded-md h-10 drop-shadow w-52 pl-5 focus:outline-none" placeholder="Search" type="text" name="">
         <ul class="">

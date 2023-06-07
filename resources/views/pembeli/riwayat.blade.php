@@ -6,8 +6,8 @@
                 <div class="bg-[#B2A4FF] text-center text-sm w-10 p-2">No</div>
                 <div class="bg-[#B2A4FF] text-center text-sm w-28 p-2">Gambar</div>
                 <div class="bg-[#B2A4FF] text-center text-sm w-32 p-2">Nama Barang</div>
-                <div class="bg-[#B2A4FF] text-center text-sm w-32 p-2">Nama Toko</div>
-                <div class="bg-[#B2A4FF] text-center text-sm w-32 p-2">Alamat</div>
+                {{-- <div class="bg-[#B2A4FF] text-center text-sm w-32 p-2">Nama Toko</div> --}}
+                {{-- <div class="bg-[#B2A4FF] text-center text-sm w-32 p-2">Alamat</div> --}}
                 <div class="bg-[#B2A4FF] text-center text-sm w-20 p-2">Harga</div>
                 <div class="bg-[#B2A4FF] text-center text-sm w-24 p-2">Jumlah</div>
                 <div class="bg-[#B2A4FF] text-center text-sm w-28 p-2">Total Harga</div>
@@ -37,8 +37,8 @@
                             <td class="w-10 bg-slate-200">{{$no+1}}</td>
                             <td class="w-28"><img class="h-10 m-auto" src="{{asset('barang/'.$hasil->barang['gambar'])}}" alt=""></td>
                             <td class="w-32">{{$hasil->barang['nama']}}</td>
-                            <td class="w-32">{{$hasil->penjual['nama_toko']}}</td>
-                            <td class="w-32">{{$hasil->alamat}}</td>
+                            {{-- <td class="w-32">{{$hasil->penjual['nama_toko']}}</td> --}}
+                            {{-- <td class="w-32">{{substr($hasil->alamat,0,10)}}...</td> --}}
                             <td class="w-20">Rp. {{$hasil->barang['harga']}}</td>
                             <td class="w-24">{{$hasil->jumlah}}</td>
                             <td class="w-28">Rp. {{$hasil->total_harga}}</td>

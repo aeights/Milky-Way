@@ -38,14 +38,14 @@
                             <td class="bg-slate-100 w-36">
                                 <img class="h-10 inline-block m-auto" src="{{asset('barang/'.$hasil->gambar)}}" alt="{{$hasil->gambar}}">
                             </td>
-                            <td class="bg-slate-200 w-44">{{$hasil->nama}}</td>
+                            <td class="bg-slate-200 w-44">{{substr($hasil->nama,0,20)}}</td>
                             <td class="bg-slate-100 w-28">{{'Rp. '.$hasil->harga}}</td>
                             <td class="bg-slate-200 w-14">{{$hasil->berat}}</td>
                             <td class="bg-slate-100 w-32">{{$hasil->kategori}}</td>
                             <td class="bg-slate-200 w-14">{{$hasil->stok}}</td>
                             <td class="bg-slate-100 overflow-hidden whitespace-nowrap">{{$hasil->detail_produk}}</td>
                             <td class="bg-slate-200 w-24">
-                                <form action="{{url('/hapusBarang/'.$hasil->id)}}" method="post" onsubmit="return confirm('Apakah anda yakin ingin menghapus barang ini?')">
+                                <form class="flex justify-evenly" action="{{url('/hapusBarang/'.$hasil->id)}}" method="post" onsubmit="return confirm('Apakah anda yakin ingin menghapus barang ini?')">
                                     @csrf
                                     <a class="bg-green-500 text-[12px] text-white p-1 rounded-sm" href="{{url('/dashboardPenjual/barang/edit/'.$hasil->id)}}">Edit</a>
                                     <button class="text-[12px] bg-red-500 text-white p-1 rounded-sm">Hapus</button>

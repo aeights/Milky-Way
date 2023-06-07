@@ -201,6 +201,10 @@ Route::middleware(['auth','user_role:admin'])->group(function (){
 
     Route::post('/profileAdmin/prosesEdit',[DashboardAdminController::class,'prosesEditProfile']);
 
+    Route::get('/resetPasswordAdmin',[DashboardAdminController::class,'resetPassword']);
+
+    Route::post('/proses/resetPasswordAdmin',[DashboardAdminController::class,'prosesReset']);
+
     // Transaksi
     Route::get('/dashboardAdmin/transaksi',[DashboardAdminController::class,'transaksi']);
 

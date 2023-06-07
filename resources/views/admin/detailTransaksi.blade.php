@@ -34,7 +34,7 @@
                             <p class="text-sm mb-1">Jumlah</p>
                             <input class="mb-2 bg-white appearance-none text-sm border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" value="{{$transaksi->jumlah}}" name="jumlah">
                         </div>
-                        <div class="mb-2">
+                        <div class="">
                             <p class="text-sm mb-1">Total Harga</p>
                             <input class="mb-2 bg-white appearance-none text-sm border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" value="Rp. {{$transaksi->total_harga}}" disabled name="total_harga">
                         </div>

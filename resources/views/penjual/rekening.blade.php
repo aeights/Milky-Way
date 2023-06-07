@@ -4,8 +4,15 @@
     <a class="bg-[#B2A4FF] p-2 mr-2 text-white rounded-md hover:bg-slate-400 duration-200 drop-shadow-lg" href="/dashboardPenjual/penarikan/tambah">Tambah</a>
 </div>
 <div id="tabel" class="pl-72 flex flex-col justify-center">
-    <table class="w-[97%] table-fixed border text-sm overflow-y-scroll block h-[400px]">
-        <thead class="">
+    <div class="flex">
+        <div class="bg-[#B2A4FF] text-center text-sm p-2 w-10">No</div>
+        <div class="bg-[#B2A4FF] text-center text-sm p-2 w-72">Nama</div>
+        <div class="bg-[#B2A4FF] text-center text-sm p-2 w-48">Jenis Bank</div>
+        <div class="bg-[#B2A4FF] text-center text-sm p-2 w-56">No. Rekening</div>
+        <div class="bg-[#B2A4FF] text-center text-sm p-2 w-24">Opsi</div>
+    </div>
+    <table class="table-fixed border text-sm overflow-y-scroll block w-[860px] h-[60vh]">
+        {{-- <thead class="">
             <tr class="">
                 <th class="bg-slate-200 p-2">No</th>
                 <th class="bg-slate-200 p-2">Nama</th>
@@ -13,15 +20,15 @@
                 <th class="bg-slate-200 p-2">No. Rekening</th>
                 <th class="bg-slate-200 p-2">Opsi</th>
             </tr>
-        </thead>
+        </thead> --}}
         <tbody class="text-center">
             @foreach ($rekening as $no => $hasil)
                 <tr>
-                    <td class="w-10">{{$no+1}}</td>
-                    <td>{{$hasil->nama}}</td>
-                    <td>{{$hasil->jenis_bank}}</td>
-                    <td>{{$hasil->no_rekening}}</td>
-                    <td class="bg-slate-200">
+                    <td class="bg-slate-200 w-10">{{$no+1}}</td>
+                    <td class="w-72">{{$hasil->nama}}</td>
+                    <td class="w-48">{{$hasil->jenis_bank}}</td>
+                    <td class="w-56">{{$hasil->no_rekening}}</td>
+                    <td class="bg-slate-200 w-24">
                         <form class="flex" action="{{'/hapusRekening/'.$hasil->id}}" method="post" onsubmit="return confirm('Apakah anda yakin ingin menghapus rekening ini?')">
                             @csrf
                             <a class="bg-green-500 text-[12px] p-1 m-1 text-white rounded-sm" href="{{url('/dashboardPenjual/penarikan/edit/'.$hasil->id)}}">Edit</a>

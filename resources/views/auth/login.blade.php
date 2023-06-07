@@ -7,7 +7,7 @@
                 @csrf
                 <input type="hidden" value="{{ $type }}" name="type">
                 <p class="mt-2">Username</p>
-                <input class="my-1 py-1 px-2 rounded-lg placeholder:text-sm" type="text" placeholder="Username" name="username">
+                <input class="my-1 py-1 px-2 rounded-lg placeholder:text-sm outline-none" type="text" placeholder="Username" name="username">
                 @error('username')
                     <div class="mt-2 text-sm text-red-600">{{$message}}</div>
                 @enderror
@@ -15,7 +15,7 @@
                     <p class="mt-2">Password</p>
                     <a class="mt-3 ml-10 text-[12px] underline" href="/login/{{$type}}/lupaPassword">Lupa Password?</a>
                 </div>
-                <input class="my-1 py-1 px-2 rounded-lg placeholder:text-sm" type="password" placeholder="Password" name="password">
+                <input class="my-1 py-1 px-2 rounded-lg placeholder:text-sm outline-none" type="password" placeholder="Password" name="password">
                 @error('password')
                     <div class="mt-2 text-sm text-red-600">{{$message}}</div>
                 @enderror

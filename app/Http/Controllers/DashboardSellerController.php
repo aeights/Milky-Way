@@ -6,6 +6,7 @@ use App\Models\Barang;
 use App\Models\BiayaPengiriman;
 use App\Models\DataTransaksi;
 use App\Models\DetailPenjual;
+use App\Models\MetodePembayaran;
 use App\Models\Pencatatan;
 use App\Models\RekeningPenjual;
 use App\Models\User;
@@ -526,6 +527,18 @@ class DashboardSellerController extends Controller
             'title' => 'Pengiriman',
             'transaksi' => DataTransaksi::where('penjual_id',$toko->id)
             ->where('status_transaksi','Selesai')->get(),
+        ]);
+    }
+
+    public function detailRiwayat($id)
+    {
+        $transaksi = DataTransaksi::find($id);
+        return view('penjual.detailRiwayatTransaksi',
+        [
+            'title' => 'Detail Transaksi',
+            'transaksi' => $transaksi,
+            'rekening' => MetodePembayaran::where('jenis_bank',$transaksi->metode_pembayaran)->first(),
+            'total_transfer' => $transaksi->total_harga+1000
         ]);
     }
 }

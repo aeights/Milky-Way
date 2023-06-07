@@ -1,6 +1,6 @@
 @extends('layouts.dashboardAdmin')
 @section('content')
-<div class="pt-32 pl-72 flex justify-center">
+<div class="pt-32 pl-72 flex">
     <div>
         <div class="flex">
             <div class="bg-[#B2A4FF] text-center text-sm w-10 p-2">No</div>
@@ -13,7 +13,7 @@
             <div class="bg-[#B2A4FF] text-center text-sm w-28 p-2">Total Harga</div>
             <div class="bg-[#B2A4FF] text-center text-sm w-28 p-2">Pembayaran</div>
             <div class="bg-[#B2A4FF] text-center text-sm w-44 p-2">Status Transaksi</div>
-            <div class="bg-[#B2A4FF] text-center text-sm w-44 p-2">Opsi</div>
+            <div class="bg-[#B2A4FF] text-center text-sm w-20 p-2">Opsi</div>
         </div>
         <table class="table-fixed border text-sm overflow-y-scroll block h-[60vh]">
             {{-- <thead>
@@ -36,7 +36,7 @@
                     <tr class="border-b-2">
                         <td class="w-10 bg-slate-200">{{$no+1}}</td>
                         {{-- <td class="w-28"><img class="h-10 m-auto" src="{{asset('barang/'.$hasil->barang['gambar'])}}" alt=""></td> --}}
-                        <td class="w-32">{{$hasil->barang['nama']}}</td>
+                        <td class="w-32">{{substr($hasil->barang['nama'],0,10)}}</td>
                         <td class="w-32">{{$hasil->penjual['nama_toko']}}</td>
                         {{-- <td class="w-32">{{$hasil->alamat}}</td> --}}
                         <td class="w-20">Rp. {{$hasil->barang['harga']}}</td>
@@ -44,8 +44,8 @@
                         <td class="w-28">Rp. {{$hasil->total_harga}}</td>
                         <td class="w-28">{{$hasil->metode_pembayaran}}</td>
                         <td class="w-44">{{$hasil->status_transaksi}}</td>
-                        <td class="bg-slate-200 w-44">
-                            <a class="bg-green-500 text-[12px] p-1 m-1 text-white rounded-sm" href="{{url('/riwayat/detail/'.$hasil->id)}}">Detail</a>
+                        <td class="bg-slate-200 w-20 p-2">
+                            <a class="bg-green-500 text-[12px] p-1 m-1 text-white rounded-sm" href="{{url('/dashboardAdmin/riwayat/detail/'.$hasil->id)}}">Detail</a>
                         </td>
                     </tr>
                 @endforeach

@@ -6,31 +6,29 @@
         </div>
         <div class="flex flex-row">
             <div class="bg-[#B2A4FF] text-center text-sm py-2 w-10">No</div>
-            <div class="bg-[#B2A4FF] text-center text-sm py-2">Nama</div>
-            <div class="bg-[#B2A4FF] text-center text-sm py-2">Jenis Bank</div>
-            <div class="bg-[#B2A4FF] text-center text-sm py-2">No. Rekening</div>
-            <div class="bg-[#B2A4FF] text-center text-sm py-2">Opsi</div>
+            <div class="bg-[#B2A4FF] text-center text-sm py-2 w-72">Nama</div>
+            <div class="bg-[#B2A4FF] text-center text-sm py-2 w-48">Jenis Bank</div>
+            <div class="bg-[#B2A4FF] text-center text-sm py-2 w-56">No. Rekening</div>
+            <div class="bg-[#B2A4FF] text-center text-sm py-2 w-24">Opsi</div>
         </div>
-        <div class="w-[1050px] h-[400px] overflow-y-scroll flex flex-col items-center shadow-md border">
-            <table class="table-fixed border w-[1031px] text-sm p-4">
-                <tbody class="text-center">
-                    @foreach ($pembayaran as $no => $hasil)  
-                        <tr class="bg-slate-50 border-b-2">
-                            <td class="bg-slate-100 w-10">{{$no+1}}</td>
-                            <td class="">{{$hasil->nama}}</td>
-                            <td class="">{{$hasil->jenis_bank}}</td>
-                            <td class="">{{$hasil->no_rekening}}</td>
-                            <td class="bg-slate-100">
-                                <form action="{{url('/hapusPembayaran/'.$hasil->id)}}" method="post" onsubmit="return confirm('Apakah anda yakin ingin menghapus pembayaran ini?')">
-                                    @csrf
-                                    <a class="bg-green-500 text-[12px] text-white p-1 rounded-sm" href="{{url('/dashboardAdmin/pembayaran/edit/'.$hasil->id)}}">Edit</a>
-                                    <button class="text-[12px] bg-red-500 text-white p-1 rounded-sm">Hapus</button>
-                                </form>
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
+        <table class="table-fixed border text-sm overflow-y-scroll block w-[860px] h-[60vh]">
+            <tbody class="text-center">
+                @foreach ($pembayaran as $no => $hasil)
+                    <tr class="bg-slate-50 border-b-2">
+                        <td class="bg-slate-100 w-10">{{$no+1}}</td>
+                        <td class="w-72">{{$hasil->nama}}</td>
+                        <td class="w-48">{{$hasil->jenis_bank}}</td>
+                        <td class="w-56">{{$hasil->no_rekening}}</td>
+                        <td class="bg-slate-100 w-24">
+                            <form class="flex" action="{{url('/hapusPembayaran/'.$hasil->id)}}" method="post" onsubmit="return confirm('Apakah anda yakin ingin menghapus pembayaran ini?')">
+                                @csrf
+                                <a class="bg-green-500 text-[12px] p-1 m-1 text-white rounded-sm" href="{{url('/dashboardAdmin/pembayaran/edit/'.$hasil->id)}}">Edit</a>
+                                <button class="text-[12px] p-1 m-1 bg-red-500 text-white rounded-sm">Hapus</button>
+                            </form>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
     </div>
 @endsection
